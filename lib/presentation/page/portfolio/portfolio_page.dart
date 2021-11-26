@@ -2,6 +2,7 @@ import 'package:clean_app/backbone/bloc_status.dart';
 import 'package:clean_app/domain/entity/global_data.dart';
 import 'package:clean_app/domain/entity/market_cap_percentage.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
+import 'package:clean_app/presentation/widget/pie_chart_widget.dart';
 import 'package:clean_app/theme/palette.dart';
 import 'package:clean_app/theme/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,21 @@ class _PortfolioPageState extends State<PortfolioPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Palette.background,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(120.h),
+        child: Container(
+          color: Palette.base1,
+          padding: EdgeInsets.only(top: 50.h, bottom: 8.h),
+          child: Row(
+            children: <Widget>[
+              Text(
+                'Market Data',
+                style: TextStyles.whiteSemiBold14,
+              ),
+            ],
+          ),
+        ),
+      ),
       body: Center(
         child: BlocBuilder<GlobalDataBloc, GlobalDataState>(
           bloc: globalDataBloc,
@@ -41,10 +57,18 @@ class _PortfolioPageState extends State<PortfolioPage> {
                 ),
               );
             } else {
-              marketCapList = state.globalData!.marketCapPercentage;
+              marketCapList =
+                  state.globalData!.marketCapPercentage.getRange(0, 5).toList();
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  Container(
+                    //width: 250.w,
+                    height: 300.h,
+                    child: PieChartWidget(
+                      marketCapList: marketCapList,
+                    ),
+                  ),
                   Flexible(
                     child: ListView.builder(
                       itemCount: marketCapList.length,
