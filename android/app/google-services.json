@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1026009858914",
+    "project_id": "clean-app-4e0c8",
+    "storage_bucket": "clean-app-4e0c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026009858914:android:3945f2f224b03cc94ca23b",
+        "android_client_info": {
+          "package_name": "com.crypto.clean_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026009858914-an1ljf8bp54mt1a2edr4eku8fao720lc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgckV6NslwSvh5QUrjD1M-6Ch-mselnaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026009858914-an1ljf8bp54mt1a2edr4eku8fao720lc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1026009858914-9uftnga7febs31j5h0u096kglgniimpv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.crypto.cleapApp.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
