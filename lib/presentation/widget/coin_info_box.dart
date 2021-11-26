@@ -107,7 +107,7 @@ class CoinInfoBox extends StatelessWidget {
             ),
           ),
           Row(
-            children: [
+            children: <Widget>[
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
