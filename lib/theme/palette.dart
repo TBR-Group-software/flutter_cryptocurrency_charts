@@ -28,6 +28,10 @@ class Palette {
   );
 
   static const Color errorRed = Color(0xFFFF3B30);
+  static const Color lightRed = Color(0xFFFF6057);
   static const Color accentBlue = Color(0xFF6BD1E7);
   static const Color accentDarkBlue = Color(0xFF6B9DE7);
+
+  static const Color darkBlue = Color(0xff37434d);
+  static const Color darkRed = Color(0xff4D3737);
 }

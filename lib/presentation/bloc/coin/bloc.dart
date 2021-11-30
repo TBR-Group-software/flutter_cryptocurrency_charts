@@ -37,6 +37,7 @@ class CoinBloc extends Bloc<CoinEvent, CoinState> {
         )
         .catchError(_onError);
   }
+  
 
   CoinState _loadingState() => CoinState(BlocStatus.Loading, state.coins);
 

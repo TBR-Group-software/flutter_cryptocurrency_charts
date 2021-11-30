@@ -8,13 +8,13 @@ import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:fl_chart/fl_chart.dart' as _i10;
 import 'package:flutter/material.dart' as _i2;
 
-import '../page/discover/discover_page.dart' as _i6;
+import '../page/discover/discover_page.dart' as _i5;
 import '../page/home/home_page.dart' as _i4;
 import '../page/navigation_page.dart' as _i3;
-import '../page/portfolio/portfolio_page.dart' as _i5;
-import '../page/profile/profile_page.dart' as _i7;
-import '../page/ratings/detail_info_page.dart' as _i9;
-import '../page/ratings/ratings_page.dart' as _i8;
+import '../page/portfolio/portfolio_page.dart' as _i9;
+import '../page/profile/profile_page.dart' as _i6;
+import '../page/ratings/detail_info_page.dart' as _i8;
+import '../page/ratings/ratings_page.dart' as _i7;
 
 class AppRouter extends _i1.RootStackRouter {
   AppRouter([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])
@@ -40,28 +40,28 @@ class AppRouter extends _i1.RootStackRouter {
     PortfolioPageRouter.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i5.PortfolioPage();
+          return const _i1.EmptyRouterPage();
         }),
     DiscoverPageRouter.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i6.DiscoverPage();
+          return const _i5.DiscoverPage();
         }),
     ProfilePageRouter.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i7.ProfilePage();
+          return const _i6.ProfilePage();
         }),
     RatingsRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return _i8.RatingsPage();
+          return _i7.RatingsPage();
         }),
     DetailInfoRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (data) {
           final args = data.argsAs<DetailInfoRouteArgs>();
-          return _i9.DetailInfoPage(
+          return _i8.DetailInfoPage(
               coinName: args.coinName,
               currentPrice: args.currentPrice,
               priceChangePercentage: args.priceChangePercentage,
@@ -72,6 +72,11 @@ class AppRouter extends _i1.RootStackRouter {
               sparkline: args.sparkline,
               flSpotList: args.flSpotList,
               key: args.key);
+        }),
+    PortfolioRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return const _i9.PortfolioPage();
         })
   };
 
@@ -93,7 +98,11 @@ class AppRouter extends _i1.RootStackRouter {
                     _i1.RouteConfig(DetailInfoRoute.name, path: '')
                   ]),
               _i1.RouteConfig(PortfolioPageRouter.name,
-                  path: 'presentation/page/portfolio/portfolio_page'),
+                  path: 'presentation/page/portfolio/portfolio_page',
+                  children: [
+                    _i1.RouteConfig(PortfolioRoute.name, path: ''),
+                    _i1.RouteConfig(DetailInfoRoute.name, path: '')
+                  ]),
               _i1.RouteConfig(DiscoverPageRouter.name,
                   path: 'presentation/page/discover/discover_page'),
               _i1.RouteConfig(ProfilePageRouter.name,
@@ -127,8 +136,10 @@ class RatingsPageRouter extends _i1.PageRouteInfo<void> {
 }
 
 class PortfolioPageRouter extends _i1.PageRouteInfo<void> {
-  const PortfolioPageRouter()
-      : super(name, path: 'presentation/page/portfolio/portfolio_page');
+  const PortfolioPageRouter({List<_i1.PageRouteInfo>? children})
+      : super(name,
+            path: 'presentation/page/portfolio/portfolio_page',
+            initialChildren: children);
 
   static const String name = 'PortfolioPageRouter';
 }
@@ -214,4 +225,10 @@ class DetailInfoRouteArgs {
   final List<_i10.FlSpot>? flSpotList;
 
   final _i2.Key? key;
+}
+
+class PortfolioRoute extends _i1.PageRouteInfo<void> {
+  const PortfolioRoute() : super(name, path: '');
+
+  static const String name = 'PortfolioRoute';
 }

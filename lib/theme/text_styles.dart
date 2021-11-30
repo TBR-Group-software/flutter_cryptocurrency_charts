@@ -14,6 +14,11 @@ class TextStyles {
     fontWeight: FontWeight.w600,
     color: Palette.overlay1,
   );
+  static TextStyle whiteSemiBold16 = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w600,
+    color: Palette.overlay1,
+  );
   static TextStyle whiteSemiBold24 = TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeight.w600,
@@ -26,6 +31,11 @@ class TextStyles {
   );
   static TextStyle overlay3Bold11 = TextStyle(
     fontSize: 11.sp,
+    fontWeight: FontWeight.w600,
+    color: Palette.overlay3,
+  );
+   static TextStyle overlay3Bold14 = TextStyle(
+    fontSize: 14.sp,
     fontWeight: FontWeight.w600,
     color: Palette.overlay3,
   );

@@ -125,6 +125,7 @@ class _DetailInfoPageState extends State<DetailInfoPage> {
                 showBarArea: true,
                 sparkline: widget.sparkline,
                 flSpotList: widget.flSpotList,
+                pricePercentage: widget.priceChangePercentage,
               ),
             ),
             SizedBox(height: 8.h),

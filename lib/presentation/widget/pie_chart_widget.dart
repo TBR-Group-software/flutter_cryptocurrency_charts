@@ -17,16 +17,17 @@ class PieChartWidget extends StatefulWidget {
 }
 
 class _PieChartWidgetState extends State<PieChartWidget> {
-  int touchedIndex = -1;
-  double fullAmount = 100.0;
+  List<PieChartSectionData> pieChartDataList = <PieChartSectionData>[];
+
   @override
-  Widget build(BuildContext context) {
-    final List<PieChartSectionData> pieChartDataList =
-        List<PieChartSectionData>.generate(
+  void initState() {
+    super.initState();
+
+    pieChartDataList = List<PieChartSectionData>.generate(
       widget.marketCapList.length,
       (int index) {
         fullAmount = fullAmount - widget.marketCapList[index].percentage!;
-        print(fullAmount);
+
         if (index == 0) {
           return PieChartSectionData(
             color: Palette.primary,
@@ -34,9 +35,9 @@ class _PieChartWidgetState extends State<PieChartWidget> {
             title: '${widget.marketCapList[index].coinSymbol?.toUpperCase()}',
             titleStyle: TextStyles.whiteSemiBold14,
             radius: 60.r,
-            borderSide: const BorderSide(
+            borderSide: BorderSide(
               color: Palette.background,
-              width: 2,
+              width: 2.w,
             ),
           );
         } else if (index == 1) {
@@ -46,9 +47,9 @@ class _PieChartWidgetState extends State<PieChartWidget> {
             title: '${widget.marketCapList[index].coinSymbol?.toUpperCase()}',
             titleStyle: TextStyles.whiteSemiBold14,
             radius: 60.r,
-            borderSide: const BorderSide(
+            borderSide: BorderSide(
               color: Palette.background,
-              width: 2,
+              width: 2.w,
             ),
           );
         } else {
@@ -58,9 +59,9 @@ class _PieChartWidgetState extends State<PieChartWidget> {
             title: '${widget.marketCapList[index].coinSymbol?.toUpperCase()}',
             titleStyle: TextStyles.whiteSemiBold14,
             radius: 60.r,
-            borderSide: const BorderSide(
+            borderSide: BorderSide(
               color: Palette.background,
-              width: 2,
+              width: 2.w,
             ),
           );
         }
@@ -73,18 +74,40 @@ class _PieChartWidgetState extends State<PieChartWidget> {
         title: 'Other',
         titleStyle: TextStyles.whiteSemiBold14,
         radius: 60.r,
-        borderSide: const BorderSide(
+        borderSide: BorderSide(
           color: Palette.background,
-          width: 2,
+          width: 2.w,
         ),
       ),
     );
+  }
+
+  double fullAmount = 100.0;
+  @override
+  Widget build(BuildContext context) {
+    int touchedIndex = -1;
 
     return PieChart(
       PieChartData(
         sectionsSpace: 0,
-        centerSpaceRadius: 50,
+        centerSpaceRadius: 50.r,
         sections: pieChartDataList,
+        pieTouchData: PieTouchData(
+          touchCallback: (FlTouchEvent event, pieTouchResponse) {
+            setState(
+              () {
+                if (!event.isInterestedForInteractions ||
+                    pieTouchResponse == null ||
+                    pieTouchResponse.touchedSection == null) {
+                  touchedIndex = -1;
+                  return;
+                }
+                touchedIndex =
+                    pieTouchResponse.touchedSection!.touchedSectionIndex;
+              },
+            );
+          },
+        ),
       ),
     );
   }

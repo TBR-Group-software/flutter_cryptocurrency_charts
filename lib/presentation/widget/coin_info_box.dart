@@ -103,6 +103,7 @@ class CoinInfoBox extends StatelessWidget {
                 sparkline: sparkline,
                 flSpotList: flSpotList,
                 showBarArea: false,
+                pricePercentage: priceChangePercentage,
               ),
             ),
           ),

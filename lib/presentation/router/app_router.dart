@@ -50,7 +50,17 @@ import 'package:clean_app/presentation/page/ratings/ratings_page.dart';
         AutoRoute<dynamic>(
           path: 'presentation/page/portfolio/portfolio_page',
           name: 'PortfolioPageRouter',
-          page: PortfolioPage,
+          page: EmptyRouterPage,
+          children: <AutoRoute<dynamic>>[
+            AutoRoute<dynamic>(
+              path: '',
+              page: PortfolioPage,
+            ),
+            AutoRoute<dynamic>(
+              path: '',
+              page: DetailInfoPage,
+            ),
+          ],
         ),
         AutoRoute<dynamic>(
           path: 'presentation/page/discover/discover_page',

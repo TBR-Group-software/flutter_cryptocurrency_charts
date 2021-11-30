@@ -29,8 +29,12 @@ class _NavigationPageState extends State<NavigationPage> {
       bottomNavigationBuilder: (_, TabsRouter tabsRouter) {
         return Container(
           color: Palette.base1,
-          padding:
-              EdgeInsets.only(left: 12.w, right: 12.w, bottom: 12.h, top: 4.h),
+          padding: EdgeInsets.only(
+            left: 12.w,
+            right: 12.w,
+            bottom: 12.h,
+            top: 4.h,
+          ),
           child: SalomonBottomBar(
             onTap: tabsRouter.setActiveIndex,
             selectedItemColor: Palette.primary,
@@ -68,7 +72,7 @@ class _NavigationPageState extends State<NavigationPage> {
                   Icons.pie_chart,
                   color: Palette.overlay1,
                 ),
-                title: const Text('Portfolio'),
+                title: const Text('Market'),
               ),
               SalomonBottomBarItem(
                 activeIcon: const Icon(

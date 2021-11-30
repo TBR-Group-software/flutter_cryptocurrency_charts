@@ -23,13 +23,20 @@ class RatingsPage extends StatefulWidget {
 class _RatingsPageState extends State<RatingsPage> {
   List<Coin> coinList = <Coin>[];
   final CoinBloc coinBloc = di.sl.get();
-  
+
   int pageNumber = 1;
   @override
   void initState() {
     super.initState();
-    coinBloc.add(CoinEvent.getMarketCoins(
-        currencyUSD, order, pageNumber, perPage100, 'true'));
+    coinBloc.add(
+      CoinEvent.getMarketCoins(
+        currencyUSD,
+        order,
+        pageNumber,
+        perPage100,
+        'true',
+      ),
+    );
   }
 
   @override
