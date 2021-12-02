@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       designSize: screenSize,
       builder: () => MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Clean App',
+        title: 'Crypto Aggregator',
         routerDelegate: _appRouter.delegate(),
         routeInformationParser: _appRouter.defaultRouteParser(),
       ),

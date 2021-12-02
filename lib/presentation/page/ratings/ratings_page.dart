@@ -148,10 +148,5 @@ class _RatingsPageState extends State<RatingsPage> {
         ),
       ),
     );
-    // else {
-    //   return Center(
-    //     child: Text(state.error.toString()),
-    //   );
-    // }
   }
 }
