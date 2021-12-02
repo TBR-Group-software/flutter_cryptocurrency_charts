@@ -9,6 +9,8 @@ import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
 import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:clean_app/presentation/widget/coin_info_box.dart';
 import 'package:clean_app/presentation/widget/pie_chart_widget.dart';
+import 'package:clean_app/presentation/widget/shimmers/shimmer_coin_info_box.dart';
+import 'package:clean_app/presentation/widget/shimmers/shimmer_market_data.dart';
 import 'package:clean_app/theme/palette.dart';
 import 'package:clean_app/theme/text_styles.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -55,11 +57,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
               bloc: globalDataBloc,
               builder: (_, GlobalDataState state) {
                 if (state.status == BlocStatus.Loading) {
-                  return const Center(
-                    child: CircularProgressIndicator(
-                      color: Palette.primary,
-                    ),
-                  );
+                  return const ShimmerMarketData();
                 } else {
                   final List<MarketCapPercentage> marketCapList = state
                       .globalData!.marketCapPercentage
@@ -130,9 +128,19 @@ class _PortfolioPageState extends State<PortfolioPage> {
             BlocBuilder<CoinBloc, CoinState>(
               bloc: coinBloc,
               builder: (_, CoinState state) {
-                coinList = state.coins;
-                print(state.status);
-                if (state.status == BlocStatus.Loaded) {
+                if (state.status == BlocStatus.Loading) {
+                  return Container(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 5,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ShimmerCoinInfoBox();
+                      },
+                    ),
+                  );
+                } else {
+                  coinList = state.coins;
                   return Container(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: ListView.builder(
@@ -151,6 +159,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                             flSpotList.add(FlSpot(i, element));
                           },
                         );
+      
                         return GestureDetector(
                           child: CoinInfoBox(
                             coinIndex: index,
@@ -183,10 +192,6 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         );
                       },
                     ),
-                  );
-                } else {
-                  return Center(
-                    child: Text(state.error.toString()),
                   );
                 }
               },

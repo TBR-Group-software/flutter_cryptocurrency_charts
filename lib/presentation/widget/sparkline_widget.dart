@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:clean_app/theme/palette.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class SparklineWidget extends StatefulWidget {
   final List<double>? sparkline;

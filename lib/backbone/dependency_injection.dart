@@ -60,6 +60,6 @@ void init() {
   sl.registerLazySingleton<GetGlobalDataUseCase>(
       () => RestGetGlobalDataUseCase(sl.get()));
   //Bloc
-  sl.registerFactory<CoinBloc>(() => CoinBloc(sl.get()));
-  sl.registerFactory<GlobalDataBloc>(() => GlobalDataBloc(sl.get()));
+  sl.registerLazySingleton<CoinBloc>(() => CoinBloc(sl.get()));
+  sl.registerLazySingleton<GlobalDataBloc>(() => GlobalDataBloc(sl.get()));
 }

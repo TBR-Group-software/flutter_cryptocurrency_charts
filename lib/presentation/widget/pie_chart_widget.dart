@@ -93,7 +93,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
         centerSpaceRadius: 50.r,
         sections: pieChartDataList,
         pieTouchData: PieTouchData(
-          touchCallback: (FlTouchEvent event, pieTouchResponse) {
+          touchCallback: (FlTouchEvent event, PieTouchResponse? pieTouchResponse) {
             setState(
               () {
                 if (!event.isInterestedForInteractions ||
