@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:clean_app/assembly/factory.dart';
 import 'package:clean_app/backbone/rest_api_urls.dart';
@@ -52,7 +53,16 @@ class RestGateway {
   }
 
   Future<http.Response> _getRequest(String baseUrl, String path,
-      {Map<String, String>? headers, Map<String, String>? queryParams}) {
+      {Map<String, String>? headers, Map<String, String>? queryParams}) async {
+    try {
+      final List<InternetAddress> result =
+          await InternetAddress.lookup('coingecko.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        print('connected');
+      }
+    } on SocketException catch (_) {
+      print('not connected');
+    }
     return http.get(
         Uri.parse(
           Uri.https(baseUrl, path, queryParams ?? <String, String>{})

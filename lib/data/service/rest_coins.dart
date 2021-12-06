@@ -13,7 +13,12 @@ class RestCoinService implements CoinService {
   Future<List<Coin>> getMarketsCoins(String currency, String order,
       int pageNumber, int perPage, String sparkline) async {
     final List<CoinDto> dtoList = await _gateway.getMarketsCoins(
-        currency, order, pageNumber, perPage, sparkline);
+      currency,
+      order,
+      pageNumber,
+      perPage,
+      sparkline,
+    );
     return dtoList.map((CoinDto dto) => _factory.create(dto)).toList();
   }
 }

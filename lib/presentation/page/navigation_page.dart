@@ -20,10 +20,10 @@ class _NavigationPageState extends State<NavigationPage> {
     return AutoTabsScaffold(
       backgroundColor: Palette.background,
       routes: const <PageRouteInfo<dynamic>>[
-        HomePageRouter(),
+        // HomePageRouter(),
         RatingsPageRouter(),
         PortfolioPageRouter(),
-        DiscoverPageRouter(),
+        // DiscoverPageRouter(),
         ProfilePageRouter(),
       ],
       bottomNavigationBuilder: (_, TabsRouter tabsRouter) {
@@ -41,17 +41,17 @@ class _NavigationPageState extends State<NavigationPage> {
 
             // ignore: always_specify_types
             items: [
-              SalomonBottomBarItem(
-                activeIcon: const Icon(
-                  Icons.home,
-                  color: Palette.primary,
-                ),
-                icon: const Icon(
-                  Icons.home,
-                  color: Palette.overlay1,
-                ),
-                title: const Text('Home'),
-              ),
+              // SalomonBottomBarItem(
+              //   activeIcon: const Icon(
+              //     Icons.home,
+              //     color: Palette.primary,
+              //   ),
+              //   icon: const Icon(
+              //     Icons.home,
+              //     color: Palette.overlay1,
+              //   ),
+              //   title: const Text('Home'),
+              // ),
               SalomonBottomBarItem(
                 activeIcon: const Icon(
                   Icons.bar_chart,
@@ -74,17 +74,17 @@ class _NavigationPageState extends State<NavigationPage> {
                 ),
                 title: const Text('Market'),
               ),
-              SalomonBottomBarItem(
-                activeIcon: const Icon(
-                  Icons.explore,
-                  color: Palette.primary,
-                ),
-                icon: const Icon(
-                  Icons.explore,
-                  color: Palette.overlay1,
-                ),
-                title: const Text('Discover'),
-              ),
+              // SalomonBottomBarItem(
+              //   activeIcon: const Icon(
+              //     Icons.explore,
+              //     color: Palette.primary,
+              //   ),
+              //   icon: const Icon(
+              //     Icons.explore,
+              //     color: Palette.overlay1,
+              //   ),
+              //   title: const Text('Discover'),
+              // ),
               SalomonBottomBarItem(
                 activeIcon: const Icon(
                   Icons.manage_accounts,
