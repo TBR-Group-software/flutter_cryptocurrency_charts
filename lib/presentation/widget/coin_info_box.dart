@@ -14,6 +14,7 @@ class CoinInfoBox extends StatelessWidget {
   final String symbol;
   final List<double>? sparkline;
   final List<FlSpot>? flSpotList;
+  final String fiatCurrency;
   const CoinInfoBox({
     required this.coinName,
     required this.currentPrice,
@@ -22,6 +23,7 @@ class CoinInfoBox extends StatelessWidget {
     required this.symbol,
     required this.priceChangePercentage,
     required this.marketCap,
+    required this.fiatCurrency,
     this.sparkline,
     this.flSpotList,
   });
@@ -113,14 +115,16 @@ class CoinInfoBox extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    '\$${currentPrice.toStringAsFixed(2)}',
+                    currentPrice.toStringAsFixed(2) +
+                        ' ' +
+                        fiatCurrency.toUpperCase(),
                     style: TextStyles.whiteSemiBold14,
                   ),
                   SizedBox(height: 6.h),
                   Text(
                     marketCap > 1000000000000
-                        ? 'MCap \$${(marketCap / 1000000000).toStringAsFixed(2)} T'
-                        : 'MCap \$${(marketCap / 1000000000).toStringAsFixed(2)} Bn',
+                        ? 'MCap ${(marketCap / 1000000000).toStringAsFixed(2) + ' ' + fiatCurrency.toUpperCase()} T'
+                        : 'MCap ${(marketCap / 1000000000).toStringAsFixed(2) + ' ' + fiatCurrency.toUpperCase()} Bn',
                     style: TextStyles.overlay3Bold11,
                   )
                 ],

@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
+import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:clean_app/theme/palette.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:clean_app/backbone/dependency_injection.dart' as di;
+import 'package:easy_localization/easy_localization.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
@@ -15,15 +17,20 @@ class NavigationPage extends StatefulWidget {
 }
 
 class _NavigationPageState extends State<NavigationPage> {
+  final SettingsBloc settingsBloc = di.sl.get();
+  @override
+  void initState() {
+    super.initState();
+    settingsBloc.add(const SettingsEvent.getFiatCurrency());
+  }
+
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
       backgroundColor: Palette.background,
       routes: const <PageRouteInfo<dynamic>>[
-        // HomePageRouter(),
         RatingsPageRouter(),
         PortfolioPageRouter(),
-        // DiscoverPageRouter(),
         ProfilePageRouter(),
       ],
       bottomNavigationBuilder: (_, TabsRouter tabsRouter) {
@@ -38,20 +45,8 @@ class _NavigationPageState extends State<NavigationPage> {
           child: SalomonBottomBar(
             onTap: tabsRouter.setActiveIndex,
             selectedItemColor: Palette.primary,
-
             // ignore: always_specify_types
             items: [
-              // SalomonBottomBarItem(
-              //   activeIcon: const Icon(
-              //     Icons.home,
-              //     color: Palette.primary,
-              //   ),
-              //   icon: const Icon(
-              //     Icons.home,
-              //     color: Palette.overlay1,
-              //   ),
-              //   title: const Text('Home'),
-              // ),
               SalomonBottomBarItem(
                 activeIcon: const Icon(
                   Icons.bar_chart,
@@ -61,7 +56,9 @@ class _NavigationPageState extends State<NavigationPage> {
                   Icons.bar_chart,
                   color: Palette.overlay1,
                 ),
-                title: const Text('Ratings'),
+                title: Text(
+                  'ratings'.tr(),
+                ),
               ),
               SalomonBottomBarItem(
                 activeIcon: const Icon(
@@ -72,19 +69,10 @@ class _NavigationPageState extends State<NavigationPage> {
                   Icons.pie_chart,
                   color: Palette.overlay1,
                 ),
-                title: const Text('Market'),
+                title: Text(
+                  'market'.tr(),
+                ),
               ),
-              // SalomonBottomBarItem(
-              //   activeIcon: const Icon(
-              //     Icons.explore,
-              //     color: Palette.primary,
-              //   ),
-              //   icon: const Icon(
-              //     Icons.explore,
-              //     color: Palette.overlay1,
-              //   ),
-              //   title: const Text('Discover'),
-              // ),
               SalomonBottomBarItem(
                 activeIcon: const Icon(
                   Icons.manage_accounts,
@@ -94,8 +82,8 @@ class _NavigationPageState extends State<NavigationPage> {
                   Icons.manage_accounts,
                   color: Palette.overlay1,
                 ),
-                title: const Text(
-                  'Profile',
+                title: Text(
+                  'settings'.tr(),
                 ),
               ),
             ],

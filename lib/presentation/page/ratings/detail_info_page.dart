@@ -16,6 +16,7 @@ class DetailInfoPage extends StatefulWidget {
   final String symbol;
   final List<double>? sparkline;
   final List<FlSpot>? flSpotList;
+  final String fiatCurrency;
   const DetailInfoPage({
     required this.coinName,
     required this.currentPrice,
@@ -26,6 +27,7 @@ class DetailInfoPage extends StatefulWidget {
     required this.symbol,
     required this.sparkline,
     required this.flSpotList,
+    required this.fiatCurrency,
     Key? key,
   }) : super(key: key);
 
@@ -102,7 +104,9 @@ class _DetailInfoPageState extends State<DetailInfoPage> {
                       Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          '\$${widget.currentPrice.toString()}',
+                          widget.currentPrice.toString() +
+                              ' ' +
+                              widget.fiatCurrency.toUpperCase(),
                           style: TextStyles.whiteSemiBold24,
                         ),
                       ),

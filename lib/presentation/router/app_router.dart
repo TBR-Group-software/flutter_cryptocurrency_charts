@@ -20,17 +20,6 @@ import 'package:clean_app/presentation/page/ratings/ratings_page.dart';
           path: 'presentation/page/home/home_page',
           name: 'HomePageRouter',
           page: HomePage,
-          // page: EmptyRouterPage,
-          // children: [
-          //   AutoRoute<dynamic>(
-          //     path: '',
-          //     page: HomeScreen,
-          //   ),
-          //   AutoRoute<dynamic>(
-          //     path: '',
-          //     page: ItemsScreen,
-          //   ),
-          // ],
         ),
         AutoRoute<dynamic>(
           path: 'presentation/page/ratings/ratings_page',

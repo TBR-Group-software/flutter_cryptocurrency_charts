@@ -5,6 +5,7 @@ import 'package:clean_app/data/gateway/constants.dart';
 import 'package:clean_app/domain/entity/coin.dart';
 import 'package:clean_app/presentation/bloc/coin/bloc.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
+import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:clean_app/presentation/widget/coin_info_box.dart';
 import 'package:clean_app/presentation/widget/error_toast_widget.dart';
@@ -26,18 +27,29 @@ class _RatingsPageState extends State<RatingsPage> {
   List<Coin> coinList = <Coin>[];
   final CoinBloc coinBloc = di.sl.get();
   final GlobalDataBloc globalDataBloc = di.sl.get();
-  int amountOfPages = 3;
+  final SettingsBloc settingsBloc = di.sl.get();
+  int amountOfPages = 1;
   int pageNumber = 1;
-  ScrollController _scrollController = ScrollController();
-  double _scrollOffset = 0.0;
+  String? fiatCurrency;
+
   Toasts toasts = Toasts();
 
   @override
   void initState() {
     super.initState();
-    globalDataBloc.add(const GlobalDataEvent.getGlobalData());
-    coinBloc.add(CoinEvent.getMarketCoins(
-        currencyUSD, order, pageNumber, perPage100, 'true'));
+    settingsBloc.add(const SettingsEvent.getFiatCurrency());
+    settingsBloc.stream.listen(
+      (SettingsState state) {
+        if (state.status == BlocStatus.Loaded) {
+          setState(() {
+            fiatCurrency = state.fiatCurrency!;
+          });
+          globalDataBloc.add(const GlobalDataEvent.getGlobalData());
+          coinBloc.add(CoinEvent.getMarketCoins(
+              fiatCurrency.toString(), order, pageNumber, perPage100, 'true'));
+        }
+      },
+    );
   }
 
   @override
@@ -57,9 +69,18 @@ class _RatingsPageState extends State<RatingsPage> {
                 color: Palette.primary,
                 strokeWidth: 2,
                 onRefresh: () {
-                  coinBloc.add(
-                    CoinEvent.getMarketCoins(
-                        currencyUSD, order, pageNumber, perPage100, 'true'),
+                  settingsBloc.add(const SettingsEvent.getFiatCurrency());
+                  settingsBloc.stream.listen(
+                    (SettingsState state) {
+                      if (state.status == BlocStatus.Loaded) {
+                        coinBloc.add(CoinEvent.getMarketCoins(
+                            state.fiatCurrency!,
+                            order,
+                            pageNumber,
+                            perPage100,
+                            'true'));
+                      }
+                    },
                   );
                   return Future<void>.delayed(
                     const Duration(seconds: 1),
@@ -99,6 +120,7 @@ class _RatingsPageState extends State<RatingsPage> {
                               marketCap: coinList[index].marketCap!,
                               sparkline: newSparkline,
                               flSpotList: flSpotList,
+                              fiatCurrency: fiatCurrency.toString(),
                             ),
                             onTap: () {
                               context.router.push(
@@ -113,6 +135,7 @@ class _RatingsPageState extends State<RatingsPage> {
                                   marketCap: coinList[index].marketCap!,
                                   sparkline: newSparkline,
                                   flSpotList: flSpotList,
+                                  fiatCurrency: fiatCurrency.toString(),
                                 ),
                               );
                             },
@@ -121,17 +144,8 @@ class _RatingsPageState extends State<RatingsPage> {
                       );
                     } else {
                       toasts.errorConnectionToast();
-                      return Center(
-                        child: RefreshButton(
-                          onPressed: () {
-                            globalDataBloc
-                                .add(const GlobalDataEvent.getGlobalData());
-                            coinBloc.add(
-                              CoinEvent.getMarketCoins(currencyUSD, order,
-                                  pageNumber, perPage100, 'true'),
-                            );
-                          },
-                        ),
+                      return const Center(
+                        child: RefreshButton(),
                       );
                     }
                   },

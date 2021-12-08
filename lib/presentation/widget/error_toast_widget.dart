@@ -1,3 +1,4 @@
+import 'package:clean_app/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -8,8 +9,8 @@ class Toasts {
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 1,
-      backgroundColor: Colors.red,
-      textColor: Colors.white,
+      backgroundColor: Palette.primary,
+      textColor: Palette.background,
       fontSize: 16.0,
     );
   }

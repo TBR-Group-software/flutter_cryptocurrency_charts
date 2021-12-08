@@ -6,6 +6,7 @@ import 'package:clean_app/domain/entity/coin.dart';
 import 'package:clean_app/domain/entity/market_cap_percentage.dart';
 import 'package:clean_app/presentation/bloc/coin/bloc.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
+import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:clean_app/presentation/widget/coin_info_box.dart';
 import 'package:clean_app/presentation/widget/error_toast_widget.dart';
@@ -30,18 +31,28 @@ class _PortfolioPageState extends State<PortfolioPage> {
   List<Coin> coinList = <Coin>[];
   final CoinBloc coinBloc = di.sl.get();
   final GlobalDataBloc globalDataBloc = di.sl.get();
-  int pageNumber = 1;
+  final SettingsBloc settingsBloc = di.sl.get();
   bool internetIsConnected = true;
+
+  int pageNumber = 1;
   Toasts toasts = Toasts();
+  String? fiatCurrency;
 
   @override
   void initState() {
     super.initState();
-
-    globalDataBloc.add(const GlobalDataEvent.getGlobalData());
-    coinBloc.add(
-      CoinEvent.getMarketCoins(
-          currencyUSD, order, pageNumber, perPage100, 'true'),
+    settingsBloc.add(const SettingsEvent.getFiatCurrency());
+    settingsBloc.stream.listen(
+      (SettingsState state) {
+        if (state.status == BlocStatus.Loaded) {
+          setState(() {
+            fiatCurrency = state.fiatCurrency!;
+          });
+          globalDataBloc.add(const GlobalDataEvent.getGlobalData());
+          coinBloc.add(CoinEvent.getMarketCoins(
+              state.fiatCurrency!, order, pageNumber, perPage100, 'true'));
+        }
+      },
     );
     globalDataBloc.stream.listen((GlobalDataState state) {
       setState(() {
@@ -107,7 +118,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         if (state.status == BlocStatus.Loading) {
                           return Container(
                             padding: EdgeInsets.symmetric(horizontal: 16.w),
-                            child: const ShimmerCoinListView(itemCount: 15),
+                            child: const ShimmerCoinListView(itemCount: 5),
                           );
                         } else if (state.status == BlocStatus.Loaded) {
                           coinList = state.coins;
@@ -142,6 +153,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                                     marketCap: coinList[index].marketCap!,
                                     sparkline: newSparkline,
                                     flSpotList: flSpotList,
+                                    fiatCurrency: fiatCurrency.toString(),
                                   ),
                                   onTap: () {
                                     context.router.push(
@@ -157,6 +169,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                                         marketCap: coinList[index].marketCap!,
                                         sparkline: newSparkline,
                                         flSpotList: flSpotList,
+                                        fiatCurrency: fiatCurrency.toString(),
                                       ),
                                     );
                                   },
@@ -177,16 +190,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                     color: Palette.background,
                     height: 812.h,
                     width: 375.w,
-                    child: RefreshButton(
-                      onPressed: () {
-                        globalDataBloc
-                            .add(const GlobalDataEvent.getGlobalData());
-                        coinBloc.add(
-                          CoinEvent.getMarketCoins(currencyUSD, order,
-                              pageNumber, perPage100, 'true'),
-                        );
-                      },
-                    ),
+                    child: const RefreshButton(),
                   ),
                 ),
             ],

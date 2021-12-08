@@ -71,6 +71,7 @@ class AppRouter extends _i1.RootStackRouter {
               symbol: args.symbol,
               sparkline: args.sparkline,
               flSpotList: args.flSpotList,
+              fiatCurrency: args.fiatCurrency,
               key: args.key);
         }),
     PortfolioRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
@@ -175,6 +176,7 @@ class DetailInfoRoute extends _i1.PageRouteInfo<DetailInfoRouteArgs> {
       required String symbol,
       required List<double>? sparkline,
       required List<_i10.FlSpot>? flSpotList,
+      required String fiatCurrency,
       _i2.Key? key})
       : super(name,
             path: '',
@@ -188,6 +190,7 @@ class DetailInfoRoute extends _i1.PageRouteInfo<DetailInfoRouteArgs> {
                 symbol: symbol,
                 sparkline: sparkline,
                 flSpotList: flSpotList,
+                fiatCurrency: fiatCurrency,
                 key: key));
 
   static const String name = 'DetailInfoRoute';
@@ -204,6 +207,7 @@ class DetailInfoRouteArgs {
       required this.symbol,
       required this.sparkline,
       required this.flSpotList,
+      required this.fiatCurrency,
       this.key});
 
   final String coinName;
@@ -223,6 +227,8 @@ class DetailInfoRouteArgs {
   final List<double>? sparkline;
 
   final List<_i10.FlSpot>? flSpotList;
+
+  final String fiatCurrency;
 
   final _i2.Key? key;
 }

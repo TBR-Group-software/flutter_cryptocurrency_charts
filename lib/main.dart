@@ -1,14 +1,31 @@
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
 import 'package:clean_app/presentation/router/app_router.gr.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const Size screenSize = Size(375, 812);
 
-void main() {
+Future<void> main() async {
   di.init();
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
 
-  runApp(MyApp());
+  runApp(EasyLocalization(
+    supportedLocales: const <Locale>[
+      Locale(
+        'en',
+      ),
+      Locale(
+        'ru',
+      )
+    ],
+    fallbackLocale: const Locale(
+      'en',
+    ),
+    path: 'assets/translations',
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -21,6 +38,11 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: screenSize,
       builder: () => MaterialApp.router(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        themeMode: ThemeMode.dark,
+        darkTheme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         title: 'Crypto Aggregator',
         routerDelegate: _appRouter.delegate(),
