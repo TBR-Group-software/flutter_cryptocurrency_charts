@@ -26,71 +26,76 @@ class _NavigationPageState extends State<NavigationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AutoTabsScaffold(
-      backgroundColor: Palette.background,
-      routes: const <PageRouteInfo<dynamic>>[
-        RatingsPageRouter(),
-        PortfolioPageRouter(),
-        ProfilePageRouter(),
-      ],
-      bottomNavigationBuilder: (_, TabsRouter tabsRouter) {
-        return Container(
-          color: Palette.base1,
-          padding: EdgeInsets.only(
-            left: 12.w,
-            right: 12.w,
-            bottom: 12.h,
-            top: 4.h,
-          ),
-          child: SalomonBottomBar(
-            onTap: tabsRouter.setActiveIndex,
-            selectedItemColor: Palette.primary,
-            // ignore: always_specify_types
-            items: [
-              SalomonBottomBarItem(
-                activeIcon: const Icon(
-                  Icons.bar_chart,
-                  color: Palette.primary,
-                ),
-                icon: const Icon(
-                  Icons.bar_chart,
-                  color: Palette.overlay1,
-                ),
-                title: Text(
-                  'ratings'.tr(),
-                ),
-              ),
-              SalomonBottomBarItem(
-                activeIcon: const Icon(
-                  Icons.pie_chart,
-                  color: Palette.primary,
-                ),
-                icon: const Icon(
-                  Icons.pie_chart,
-                  color: Palette.overlay1,
-                ),
-                title: Text(
-                  'market'.tr(),
-                ),
-              ),
-              SalomonBottomBarItem(
-                activeIcon: const Icon(
-                  Icons.manage_accounts,
-                  color: Palette.primary,
-                ),
-                icon: const Icon(
-                  Icons.manage_accounts,
-                  color: Palette.overlay1,
-                ),
-                title: Text(
-                  'settings'.tr(),
-                ),
-              ),
-            ],
-            currentIndex: tabsRouter.activeIndex,
-          ),
-        );
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
       },
+      child: AutoTabsScaffold(
+        backgroundColor: Palette.background,
+        routes: const <PageRouteInfo<dynamic>>[
+          RatingsPageRouter(),
+          PortfolioPageRouter(),
+          ProfilePageRouter(),
+        ],
+        bottomNavigationBuilder: (_, TabsRouter tabsRouter) {
+          return Container(
+            color: Palette.base1,
+            padding: EdgeInsets.only(
+              left: 12.w,
+              right: 12.w,
+              bottom: 12.h,
+              top: 4.h,
+            ),
+            child: SalomonBottomBar(
+              onTap: tabsRouter.setActiveIndex,
+              selectedItemColor: Palette.primary,
+              // ignore: always_specify_types
+              items: [
+                SalomonBottomBarItem(
+                  activeIcon: const Icon(
+                    Icons.bar_chart,
+                    color: Palette.primary,
+                  ),
+                  icon: const Icon(
+                    Icons.bar_chart,
+                    color: Palette.overlay1,
+                  ),
+                  title: Text(
+                    'ratings'.tr(),
+                  ),
+                ),
+                SalomonBottomBarItem(
+                  activeIcon: const Icon(
+                    Icons.pie_chart,
+                    color: Palette.primary,
+                  ),
+                  icon: const Icon(
+                    Icons.pie_chart,
+                    color: Palette.overlay1,
+                  ),
+                  title: Text(
+                    'market'.tr(),
+                  ),
+                ),
+                SalomonBottomBarItem(
+                  activeIcon: const Icon(
+                    Icons.manage_accounts,
+                    color: Palette.primary,
+                  ),
+                  icon: const Icon(
+                    Icons.manage_accounts,
+                    color: Palette.overlay1,
+                  ),
+                  title: Text(
+                    'settings'.tr(),
+                  ),
+                ),
+              ],
+              currentIndex: tabsRouter.activeIndex,
+            ),
+          );
+        },
+      ),
     );
   }
 }

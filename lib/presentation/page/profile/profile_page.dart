@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:clean_app/backbone/bloc_status.dart';
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
+import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:clean_app/presentation/widget/fiat_currency_bottom_sheet.dart';
 import 'package:clean_app/presentation/widget/language_bottom_sheet_selector.dart';
 import 'package:clean_app/theme/palette.dart';
@@ -58,7 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      const Text('Fiat currency'),
+                      Text('fiat_currency'.tr()),
                       GestureDetector(
                         onTap: () async {
                           final String? selectedCurrency =
@@ -87,9 +89,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const <Widget>[
-                      Text('Switch to Day Mode'),
-                      Icon(
+                    children: <Widget>[
+                      Text('switch_to_day_mode'.tr()),
+                      const Icon(
                         CupertinoIcons.sun_max,
                       )
                     ],
@@ -98,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      const Text('Language'),
+                      Text('language'.tr()),
                       GestureDetector(
                         onTap: () async {
                           final String? selectedLanguage =
@@ -106,11 +108,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                   context: context);
                           setState(() {
                             language = selectedLanguage;
-                            if (language == 'Russian') {
+                            if (language == 'russian'.tr()) {
                               context.setLocale(const Locale('ru'));
+                              context.router.push(const NavigationPageRouter());
                             }
-                            if (language == 'English') {
+                            if (language == 'english'.tr()) {
                               context.setLocale(const Locale('en'));
+                              context.router.push(const NavigationPageRouter());
                             }
                           });
                         },
@@ -118,8 +122,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           children: <Widget>[
                             Text(
                               context.locale.toString() == 'en'
-                                  ? 'English'
-                                  : 'Russian',
+                                  ? 'english'.tr()
+                                  : 'russian'.tr(),
                               style: TextStyles.overlay3Bold14,
                             ),
                             SizedBox(width: 4.w),

@@ -103,7 +103,9 @@ class _RatingsPageState extends State<RatingsPage> {
 
                           final List<double> newSparkline = <double>[];
                           double i = 0;
-                          coinList[index].sparkline.forEach((dynamic element) {
+                          coinList[index]
+                              .sparkline
+                              .forEach((dynamic element) {
                             i++;
                             newSparkline.add(element as double);
                             flSpotList.add(FlSpot(i, element));

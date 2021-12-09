@@ -1,6 +1,7 @@
 import 'package:clean_app/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class RatingsTabRow extends StatelessWidget {
   const RatingsTabRow({Key? key}) : super(key: key);
@@ -9,11 +10,11 @@ class RatingsTabRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        Text('Cryptoassets', style: TextStyles.tabText),
+        Text('cryptoassets'.tr(), style: TextStyles.tabText),
         SizedBox(width: 16.w),
-        Text('Exchanges', style: TextStyles.tabText),
+        Text('exchanges'.tr(), style: TextStyles.tabText),
         SizedBox(width: 16.w),
-        Text('Sectors', style: TextStyles.tabText),
+        Text('sectors'.tr(), style: TextStyles.tabText),
       ],
     );
   }

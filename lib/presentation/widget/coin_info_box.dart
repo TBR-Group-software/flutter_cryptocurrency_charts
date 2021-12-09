@@ -5,6 +5,7 @@ import 'package:clean_app/theme/text_styles.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CoinInfoBox extends StatelessWidget {
   final String coinName;
@@ -123,17 +124,11 @@ class CoinInfoBox extends StatelessWidget {
                   SizedBox(height: 6.h),
                   Text(
                     marketCap > 1000000000000
-                        ? 'MCap ${(marketCap / 1000000000).toStringAsFixed(2) + ' ' + fiatCurrency.toUpperCase()} T'
-                        : 'MCap ${(marketCap / 1000000000).toStringAsFixed(2) + ' ' + fiatCurrency.toUpperCase()} Bn',
+                        ? ' ${'market_cap'.tr() + ' ' + (marketCap / 1000000000).toStringAsFixed(2) + ' ' + fiatCurrency.toUpperCase()} T'
+                        : ' ${'market_cap'.tr() + ' ' + (marketCap / 1000000000).toStringAsFixed(2) + ' ' + fiatCurrency.toUpperCase()} Bn',
                     style: TextStyles.overlay3Bold11,
                   )
                 ],
-              ),
-              SizedBox(width: 8.w),
-              Icon(
-                Icons.star,
-                color: Palette.accentDarkBlue,
-                size: 18.sp,
               ),
             ],
           ),

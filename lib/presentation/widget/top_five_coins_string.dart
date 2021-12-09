@@ -1,6 +1,7 @@
 import 'package:clean_app/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TopFiveCoinsString extends StatelessWidget {
   const TopFiveCoinsString({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class TopFiveCoinsString extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
-          'Top 5 Coins',
+          'top_five_coins'.tr(),
           style: TextStyles.whiteSemiBold16,
         ),
       ),

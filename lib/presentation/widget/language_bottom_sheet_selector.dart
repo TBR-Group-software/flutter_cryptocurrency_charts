@@ -5,6 +5,7 @@ import 'package:clean_app/theme/palette.dart';
 import 'package:clean_app/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 Future<String?> showBottomSheetLanguageSelector({
   required BuildContext context,
@@ -29,7 +30,7 @@ Future<String?> showBottomSheetLanguageSelector({
           children: <Widget>[
             SizedBox(height: 20.h),
             Text(
-              'Language',
+              'lanugage'.tr(),
               style: TextStyles.whiteSemiBold16,
             ),
             SizedBox(height: 16.h),
@@ -41,12 +42,12 @@ Future<String?> showBottomSheetLanguageSelector({
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    const LanguageSelectedWidgeet(
-                      language: 'English',
+                    LanguageSelectedWidgeet(
+                      language: 'english'.tr(),
                     ),
                     SizedBox(height: 24.h),
-                    const LanguageSelectedWidgeet(
-                      language: 'Russian',
+                    LanguageSelectedWidgeet(
+                      language: 'russian'.tr(),
                     ),
                   ],
                 ),

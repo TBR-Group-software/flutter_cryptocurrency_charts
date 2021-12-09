@@ -5,6 +5,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ShimmerMarketData extends StatelessWidget {
   const ShimmerMarketData({Key? key}) : super(key: key);
@@ -61,11 +62,11 @@ class ShimmerMarketData extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Active Coins',
+                      'active_coins'.tr(),
                       style: TextStyles.overlay3Bold14,
                     ),
                     Text(
-                      '10000',
+                      '-----',
                       style: TextStyles.whiteSemiBold14,
                     )
                   ],
@@ -74,11 +75,11 @@ class ShimmerMarketData extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Markets',
+                      'markets'.tr(),
                       style: TextStyles.overlay3Bold14,
                     ),
                     Text(
-                      '666',
+                      '----',
                       style: TextStyles.whiteSemiBold14,
                     )
                   ],

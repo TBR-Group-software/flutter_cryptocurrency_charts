@@ -7,6 +7,7 @@ import 'package:clean_app/theme/text_styles.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DetailInfoPage extends StatefulWidget {
   final String coinName;
@@ -146,7 +147,7 @@ class _DetailInfoPageState extends State<DetailInfoPage> {
                 ),
                 child: Center(
                   child: Text(
-                    'Buy Crypto',
+                    'buy_crypto'.tr(),
                     style: TextStyles.whiteSemiBold14,
                   ),
                 ),

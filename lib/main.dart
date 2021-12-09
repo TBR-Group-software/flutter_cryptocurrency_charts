@@ -30,7 +30,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final AppRouter _appRouter = AppRouter();
-
+  bool themeMode = true;
   MyApp({Key? key}) : super(key: key);
 
   @override
@@ -41,7 +41,8 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        themeMode: ThemeMode.dark,
+        theme: ThemeData(),
+        themeMode: themeMode ? ThemeMode.dark : ThemeMode.light,
         darkTheme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         title: 'Crypto Aggregator',

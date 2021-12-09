@@ -1,5 +1,6 @@
 import 'package:clean_app/theme/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MarketRowData extends StatelessWidget {
   final num activeCryptocurrencies, markets;
@@ -17,7 +18,7 @@ class MarketRowData extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Active Coins',
+              'active_coins'.tr(),
               style: TextStyles.overlay3Bold14,
             ),
             Text(
@@ -30,7 +31,7 @@ class MarketRowData extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Markets',
+              'markets'.tr(),
               style: TextStyles.overlay3Bold14,
             ),
             Text(

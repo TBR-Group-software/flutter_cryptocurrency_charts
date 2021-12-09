@@ -6,6 +6,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ShimmerCoinInfoBox extends StatelessWidget {
   @override
@@ -34,7 +35,7 @@ class ShimmerCoinInfoBox extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          'Coin',
+                          '----',
                           style: TextStyles.whiteSemiBold14,
                         ),
                         SizedBox(height: 6.h),
@@ -51,7 +52,7 @@ class ShimmerCoinInfoBox extends StatelessWidget {
                             ),
                             SizedBox(width: 4.w),
                             Text(
-                              'CNN',
+                              '---',
                               style: TextStyles.overlay3Bold11,
                             ),
                             ChangePriceTriangle(
@@ -93,21 +94,15 @@ class ShimmerCoinInfoBox extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text(
-                      '\$666',
+                      '\---',
                       style: TextStyles.whiteSemiBold14,
                     ),
                     SizedBox(height: 6.h),
                     Text(
-                      'MCap \$${120.8} Bn',
+                      '---- ----- --',
                       style: TextStyles.overlay3Bold11,
                     )
                   ],
-                ),
-                SizedBox(width: 8.w),
-                Icon(
-                  Icons.star,
-                  color: Palette.accentDarkBlue,
-                  size: 18.sp,
                 ),
               ],
             ),
