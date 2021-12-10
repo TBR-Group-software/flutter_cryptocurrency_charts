@@ -55,7 +55,7 @@ class _RatingsPageState extends State<RatingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
         padding: EdgeInsets.all(16.w),
         child: Column(
@@ -65,7 +65,7 @@ class _RatingsPageState extends State<RatingsPage> {
             SizedBox(height: 16.h),
             Flexible(
               child: RefreshIndicator(
-                backgroundColor: Palette.background,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 color: Palette.primary,
                 strokeWidth: 2,
                 onRefresh: () {
@@ -103,9 +103,7 @@ class _RatingsPageState extends State<RatingsPage> {
 
                           final List<double> newSparkline = <double>[];
                           double i = 0;
-                          coinList[index]
-                              .sparkline
-                              .forEach((dynamic element) {
+                          coinList[index].sparkline.forEach((dynamic element) {
                             i++;
                             newSparkline.add(element as double);
                             flSpotList.add(FlSpot(i, element));

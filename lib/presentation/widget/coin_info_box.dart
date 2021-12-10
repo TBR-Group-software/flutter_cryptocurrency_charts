@@ -57,11 +57,13 @@ class CoinInfoBox extends StatelessWidget {
                                   coinName.length,
                                   '...',
                                 ),
-                                style: TextStyles.whiteSemiBold14,
+                                style: TextStyles.semiBold14.copyWith(
+                                    color: Theme.of(context).hintColor),
                               )
                             : Text(
                                 coinName,
-                                style: TextStyles.whiteSemiBold14,
+                                style: TextStyles.semiBold14.copyWith(
+                                    color: Theme.of(context).hintColor),
                               ),
                       ),
                       SizedBox(height: 6.h),
@@ -119,7 +121,8 @@ class CoinInfoBox extends StatelessWidget {
                     currentPrice.toStringAsFixed(2) +
                         ' ' +
                         fiatCurrency.toUpperCase(),
-                    style: TextStyles.whiteSemiBold14,
+                    style: TextStyles.semiBold14
+                        .copyWith(color: Theme.of(context).hintColor),
                   ),
                   SizedBox(height: 6.h),
                   Text(

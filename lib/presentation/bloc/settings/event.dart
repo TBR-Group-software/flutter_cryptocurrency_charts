@@ -9,4 +9,7 @@ abstract class SettingsEvent with _$SettingsEvent {
 
   const factory SettingsEvent.selectFiatCurrency(String fiatCurrency) =
       SelectFiatCurrencyEvent;
+  const factory SettingsEvent.getTheme() = GetThemeEvent;
+
+  const factory SettingsEvent.selectTheme(String themeType) = SelectThemeEvent;
 }

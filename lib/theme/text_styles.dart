@@ -6,23 +6,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class TextStyles {
   static TextStyle tabText = TextStyle(
     fontSize: 16.sp,
-    color: Palette.overlay1,
   );
 
-  static TextStyle whiteSemiBold14 = TextStyle(
+  static TextStyle semiBold14 = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w600,
-    color: Palette.overlay1,
   );
-  static TextStyle whiteSemiBold16 = TextStyle(
+  static TextStyle semiBold16 = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeight.w600,
-    color: Palette.overlay1,
   );
-  static TextStyle whiteSemiBold24 = TextStyle(
+  static TextStyle semiBold24 = TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeight.w600,
-    color: Palette.overlay1,
   );
   static TextStyle whiteSemiBold11 = TextStyle(
     fontSize: 11.sp,
@@ -34,7 +30,7 @@ class TextStyles {
     fontWeight: FontWeight.w600,
     color: Palette.overlay3,
   );
-   static TextStyle overlay3Bold14 = TextStyle(
+  static TextStyle overlay3Bold14 = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w600,
     color: Palette.overlay3,

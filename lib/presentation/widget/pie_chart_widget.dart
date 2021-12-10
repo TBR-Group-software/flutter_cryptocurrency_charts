@@ -33,10 +33,10 @@ class _PieChartWidgetState extends State<PieChartWidget> {
             color: Palette.primary,
             value: widget.marketCapList[index].percentage?.toDouble(),
             title: '${widget.marketCapList[index].coinSymbol?.toUpperCase()}',
-            titleStyle: TextStyles.whiteSemiBold14,
+            titleStyle: TextStyles.semiBold14.copyWith(color: Palette.white),
             radius: 60.r,
             borderSide: BorderSide(
-              color: Palette.background,
+              color: Colors.transparent,
               width: 2.w,
             ),
           );
@@ -45,10 +45,10 @@ class _PieChartWidgetState extends State<PieChartWidget> {
             color: Palette.tertriary,
             value: widget.marketCapList[index].percentage?.toDouble(),
             title: '${widget.marketCapList[index].coinSymbol?.toUpperCase()}',
-            titleStyle: TextStyles.whiteSemiBold14,
+            titleStyle: TextStyles.semiBold14.copyWith(color: Palette.white),
             radius: 60.r,
             borderSide: BorderSide(
-              color: Palette.background,
+              color: Colors.transparent,
               width: 2.w,
             ),
           );
@@ -57,10 +57,10 @@ class _PieChartWidgetState extends State<PieChartWidget> {
             color: Palette.overlay4,
             value: widget.marketCapList[index].percentage?.toDouble(),
             title: '${widget.marketCapList[index].coinSymbol?.toUpperCase()}',
-            titleStyle: TextStyles.whiteSemiBold14,
+            titleStyle: TextStyles.semiBold14.copyWith(color: Palette.white),
             radius: 60.r,
             borderSide: BorderSide(
-              color: Palette.background,
+              color: Colors.transparent,
               width: 2.w,
             ),
           );
@@ -72,10 +72,10 @@ class _PieChartWidgetState extends State<PieChartWidget> {
         color: Palette.base3,
         value: fullAmount,
         title: 'Other',
-        titleStyle: TextStyles.whiteSemiBold14,
+        titleStyle: TextStyles.semiBold14.copyWith(color: Palette.white),
         radius: 60.r,
         borderSide: BorderSide(
-          color: Palette.background,
+          color: Colors.transparent,
           width: 2.w,
         ),
       ),
@@ -93,7 +93,8 @@ class _PieChartWidgetState extends State<PieChartWidget> {
         centerSpaceRadius: 50.r,
         sections: pieChartDataList,
         pieTouchData: PieTouchData(
-          touchCallback: (FlTouchEvent event, PieTouchResponse? pieTouchResponse) {
+          touchCallback:
+              (FlTouchEvent event, PieTouchResponse? pieTouchResponse) {
             setState(
               () {
                 if (!event.isInterestedForInteractions ||

@@ -10,11 +10,17 @@ class RatingsTabRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        Text('cryptoassets'.tr(), style: TextStyles.tabText),
+        Text('cryptoassets'.tr(),
+            style: TextStyles.tabText
+                .copyWith(color: Theme.of(context).hintColor)),
         SizedBox(width: 16.w),
-        Text('exchanges'.tr(), style: TextStyles.tabText),
+        Text('exchanges'.tr(),
+            style: TextStyles.tabText
+                .copyWith(color: Theme.of(context).hintColor)),
         SizedBox(width: 16.w),
-        Text('sectors'.tr(), style: TextStyles.tabText),
+        Text('sectors'.tr(),
+            style: TextStyles.tabText
+                .copyWith(color: Theme.of(context).hintColor)),
       ],
     );
   }

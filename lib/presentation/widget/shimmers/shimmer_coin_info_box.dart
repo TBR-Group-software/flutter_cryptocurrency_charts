@@ -36,7 +36,7 @@ class ShimmerCoinInfoBox extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           '----',
-                          style: TextStyles.whiteSemiBold14,
+                          style: TextStyles.semiBold14,
                         ),
                         SizedBox(height: 6.h),
                         Row(
@@ -95,7 +95,7 @@ class ShimmerCoinInfoBox extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       '\---',
-                      style: TextStyles.whiteSemiBold14,
+                      style: TextStyles.semiBold14,
                     ),
                     SizedBox(height: 6.h),
                     Text(

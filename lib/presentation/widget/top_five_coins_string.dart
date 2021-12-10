@@ -14,7 +14,8 @@ class TopFiveCoinsString extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: Text(
           'top_five_coins'.tr(),
-          style: TextStyles.whiteSemiBold16,
+          style: TextStyles.semiBold16
+              .copyWith(color: Theme.of(context).hintColor),
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:clean_app/backbone/bloc_status.dart';
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:clean_app/presentation/router/app_router.gr.dart';
+import 'package:clean_app/presentation/widget/chevron_icon.dart';
 import 'package:clean_app/presentation/widget/fiat_currency_bottom_sheet.dart';
 import 'package:clean_app/presentation/widget/language_bottom_sheet_selector.dart';
 import 'package:clean_app/theme/palette.dart';
@@ -30,18 +31,19 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   String? fiatCurrency;
+  String? themeType;
   String? language;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.background,
       body: Center(
         child: Container(
           padding: EdgeInsets.all(16.w),
           width: 300.w,
           height: 160.h,
           decoration: BoxDecoration(
-            color: Palette.base1,
+            color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.all(
               Radius.circular(16.r),
             ),
@@ -51,6 +53,7 @@ class _ProfilePageState extends State<ProfilePage> {
             builder: (_, SettingsState state) {
               if (BlocStatus.Loaded == state.status) {
                 fiatCurrency = state.fiatCurrency;
+                themeType = state.themeType;
               }
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -60,7 +63,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text('fiat_currency'.tr()),
+                      Text(
+                        'fiat_currency'.tr(),
+                        style: TextStyles.semiBold14
+                            .copyWith(color: Theme.of(context).hintColor),
+                      ),
                       GestureDetector(
                         onTap: () async {
                           final String? selectedCurrency =
@@ -78,29 +85,50 @@ class _ProfilePageState extends State<ProfilePage> {
                               style: TextStyles.overlay3Bold14,
                             ),
                             SizedBox(width: 4.w),
-                            Icon(
-                              CupertinoIcons.right_chevron,
-                              size: 18.sp,
-                            )
+                            const ChevronIcon(),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text('switch_to_day_mode'.tr()),
-                      const Icon(
-                        CupertinoIcons.sun_max,
-                      )
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      if (themeType == 'night') {
+                        settingsBloc
+                            .add(const SettingsEvent.selectTheme('day'));
+                      } else {
+                        settingsBloc
+                            .add(const SettingsEvent.selectTheme('night'));
+                      }
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          themeType == 'night'
+                              ? 'switch_to_day_mode'.tr()
+                              : 'switch_to_night_mode'.tr(),
+                          style: TextStyles.semiBold14
+                              .copyWith(color: Theme.of(context).hintColor),
+                        ),
+                        Icon(
+                          themeType == 'night'
+                              ? CupertinoIcons.sun_max
+                              : CupertinoIcons.moon,
+                          color: Theme.of(context).hintColor,
+                        )
+                      ],
+                    ),
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text('language'.tr()),
+                      Text(
+                        'language'.tr(),
+                        style: TextStyles.semiBold14
+                            .copyWith(color: Theme.of(context).hintColor),
+                      ),
                       GestureDetector(
                         onTap: () async {
                           final String? selectedLanguage =
@@ -127,10 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               style: TextStyles.overlay3Bold14,
                             ),
                             SizedBox(width: 4.w),
-                            Icon(
-                              CupertinoIcons.right_chevron,
-                              size: 18.sp,
-                            )
+                            const ChevronIcon(),
                           ],
                         ),
                       ),

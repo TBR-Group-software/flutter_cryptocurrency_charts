@@ -40,17 +40,17 @@ class _DetailInfoPageState extends State<DetailInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(120.h),
         child: Container(
-          color: Palette.base1,
+          color: Theme.of(context).primaryColor,
           padding: EdgeInsets.only(top: 50.h, bottom: 8.h),
           child: Row(
             children: <Widget>[
               IconButton(
                 icon: const Icon(Icons.arrow_back),
-                color: Palette.white,
+                color: Theme.of(context).hintColor,
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -63,20 +63,22 @@ class _DetailInfoPageState extends State<DetailInfoPage> {
               SizedBox(width: 12.w),
               Text(
                 widget.symbol.toUpperCase(),
-                style: TextStyles.whiteSemiBold14,
+                style: TextStyles.semiBold14
+                    .copyWith(color: Theme.of(context).hintColor),
               ),
               SizedBox(width: 4.w),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
                 decoration: BoxDecoration(
-                  color: Palette.base4,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   borderRadius: BorderRadius.all(
                     Radius.circular(4.r),
                   ),
                 ),
                 child: Text(
                   '${widget.coinIndex + 1}',
-                  style: TextStyles.whiteSemiBold14,
+                  style: TextStyles.semiBold14
+                      .copyWith(color: Theme.of(context).hintColor),
                 ),
               ),
             ],
@@ -95,7 +97,8 @@ class _DetailInfoPageState extends State<DetailInfoPage> {
                     alignment: Alignment.topLeft,
                     child: Text(
                       widget.coinName,
-                      style: TextStyles.whiteSemiBold14,
+                      style: TextStyles.semiBold14
+                          .copyWith(color: Theme.of(context).hintColor),
                     ),
                   ),
                   SizedBox(height: 4.h),
@@ -108,13 +111,15 @@ class _DetailInfoPageState extends State<DetailInfoPage> {
                           widget.currentPrice.toString() +
                               ' ' +
                               widget.fiatCurrency.toUpperCase(),
-                          style: TextStyles.whiteSemiBold24,
+                          style: TextStyles.semiBold24
+                              .copyWith(color: Theme.of(context).hintColor),
                         ),
                       ),
                       ChangePriceTriangle(
                         priceChangePercentage: widget.priceChangePercentage,
                         fontSize: 24.sp,
-                        textStyle: TextStyles.whiteSemiBold14,
+                        textStyle: TextStyles.semiBold14
+                            .copyWith(color: Theme.of(context).hintColor),
                       ),
                     ],
                   ),
@@ -140,7 +145,7 @@ class _DetailInfoPageState extends State<DetailInfoPage> {
                 width: MediaQuery.of(context).size.width,
                 height: 50.h,
                 decoration: BoxDecoration(
-                  color: Palette.base4,
+                  color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.all(
                     Radius.circular(8.r),
                   ),
@@ -148,7 +153,8 @@ class _DetailInfoPageState extends State<DetailInfoPage> {
                 child: Center(
                   child: Text(
                     'buy_crypto'.tr(),
-                    style: TextStyles.whiteSemiBold14,
+                    style: TextStyles.semiBold14.copyWith(
+                        color: Theme.of(context).hintColor),
                   ),
                 ),
               ),

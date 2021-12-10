@@ -1,7 +1,7 @@
 import 'package:clean_app/data/gateway/constants.dart';
 import 'package:clean_app/presentation/widget/fiat_currency_selected_widget.dart';
-import 'package:clean_app/theme/palette.dart';
 import 'package:clean_app/theme/text_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,7 +17,7 @@ Future<String?> showBottomSheetCurrencySelector({
       return Container(
         height: 240.h,
         decoration: BoxDecoration(
-          color: Palette.base1,
+          color: Theme.of(context).scaffoldBackgroundColor,
           borderRadius: BorderRadius.all(
             Radius.circular(16.r),
           ),
@@ -28,8 +28,9 @@ Future<String?> showBottomSheetCurrencySelector({
           children: <Widget>[
             SizedBox(height: 20.h),
             Text(
-              'Fiat currency',
-              style: TextStyles.whiteSemiBold16,
+              'fiat_currency'.tr(),
+              style: TextStyles.semiBold16
+                  .copyWith(color: Theme.of(context).hintColor),
             ),
             SizedBox(height: 16.h),
             Padding(

@@ -30,7 +30,7 @@ class ShimmerMarketData extends StatelessWidget {
                     color: Palette.primary,
                     value: 70,
                     title: '70',
-                    titleStyle: TextStyles.whiteSemiBold14,
+                    titleStyle: TextStyles.semiBold14,
                     radius: 60.r,
                     borderSide: BorderSide(
                       color: Palette.background,
@@ -41,7 +41,7 @@ class ShimmerMarketData extends StatelessWidget {
                     color: Palette.primary,
                     value: 30,
                     title: '30',
-                    titleStyle: TextStyles.whiteSemiBold14,
+                    titleStyle: TextStyles.semiBold14,
                     radius: 60.r,
                     borderSide: BorderSide(
                       color: Palette.background,
@@ -67,7 +67,7 @@ class ShimmerMarketData extends StatelessWidget {
                     ),
                     Text(
                       '-----',
-                      style: TextStyles.whiteSemiBold14,
+                      style: TextStyles.semiBold14,
                     )
                   ],
                 ),
@@ -80,7 +80,7 @@ class ShimmerMarketData extends StatelessWidget {
                     ),
                     Text(
                       '----',
-                      style: TextStyles.whiteSemiBold14,
+                      style: TextStyles.semiBold14,
                     )
                   ],
                 ),

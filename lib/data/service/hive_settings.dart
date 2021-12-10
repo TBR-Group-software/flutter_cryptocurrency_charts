@@ -11,4 +11,11 @@ class HiveSettingsSerivce implements SettingsService {
   @override
   Future<String> selectFiatCurrency(String fiatCurrency) =>
       _gateway.selectFiatCurrency(fiatCurrency);
+
+  @override
+  Future<String> getTheme() => _gateway.getTheme();
+
+  @override
+  Future<String> selectTheme(String themeType) =>
+      _gateway.selectTheme(themeType);
 }

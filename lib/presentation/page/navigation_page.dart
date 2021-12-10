@@ -31,7 +31,7 @@ class _NavigationPageState extends State<NavigationPage> {
         return false;
       },
       child: AutoTabsScaffold(
-        backgroundColor: Palette.background,
+        backgroundColor: Theme.of(context).primaryColor,
         routes: const <PageRouteInfo<dynamic>>[
           RatingsPageRouter(),
           PortfolioPageRouter(),
@@ -39,7 +39,7 @@ class _NavigationPageState extends State<NavigationPage> {
         ],
         bottomNavigationBuilder: (_, TabsRouter tabsRouter) {
           return Container(
-            color: Palette.base1,
+            //  color: Palette.base1,
             padding: EdgeInsets.only(
               left: 12.w,
               right: 12.w,
@@ -48,43 +48,43 @@ class _NavigationPageState extends State<NavigationPage> {
             ),
             child: SalomonBottomBar(
               onTap: tabsRouter.setActiveIndex,
-              selectedItemColor: Palette.primary,
+              selectedItemColor: Theme.of(context).focusColor,
               // ignore: always_specify_types
               items: [
                 SalomonBottomBarItem(
-                  activeIcon: const Icon(
+                  activeIcon: Icon(
                     Icons.bar_chart,
-                    color: Palette.primary,
+                    color: Theme.of(context).focusColor,
                   ),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.bar_chart,
-                    color: Palette.overlay1,
+                    color: Theme.of(context).hintColor,
                   ),
                   title: Text(
                     'ratings'.tr(),
                   ),
                 ),
                 SalomonBottomBarItem(
-                  activeIcon: const Icon(
+                  activeIcon: Icon(
                     Icons.pie_chart,
-                    color: Palette.primary,
+                    color: Theme.of(context).focusColor,
                   ),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.pie_chart,
-                    color: Palette.overlay1,
+                    color: Theme.of(context).hintColor,
                   ),
                   title: Text(
                     'market'.tr(),
                   ),
                 ),
                 SalomonBottomBarItem(
-                  activeIcon: const Icon(
+                  activeIcon: Icon(
                     Icons.manage_accounts,
-                    color: Palette.primary,
+                    color: Theme.of(context).focusColor,
                   ),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.manage_accounts,
-                    color: Palette.overlay1,
+                    color: Theme.of(context).hintColor,
                   ),
                   title: Text(
                     'settings'.tr(),

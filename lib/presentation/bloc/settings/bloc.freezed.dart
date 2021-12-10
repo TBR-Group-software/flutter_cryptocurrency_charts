@@ -26,6 +26,16 @@ class _$SettingsEventTearOff {
       fiatCurrency,
     );
   }
+
+  GetThemeEvent getTheme() {
+    return const GetThemeEvent();
+  }
+
+  SelectThemeEvent selectTheme(String themeType) {
+    return SelectThemeEvent(
+      themeType,
+    );
+  }
 }
 
 /// @nodoc
@@ -37,18 +47,24 @@ mixin _$SettingsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() getFiatCurrency,
     required TResult Function(String fiatCurrency) selectFiatCurrency,
+    required TResult Function() getTheme,
+    required TResult Function(String themeType) selectTheme,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? getFiatCurrency,
     TResult Function(String fiatCurrency)? selectFiatCurrency,
+    TResult Function()? getTheme,
+    TResult Function(String themeType)? selectTheme,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFiatCurrency,
     TResult Function(String fiatCurrency)? selectFiatCurrency,
+    TResult Function()? getTheme,
+    TResult Function(String themeType)? selectTheme,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -56,18 +72,24 @@ mixin _$SettingsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(GetFiatCurrencyEvent value) getFiatCurrency,
     required TResult Function(SelectFiatCurrencyEvent value) selectFiatCurrency,
+    required TResult Function(GetThemeEvent value) getTheme,
+    required TResult Function(SelectThemeEvent value) selectTheme,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
     TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult Function(GetThemeEvent value)? getTheme,
+    TResult Function(SelectThemeEvent value)? selectTheme,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
     TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult Function(GetThemeEvent value)? getTheme,
+    TResult Function(SelectThemeEvent value)? selectTheme,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -132,6 +154,8 @@ class _$GetFiatCurrencyEvent extends GetFiatCurrencyEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() getFiatCurrency,
     required TResult Function(String fiatCurrency) selectFiatCurrency,
+    required TResult Function() getTheme,
+    required TResult Function(String themeType) selectTheme,
   }) {
     return getFiatCurrency();
   }
@@ -141,6 +165,8 @@ class _$GetFiatCurrencyEvent extends GetFiatCurrencyEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? getFiatCurrency,
     TResult Function(String fiatCurrency)? selectFiatCurrency,
+    TResult Function()? getTheme,
+    TResult Function(String themeType)? selectTheme,
   }) {
     return getFiatCurrency?.call();
   }
@@ -150,6 +176,8 @@ class _$GetFiatCurrencyEvent extends GetFiatCurrencyEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFiatCurrency,
     TResult Function(String fiatCurrency)? selectFiatCurrency,
+    TResult Function()? getTheme,
+    TResult Function(String themeType)? selectTheme,
     required TResult orElse(),
   }) {
     if (getFiatCurrency != null) {
@@ -163,6 +191,8 @@ class _$GetFiatCurrencyEvent extends GetFiatCurrencyEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(GetFiatCurrencyEvent value) getFiatCurrency,
     required TResult Function(SelectFiatCurrencyEvent value) selectFiatCurrency,
+    required TResult Function(GetThemeEvent value) getTheme,
+    required TResult Function(SelectThemeEvent value) selectTheme,
   }) {
     return getFiatCurrency(this);
   }
@@ -172,6 +202,8 @@ class _$GetFiatCurrencyEvent extends GetFiatCurrencyEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
     TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult Function(GetThemeEvent value)? getTheme,
+    TResult Function(SelectThemeEvent value)? selectTheme,
   }) {
     return getFiatCurrency?.call(this);
   }
@@ -181,6 +213,8 @@ class _$GetFiatCurrencyEvent extends GetFiatCurrencyEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
     TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult Function(GetThemeEvent value)? getTheme,
+    TResult Function(SelectThemeEvent value)? selectTheme,
     required TResult orElse(),
   }) {
     if (getFiatCurrency != null) {
@@ -264,6 +298,8 @@ class _$SelectFiatCurrencyEvent extends SelectFiatCurrencyEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() getFiatCurrency,
     required TResult Function(String fiatCurrency) selectFiatCurrency,
+    required TResult Function() getTheme,
+    required TResult Function(String themeType) selectTheme,
   }) {
     return selectFiatCurrency(fiatCurrency);
   }
@@ -273,6 +309,8 @@ class _$SelectFiatCurrencyEvent extends SelectFiatCurrencyEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? getFiatCurrency,
     TResult Function(String fiatCurrency)? selectFiatCurrency,
+    TResult Function()? getTheme,
+    TResult Function(String themeType)? selectTheme,
   }) {
     return selectFiatCurrency?.call(fiatCurrency);
   }
@@ -282,6 +320,8 @@ class _$SelectFiatCurrencyEvent extends SelectFiatCurrencyEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFiatCurrency,
     TResult Function(String fiatCurrency)? selectFiatCurrency,
+    TResult Function()? getTheme,
+    TResult Function(String themeType)? selectTheme,
     required TResult orElse(),
   }) {
     if (selectFiatCurrency != null) {
@@ -295,6 +335,8 @@ class _$SelectFiatCurrencyEvent extends SelectFiatCurrencyEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(GetFiatCurrencyEvent value) getFiatCurrency,
     required TResult Function(SelectFiatCurrencyEvent value) selectFiatCurrency,
+    required TResult Function(GetThemeEvent value) getTheme,
+    required TResult Function(SelectThemeEvent value) selectTheme,
   }) {
     return selectFiatCurrency(this);
   }
@@ -304,6 +346,8 @@ class _$SelectFiatCurrencyEvent extends SelectFiatCurrencyEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
     TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult Function(GetThemeEvent value)? getTheme,
+    TResult Function(SelectThemeEvent value)? selectTheme,
   }) {
     return selectFiatCurrency?.call(this);
   }
@@ -313,6 +357,8 @@ class _$SelectFiatCurrencyEvent extends SelectFiatCurrencyEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
     TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult Function(GetThemeEvent value)? getTheme,
+    TResult Function(SelectThemeEvent value)? selectTheme,
     required TResult orElse(),
   }) {
     if (selectFiatCurrency != null) {
@@ -330,5 +376,270 @@ abstract class SelectFiatCurrencyEvent extends SettingsEvent {
   String get fiatCurrency => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $SelectFiatCurrencyEventCopyWith<SelectFiatCurrencyEvent> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GetThemeEventCopyWith<$Res> {
+  factory $GetThemeEventCopyWith(
+          GetThemeEvent value, $Res Function(GetThemeEvent) then) =
+      _$GetThemeEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$GetThemeEventCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res>
+    implements $GetThemeEventCopyWith<$Res> {
+  _$GetThemeEventCopyWithImpl(
+      GetThemeEvent _value, $Res Function(GetThemeEvent) _then)
+      : super(_value, (v) => _then(v as GetThemeEvent));
+
+  @override
+  GetThemeEvent get _value => super._value as GetThemeEvent;
+}
+
+/// @nodoc
+
+class _$GetThemeEvent extends GetThemeEvent {
+  const _$GetThemeEvent() : super._();
+
+  @override
+  String toString() {
+    return 'SettingsEvent.getTheme()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is GetThemeEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getFiatCurrency,
+    required TResult Function(String fiatCurrency) selectFiatCurrency,
+    required TResult Function() getTheme,
+    required TResult Function(String themeType) selectTheme,
+  }) {
+    return getTheme();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? getFiatCurrency,
+    TResult Function(String fiatCurrency)? selectFiatCurrency,
+    TResult Function()? getTheme,
+    TResult Function(String themeType)? selectTheme,
+  }) {
+    return getTheme?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getFiatCurrency,
+    TResult Function(String fiatCurrency)? selectFiatCurrency,
+    TResult Function()? getTheme,
+    TResult Function(String themeType)? selectTheme,
+    required TResult orElse(),
+  }) {
+    if (getTheme != null) {
+      return getTheme();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetFiatCurrencyEvent value) getFiatCurrency,
+    required TResult Function(SelectFiatCurrencyEvent value) selectFiatCurrency,
+    required TResult Function(GetThemeEvent value) getTheme,
+    required TResult Function(SelectThemeEvent value) selectTheme,
+  }) {
+    return getTheme(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
+    TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult Function(GetThemeEvent value)? getTheme,
+    TResult Function(SelectThemeEvent value)? selectTheme,
+  }) {
+    return getTheme?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
+    TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult Function(GetThemeEvent value)? getTheme,
+    TResult Function(SelectThemeEvent value)? selectTheme,
+    required TResult orElse(),
+  }) {
+    if (getTheme != null) {
+      return getTheme(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetThemeEvent extends SettingsEvent {
+  const factory GetThemeEvent() = _$GetThemeEvent;
+  const GetThemeEvent._() : super._();
+}
+
+/// @nodoc
+abstract class $SelectThemeEventCopyWith<$Res> {
+  factory $SelectThemeEventCopyWith(
+          SelectThemeEvent value, $Res Function(SelectThemeEvent) then) =
+      _$SelectThemeEventCopyWithImpl<$Res>;
+  $Res call({String themeType});
+}
+
+/// @nodoc
+class _$SelectThemeEventCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res>
+    implements $SelectThemeEventCopyWith<$Res> {
+  _$SelectThemeEventCopyWithImpl(
+      SelectThemeEvent _value, $Res Function(SelectThemeEvent) _then)
+      : super(_value, (v) => _then(v as SelectThemeEvent));
+
+  @override
+  SelectThemeEvent get _value => super._value as SelectThemeEvent;
+
+  @override
+  $Res call({
+    Object? themeType = freezed,
+  }) {
+    return _then(SelectThemeEvent(
+      themeType == freezed
+          ? _value.themeType
+          : themeType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SelectThemeEvent extends SelectThemeEvent {
+  const _$SelectThemeEvent(this.themeType) : super._();
+
+  @override
+  final String themeType;
+
+  @override
+  String toString() {
+    return 'SettingsEvent.selectTheme(themeType: $themeType)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is SelectThemeEvent &&
+            (identical(other.themeType, themeType) ||
+                const DeepCollectionEquality()
+                    .equals(other.themeType, themeType)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(themeType);
+
+  @JsonKey(ignore: true)
+  @override
+  $SelectThemeEventCopyWith<SelectThemeEvent> get copyWith =>
+      _$SelectThemeEventCopyWithImpl<SelectThemeEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getFiatCurrency,
+    required TResult Function(String fiatCurrency) selectFiatCurrency,
+    required TResult Function() getTheme,
+    required TResult Function(String themeType) selectTheme,
+  }) {
+    return selectTheme(themeType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? getFiatCurrency,
+    TResult Function(String fiatCurrency)? selectFiatCurrency,
+    TResult Function()? getTheme,
+    TResult Function(String themeType)? selectTheme,
+  }) {
+    return selectTheme?.call(themeType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getFiatCurrency,
+    TResult Function(String fiatCurrency)? selectFiatCurrency,
+    TResult Function()? getTheme,
+    TResult Function(String themeType)? selectTheme,
+    required TResult orElse(),
+  }) {
+    if (selectTheme != null) {
+      return selectTheme(themeType);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetFiatCurrencyEvent value) getFiatCurrency,
+    required TResult Function(SelectFiatCurrencyEvent value) selectFiatCurrency,
+    required TResult Function(GetThemeEvent value) getTheme,
+    required TResult Function(SelectThemeEvent value) selectTheme,
+  }) {
+    return selectTheme(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
+    TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult Function(GetThemeEvent value)? getTheme,
+    TResult Function(SelectThemeEvent value)? selectTheme,
+  }) {
+    return selectTheme?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
+    TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult Function(GetThemeEvent value)? getTheme,
+    TResult Function(SelectThemeEvent value)? selectTheme,
+    required TResult orElse(),
+  }) {
+    if (selectTheme != null) {
+      return selectTheme(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SelectThemeEvent extends SettingsEvent {
+  const factory SelectThemeEvent(String themeType) = _$SelectThemeEvent;
+  const SelectThemeEvent._() : super._();
+
+  String get themeType => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SelectThemeEventCopyWith<SelectThemeEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }

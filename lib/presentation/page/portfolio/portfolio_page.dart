@@ -82,7 +82,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Center(
         child: SingleChildScrollView(
           child: Stack(
@@ -99,10 +99,10 @@ class _PortfolioPageState extends State<PortfolioPage> {
                         if (state.status == BlocStatus.Error) {
                           return const SizedBox();
                         } else {
-                          final List<MarketCapPercentage> marketCapList =
-                              state.globalData!.marketCapPercentage
-                                  .getRange(0, 5)
-                                  .toList();
+                          final List<MarketCapPercentage> marketCapList = state
+                              .globalData!.marketCapPercentage
+                              .getRange(0, 5)
+                              .toList();
                           return GlobalDataColumn(
                             marketCapList: marketCapList,
                             activeCryptocurrencies:
@@ -145,12 +145,11 @@ class _PortfolioPageState extends State<PortfolioPage> {
                                   child: CoinInfoBox(
                                     coinIndex: index,
                                     coinName: coinList[index].name!,
-                                    currentPrice:
-                                        coinList[index].currentPrice!,
+                                    currentPrice: coinList[index].currentPrice!,
                                     imageUrl: coinList[index].image!,
                                     symbol: coinList[index].symbol!,
-                                    priceChangePercentage: coinList[index]
-                                        .priceChangePercentage!,
+                                    priceChangePercentage:
+                                        coinList[index].priceChangePercentage!,
                                     marketCap: coinList[index].marketCap!,
                                     sparkline: newSparkline,
                                     flSpotList: flSpotList,
@@ -188,7 +187,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
               else
                 Center(
                   child: Container(
-                    color: Palette.background,
+                    color: Theme.of(context).scaffoldBackgroundColor,
                     height: 812.h,
                     width: 375.w,
                     child: const RefreshButton(),

@@ -22,7 +22,9 @@ import 'package:clean_app/domain/service/settings.dart';
 import 'package:clean_app/domain/usecase/get_fiat_currency.dart';
 import 'package:clean_app/domain/usecase/get_global_data.dart';
 import 'package:clean_app/domain/usecase/get_market_coins.dart';
+import 'package:clean_app/domain/usecase/get_theme.dart';
 import 'package:clean_app/domain/usecase/select_fiat_currency.dart';
+import 'package:clean_app/domain/usecase/select_theme.dart';
 import 'package:clean_app/presentation/bloc/coin/bloc.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
@@ -73,10 +75,13 @@ void init() {
       () => RestGetFiatCurrencyUseCase(sl.get()));
   sl.registerLazySingleton<SelectFiatCurrencyUseCase>(
       () => RestSelectFiatCurrencyUseCase(sl.get()));
-
+  sl.registerLazySingleton<GetThemeUseCase>(
+      () => RestGetThemeUseCase(sl.get()));
+  sl.registerLazySingleton<SelectThemeUseCase>(
+      () => RestSelectThemeUseCase(sl.get()));
   //Bloc
   sl.registerLazySingleton<CoinBloc>(() => CoinBloc(sl.get()));
   sl.registerLazySingleton<GlobalDataBloc>(() => GlobalDataBloc(sl.get()));
   sl.registerLazySingleton<SettingsBloc>(
-      () => SettingsBloc(sl.get(), sl.get()));
+      () => SettingsBloc(sl.get(), sl.get(), sl.get(), sl.get()));
 }

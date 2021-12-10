@@ -23,7 +23,8 @@ class MarketRowData extends StatelessWidget {
             ),
             Text(
               activeCryptocurrencies.toString(),
-              style: TextStyles.whiteSemiBold14,
+              style: TextStyles.semiBold14
+                  .copyWith(color: Theme.of(context).hintColor),
             )
           ],
         ),
@@ -36,7 +37,8 @@ class MarketRowData extends StatelessWidget {
             ),
             Text(
               markets.toString(),
-              style: TextStyles.whiteSemiBold14,
+              style: TextStyles.semiBold14
+                  .copyWith(color: Theme.of(context).hintColor),
             )
           ],
         ),
