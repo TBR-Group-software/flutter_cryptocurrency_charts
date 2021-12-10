@@ -71,6 +71,7 @@ class RestGateway {
         headers: headers);
   }
 
+  // ignore: unused_element
   Future<http.Response> _postRequest(String baseUrl, String path,
       {Map<String, String>? headers, Map<String, String>? queryParams}) {
     return http.post(

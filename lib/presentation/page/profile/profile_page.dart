@@ -6,7 +6,6 @@ import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:clean_app/presentation/widget/chevron_icon.dart';
 import 'package:clean_app/presentation/widget/fiat_currency_bottom_sheet.dart';
 import 'package:clean_app/presentation/widget/language_bottom_sheet_selector.dart';
-import 'package:clean_app/theme/palette.dart';
 import 'package:clean_app/theme/text_styles.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';

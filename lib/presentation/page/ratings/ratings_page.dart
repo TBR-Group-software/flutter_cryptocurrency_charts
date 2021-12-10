@@ -74,11 +74,12 @@ class _RatingsPageState extends State<RatingsPage> {
                     (SettingsState state) {
                       if (state.status == BlocStatus.Loaded) {
                         coinBloc.add(CoinEvent.getMarketCoins(
-                            state.fiatCurrency!,
-                            order,
-                            pageNumber,
-                            perPage100,
-                            'true'));
+                          state.fiatCurrency!,
+                          order,
+                          pageNumber,
+                          perPage100,
+                          sparkLineIsTrue,
+                        ));
                       }
                     },
                   );
@@ -91,7 +92,7 @@ class _RatingsPageState extends State<RatingsPage> {
                   builder: (_, CoinState state) {
                     coinList = state.coins;
                     if (state.status == BlocStatus.Loading) {
-                      return Container(
+                      return Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: const ShimmerCoinListView(itemCount: 15),
                       );

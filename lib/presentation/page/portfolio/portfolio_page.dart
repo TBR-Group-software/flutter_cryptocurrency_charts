@@ -14,7 +14,6 @@ import 'package:clean_app/presentation/widget/global_data_column.dart';
 import 'package:clean_app/presentation/widget/refresh_button.dart';
 import 'package:clean_app/presentation/widget/shimmers/shimmer_coin_list_view.dart';
 import 'package:clean_app/presentation/widget/shimmers/shimmer_market_data.dart';
-import 'package:clean_app/theme/palette.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +49,12 @@ class _PortfolioPageState extends State<PortfolioPage> {
           });
           globalDataBloc.add(const GlobalDataEvent.getGlobalData());
           coinBloc.add(CoinEvent.getMarketCoins(
-              state.fiatCurrency!, order, pageNumber, perPage100, 'true'));
+            state.fiatCurrency!,
+            order,
+            pageNumber,
+            perPage100,
+            sparkLineIsTrue,
+          ));
         }
       },
     );
@@ -116,13 +120,13 @@ class _PortfolioPageState extends State<PortfolioPage> {
                       bloc: coinBloc,
                       builder: (_, CoinState state) {
                         if (state.status == BlocStatus.Loading) {
-                          return Container(
+                          return Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16.w),
                             child: const ShimmerCoinListView(itemCount: 5),
                           );
                         } else if (state.status == BlocStatus.Loaded) {
                           coinList = state.coins;
-                          return Container(
+                          return Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16.w),
                             child: ListView.builder(
                               padding: EdgeInsets.zero,

@@ -1,4 +1,5 @@
 import 'package:clean_app/backbone/bloc_status.dart';
+import 'package:clean_app/backbone/dependency_injection.dart' as di;
 import 'package:clean_app/data/gateway/constants.dart';
 import 'package:clean_app/presentation/bloc/coin/bloc.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
@@ -6,7 +7,6 @@ import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:clean_app/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:clean_app/backbone/dependency_injection.dart' as di;
 
 class RefreshButton extends StatefulWidget {
   final void Function()? onPressed;
@@ -27,6 +27,7 @@ class _RefreshButtonState extends State<RefreshButton> {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
+        // ignore: unnecessary_statements
         widget.onPressed;
         settingsBloc.add(const SettingsEvent.getFiatCurrency());
         settingsBloc.stream.listen(
@@ -34,7 +35,12 @@ class _RefreshButtonState extends State<RefreshButton> {
             if (state.status == BlocStatus.Loaded) {
               globalDataBloc.add(const GlobalDataEvent.getGlobalData());
               coinBloc.add(CoinEvent.getMarketCoins(
-                  state.fiatCurrency!, order, pageNumber, perPage100, 'true'));
+                state.fiatCurrency!,
+                order,
+                pageNumber,
+                perPage100,
+                sparkLineIsTrue,
+              ));
             }
           },
         );

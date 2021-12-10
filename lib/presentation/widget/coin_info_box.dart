@@ -2,10 +2,10 @@ import 'package:clean_app/presentation/widget/change_price_triangle.dart';
 import 'package:clean_app/presentation/widget/sparkline_widget.dart';
 import 'package:clean_app/theme/palette.dart';
 import 'package:clean_app/theme/text_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class CoinInfoBox extends StatelessWidget {
   final String coinName;
@@ -31,7 +31,7 @@ class CoinInfoBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,7 +100,7 @@ class CoinInfoBox extends StatelessWidget {
               ),
             ],
           ),
-          Container(
+          SizedBox(
             height: 40.h,
             child: AbsorbPointer(
               absorbing: true,

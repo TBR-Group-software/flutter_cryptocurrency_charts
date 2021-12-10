@@ -1,11 +1,10 @@
-import 'package:clean_app/presentation/widget/pie_chart_widget.dart';
 import 'package:clean_app/theme/palette.dart';
 import 'package:clean_app/theme/text_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class ShimmerMarketData extends StatelessWidget {
   const ShimmerMarketData({Key? key}) : super(key: key);
@@ -19,7 +18,7 @@ class ShimmerMarketData extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SizedBox(height: 30.h),
-          Container(
+          SizedBox(
             height: 280.h,
             child: PieChart(
               PieChartData(

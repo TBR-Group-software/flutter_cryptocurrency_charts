@@ -4,6 +4,7 @@ import 'package:clean_app/theme/palette.dart';
 import 'package:clean_app/theme/text_styles.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DetailSparklineWidget extends StatefulWidget {
   final List<double>? sparkline;
@@ -74,24 +75,22 @@ class _SparklineWidgetState extends State<DetailSparklineWidget> {
           getTitles: (double value) {
             switch (value.toInt()) {
               case 0:
-                return '1d';
+                return '1${'day'.tr()}';
               case 24:
-                return '2d';
+                return '2${'day'.tr()}';
               case 48:
-                return '3d';
+                return '3${'day'.tr()}';
               case 72:
-                return '4d';
+                return '4${'day'.tr()}';
               case 96:
-                return '5d';
+                return '5${'day'.tr()}';
               case 120:
-                return '6d';
+                return '6${'day'.tr()}';
               case 144:
-                return '7d';
+                return '7${'day'.tr()}';
             }
             return '';
           },
-
-          //margin: 20,
           interval: 1,
         ),
         show: true,

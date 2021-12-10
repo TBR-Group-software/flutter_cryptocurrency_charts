@@ -2,12 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:clean_app/presentation/router/app_router.gr.dart';
-import 'package:clean_app/theme/palette.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:clean_app/backbone/dependency_injection.dart' as di;
-import 'package:easy_localization/easy_localization.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
@@ -38,8 +36,7 @@ class _NavigationPageState extends State<NavigationPage> {
           ProfilePageRouter(),
         ],
         bottomNavigationBuilder: (_, TabsRouter tabsRouter) {
-          return Container(
-            //  color: Palette.base1,
+          return Padding(
             padding: EdgeInsets.only(
               left: 12.w,
               right: 12.w,

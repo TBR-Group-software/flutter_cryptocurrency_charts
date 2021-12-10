@@ -85,7 +85,6 @@ class _PieChartWidgetState extends State<PieChartWidget> {
   double fullAmount = 100.0;
   @override
   Widget build(BuildContext context) {
-    int touchedIndex = -1;
 
     return PieChart(
       PieChartData(
@@ -100,11 +99,8 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                 if (!event.isInterestedForInteractions ||
                     pieTouchResponse == null ||
                     pieTouchResponse.touchedSection == null) {
-                  touchedIndex = -1;
                   return;
                 }
-                touchedIndex =
-                    pieTouchResponse.touchedSection!.touchedSectionIndex;
               },
             );
           },

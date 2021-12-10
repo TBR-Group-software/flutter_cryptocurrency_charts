@@ -1,4 +1,3 @@
-import 'package:clean_app/backbone/bloc_status.dart';
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:clean_app/presentation/router/app_router.gr.dart';
@@ -16,15 +15,18 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
 
   runApp(EasyLocalization(
-    supportedLocales: const <Locale>[Locale('en'), Locale('ru')],
+    supportedLocales: const <Locale>[
+      Locale('en'),
+      Locale('ru'),
+    ],
     fallbackLocale: const Locale('en'),
     path: 'assets/translations',
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();

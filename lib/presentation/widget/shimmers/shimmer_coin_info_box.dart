@@ -6,7 +6,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class ShimmerCoinInfoBox extends StatelessWidget {
   @override
@@ -14,7 +13,7 @@ class ShimmerCoinInfoBox extends StatelessWidget {
     return Shimmer.fromColors(
       highlightColor: Palette.overlay1,
       baseColor: Palette.base4,
-      child: Container(
+      child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,7 +67,7 @@ class ShimmerCoinInfoBox extends StatelessWidget {
                 ),
               ],
             ),
-            Container(
+            SizedBox(
               height: 40.h,
               child: const AbsorbPointer(
                 absorbing: true,
