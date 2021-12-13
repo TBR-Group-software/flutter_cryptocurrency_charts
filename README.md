@@ -1,4 +1,7 @@
-# Crypto Aggregator
+ <p  align="center ">
+ <img src="https://user-images.githubusercontent.com/86306159/145790795-dc47ab81-f3b9-44fc-926f-55244709063b.png" width="250" />
+</p>
+
 ## About the project
 The purpose of this project is to develop the best Cryptocurrency, markets data and charts experience.
 This project has been built using the Flutter framework, which allows to build an app for mobile, desktop & web, from a single codebase.
