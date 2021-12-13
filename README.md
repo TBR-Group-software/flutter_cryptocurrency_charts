@@ -2,6 +2,18 @@
 ## About the project
 The purpose of this project is to develop the best Cryptocurrency, markets data and charts experience.
 This project has been built using the Flutter framework, which allows to build an app for mobile, desktop & web, from a single codebase.
+<p float="center", align="justify ">
+  <img src="https://user-images.githubusercontent.com/86306159/145789291-63fa116d-34cb-4c56-a5ae-99490b71ae9d.gif" width="250" />
+     
+  <img src="https://user-images.githubusercontent.com/86306159/145789874-bebcf9cc-bbc8-4150-a7fc-a60962980ffe.gif" width="250" />
+     
+  <img src="https://user-images.githubusercontent.com/86306159/145789962-c20229aa-d1ad-40dd-9270-e3733e589b00.gif" width="250" />
+</p>
+
+
+
+
+
 
 ## Features
 - Beautiful and clean UI
