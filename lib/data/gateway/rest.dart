@@ -56,7 +56,7 @@ class RestGateway {
       {Map<String, String>? headers, Map<String, String>? queryParams}) async {
     try {
       final List<InternetAddress> result =
-          await InternetAddress.lookup('coingecko.com');
+          await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         print('connected');
       }

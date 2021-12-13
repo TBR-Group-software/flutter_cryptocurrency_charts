@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:clean_app/theme/palette.dart';
 import 'package:clean_app/theme/text_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class DetailSparklineWidget extends StatefulWidget {
   final List<double>? sparkline;
