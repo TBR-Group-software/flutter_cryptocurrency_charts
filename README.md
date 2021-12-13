@@ -19,13 +19,13 @@ This project has been built using the Flutter framework, which allows to build a
 
 
 ## Features
-- Beautiful and clean UI
+- Beautiful and clean UI.
 - Browse cryptocurrencies and markets data.
-- Line and Pie charts for easy tracking of price and data changes
-- Refresh data
-- Switching fiat currency
-- Switching between Night and Day mode
-- Switching language of application
+- Line and Pie charts for easy tracking of price and data changes.
+- Refresh data.
+- Switching fiat currency.
+- Switching between Night and Day mode.
+- Switching language of application.
 ## Built with
 - [Flutter](https://flutter.dev/) - Beautiful native apps in record time.
 - [Visual Studio Code](https://code.visualstudio.com/) - Code Editing.
