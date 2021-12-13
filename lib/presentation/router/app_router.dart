@@ -1,6 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:clean_app/presentation/page/discover/discover_page.dart';
-import 'package:clean_app/presentation/page/home/home_page.dart';
 import 'package:clean_app/presentation/page/navigation_page.dart';
 import 'package:clean_app/presentation/page/portfolio/portfolio_page.dart';
 import 'package:clean_app/presentation/page/profile/profile_page.dart';
@@ -9,29 +7,13 @@ import 'package:clean_app/presentation/page/ratings/ratings_page.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
-  routes: <AutoRoute>[
+  routes: <AutoRoute<dynamic>>[
     AutoRoute<dynamic>(
       path: 'presentation/navigation_page',
       name: 'NavigationPageRouter',
       initial: true,
       page: NavigationPage,
       children: <AutoRoute<dynamic>>[
-        AutoRoute<dynamic>(
-          path: 'presentation/page/home/home_page',
-          name: 'HomePageRouter',
-          page: HomePage,
-          // page: EmptyRouterPage,
-          // children: [
-          //   AutoRoute<dynamic>(
-          //     path: '',
-          //     page: HomeScreen,
-          //   ),
-          //   AutoRoute<dynamic>(
-          //     path: '',
-          //     page: ItemsScreen,
-          //   ),
-          // ],
-        ),
         AutoRoute<dynamic>(
           path: 'presentation/page/ratings/ratings_page',
           name: 'RatingsPageRouter',
@@ -50,12 +32,17 @@ import 'package:clean_app/presentation/page/ratings/ratings_page.dart';
         AutoRoute<dynamic>(
           path: 'presentation/page/portfolio/portfolio_page',
           name: 'PortfolioPageRouter',
-          page: PortfolioPage,
-        ),
-        AutoRoute<dynamic>(
-          path: 'presentation/page/discover/discover_page',
-          name: 'DiscoverPageRouter',
-          page: DiscoverPage,
+          page: EmptyRouterPage,
+          children: <AutoRoute<dynamic>>[
+            AutoRoute<dynamic>(
+              path: '',
+              page: PortfolioPage,
+            ),
+            AutoRoute<dynamic>(
+              path: '',
+              page: DetailInfoPage,
+            ),
+          ],
         ),
         AutoRoute<dynamic>(
           path: 'presentation/page/profile/profile_page',

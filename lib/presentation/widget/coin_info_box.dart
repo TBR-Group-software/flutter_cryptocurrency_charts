@@ -2,6 +2,7 @@ import 'package:clean_app/presentation/widget/change_price_triangle.dart';
 import 'package:clean_app/presentation/widget/sparkline_widget.dart';
 import 'package:clean_app/theme/palette.dart';
 import 'package:clean_app/theme/text_styles.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,6 +15,7 @@ class CoinInfoBox extends StatelessWidget {
   final String symbol;
   final List<double>? sparkline;
   final List<FlSpot>? flSpotList;
+  final String fiatCurrency;
   const CoinInfoBox({
     required this.coinName,
     required this.currentPrice,
@@ -22,13 +24,14 @@ class CoinInfoBox extends StatelessWidget {
     required this.symbol,
     required this.priceChangePercentage,
     required this.marketCap,
+    required this.fiatCurrency,
     this.sparkline,
     this.flSpotList,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,11 +57,13 @@ class CoinInfoBox extends StatelessWidget {
                                   coinName.length,
                                   '...',
                                 ),
-                                style: TextStyles.whiteSemiBold14,
+                                style: TextStyles.semiBold14.copyWith(
+                                    color: Theme.of(context).hintColor),
                               )
                             : Text(
                                 coinName,
-                                style: TextStyles.whiteSemiBold14,
+                                style: TextStyles.semiBold14.copyWith(
+                                    color: Theme.of(context).hintColor),
                               ),
                       ),
                       SizedBox(height: 6.h),
@@ -95,7 +100,7 @@ class CoinInfoBox extends StatelessWidget {
               ),
             ],
           ),
-          Container(
+          SizedBox(
             height: 40.h,
             child: AbsorbPointer(
               absorbing: true,
@@ -103,32 +108,30 @@ class CoinInfoBox extends StatelessWidget {
                 sparkline: sparkline,
                 flSpotList: flSpotList,
                 showBarArea: false,
+                pricePercentage: priceChangePercentage,
               ),
             ),
           ),
           Row(
-            children: [
+            children: <Widget>[
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    '\$${currentPrice.toStringAsFixed(2)}',
-                    style: TextStyles.whiteSemiBold14,
+                    currentPrice.toStringAsFixed(2) +
+                        ' ' +
+                        fiatCurrency.toUpperCase(),
+                    style: TextStyles.semiBold14
+                        .copyWith(color: Theme.of(context).hintColor),
                   ),
                   SizedBox(height: 6.h),
                   Text(
                     marketCap > 1000000000000
-                        ? 'MCap \$${(marketCap / 1000000000).toStringAsFixed(2)} T'
-                        : 'MCap \$${(marketCap / 1000000000).toStringAsFixed(2)} Bn',
+                        ? ' ${'market_cap'.tr() + ' ' + (marketCap / 1000000000).toStringAsFixed(2) + ' ' + fiatCurrency.toUpperCase()} T'
+                        : ' ${'market_cap'.tr() + ' ' + (marketCap / 1000000000).toStringAsFixed(2) + ' ' + fiatCurrency.toUpperCase()} Bn',
                     style: TextStyles.overlay3Bold11,
                   )
                 ],
-              ),
-              SizedBox(width: 8.w),
-              Icon(
-                Icons.star,
-                color: Palette.accentDarkBlue,
-                size: 18.sp,
               ),
             ],
           ),

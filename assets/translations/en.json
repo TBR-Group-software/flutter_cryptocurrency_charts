@@ -1,0 +1,21 @@
+{
+    "active_coins": "Active Coins",
+    "buy_crypto": "Buy Crypto",
+    "cryptoassets": "Cryptoassets",
+    "english": "English",
+    "exchanges": "Exchanges",
+    "fiat_currency": "Fiat currency",
+    "language": "Language",
+    "market_cap": "MCap",
+    "market": "Market",
+    "markets": "Markets",
+    "no_internet_connection": "No internet connection, please check it and try it again.",
+    "ratings": "Ratings",
+    "russian": "Russian",
+    "sectors": "Sectors",
+    "settings": "Settings",
+    "switch_to_day_mode": "Switch to Day Mode",
+    "switch_to_night_mode": "Switch to Night Mode",
+    "top_five_coins": "Top 5 Coins",
+    "day": "d"
+}

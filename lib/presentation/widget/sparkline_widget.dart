@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:clean_app/theme/palette.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -7,11 +8,13 @@ class SparklineWidget extends StatefulWidget {
   final List<double>? sparkline;
   final List<FlSpot>? flSpotList;
   final bool showBarArea;
+  final num pricePercentage;
 
   const SparklineWidget({
     required this.sparkline,
     required this.flSpotList,
     required this.showBarArea,
+    required this.pricePercentage,
     Key? key,
   }) : super(key: key);
 
@@ -20,11 +23,6 @@ class SparklineWidget extends StatefulWidget {
 }
 
 class _SparklineWidgetState extends State<SparklineWidget> {
-  List<Color> gradientColors = <Color>[
-    const Color(0xff23b6e6),
-    const Color(0xff02d39a),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -41,19 +39,27 @@ class _SparklineWidgetState extends State<SparklineWidget> {
   }
 
   LineChartData mainData() {
+    final List<Color> gradientColors = <Color>[
+      if (widget.pricePercentage >= 0) Palette.accentBlue else Palette.errorRed,
+      if (widget.pricePercentage >= 0) Palette.primary else Palette.lightRed,
+    ];
     return LineChartData(
       gridData: FlGridData(
         show: false,
         drawVerticalLine: true,
         getDrawingHorizontalLine: (double value) {
           return FlLine(
-            color: const Color(0xff37434d),
+            color: widget.pricePercentage >= 0
+                ? Palette.darkBlue
+                : Palette.darkRed,
             strokeWidth: 1,
           );
         },
         getDrawingVerticalLine: (double value) {
           return FlLine(
-            color: const Color(0xff37434d),
+            color: widget.pricePercentage >= 0
+                ? Palette.darkBlue
+                : Palette.darkRed,
             strokeWidth: 1,
           );
         },
@@ -63,7 +69,11 @@ class _SparklineWidgetState extends State<SparklineWidget> {
       ),
       borderData: FlBorderData(
           show: false,
-          border: Border.all(color: const Color(0xff37434d), width: 1)),
+          border: Border.all(
+              color: widget.pricePercentage >= 0
+                  ? Palette.darkBlue
+                  : Palette.darkRed,
+              width: 1)),
       minX: 0,
       maxX: widget.sparkline?.length.toDouble(),
       minY: widget.sparkline?.reduce(min),
