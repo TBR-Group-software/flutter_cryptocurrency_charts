@@ -6,6 +6,7 @@
 
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:fl_chart/fl_chart.dart' as _i8;
+import 'package:flutter/cupertino.dart' as _i9;
 import 'package:flutter/material.dart' as _i2;
 
 import '../page/navigation_page.dart' as _i3;
@@ -147,7 +148,7 @@ class DetailInfoRoute extends _i1.PageRouteInfo<DetailInfoRouteArgs> {
       required List<double>? sparkline,
       required List<_i8.FlSpot>? flSpotList,
       required String fiatCurrency,
-      _i2.Key? key})
+      _i9.Key? key})
       : super(name,
             path: '',
             args: DetailInfoRouteArgs(
@@ -200,7 +201,7 @@ class DetailInfoRouteArgs {
 
   final String fiatCurrency;
 
-  final _i2.Key? key;
+  final _i9.Key? key;
 }
 
 class PortfolioRoute extends _i1.PageRouteInfo<void> {

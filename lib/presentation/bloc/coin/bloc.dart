@@ -11,24 +11,24 @@ part 'state.dart';
 
 class CoinBloc extends Bloc<CoinEvent, CoinState> {
   final GetMarketCoinsUseCase _getMarketCoinsUseCase;
+
   CoinBloc(this._getMarketCoinsUseCase)
-      : super(
-          const CoinState(BlocStatus.Loading, <Coin>[]),
+      : super(const CoinState(BlocStatus.Loading, <Coin>[])) {
+    on<GetMarketCoinsEvent>(
+      (GetMarketCoinsEvent event, Emitter<CoinState> emit) async {
+        await event.when(
+          getMarketCoins: (String currency, String order, int pageNumber,
+                  int perPage, String sparkline) =>
+              _getMarketCoins(
+                  emit, currency, order, pageNumber, perPage, sparkline),
         );
-
-  @override
-  Stream<CoinState> mapEventToState(
-    CoinEvent event,
-  ) =>
-      event.when(
-        getMarketCoins: _getMarketCoins,
-        getNextMarketCoins: _getNextMarketCoins
-      );
-
-  Stream<CoinState> _getMarketCoins(String currency, String order,
-      int pageNumber, int perPage, String sparkline) async* {
-    yield _loadingState();
-    yield await _getMarketCoinsUseCase(
+      },
+    );
+  }
+  Future<void> _getMarketCoins(Emitter<CoinState> emit, String currency,
+      String order, int pageNumber, int perPage, String sparkline) async {
+    emit(_loadingState());
+    emit(await _getMarketCoinsUseCase(
             currency, order, pageNumber, perPage, sparkline)
         .then(
           (List<Coin> coin) => CoinState(
@@ -36,25 +36,47 @@ class CoinBloc extends Bloc<CoinEvent, CoinState> {
             coin,
           ),
         )
-        .catchError(_onError);
+        .catchError(_onError));
   }
+  // @override
+  // Stream<CoinState> mapEventToState(
+  //   CoinEvent event,
+  // ) =>
+  //     event.when(
+  //       getMarketCoins: _getMarketCoins,
+  //       getNextMarketCoins: _getNextMarketCoins
+  //     );
 
-  Stream<CoinState> _getNextMarketCoins(String currency, String order,
-      int pageNumber, int perPage, String sparkline) async* {
-    yield _loadingState();
-    yield await _getMarketCoinsUseCase(
-            currency, order, pageNumber, perPage, sparkline)
-        .then(
-          (List<Coin> coin) => CoinState(
-            BlocStatus.Loaded,
-            <Coin>[
-              ...state.coins,
-              ...coin,
-            ],
-          ),
-        )
-        .catchError(_onError);
-  }
+  // Stream<CoinState> _getMarketCoins(String currency, String order,
+  //     int pageNumber, int perPage, String sparkline) async* {
+  //   yield _loadingState();
+  //   yield await _getMarketCoinsUseCase(
+  //           currency, order, pageNumber, perPage, sparkline)
+  //       .then(
+  //         (List<Coin> coin) => CoinState(
+  //           BlocStatus.Loaded,
+  //           coin,
+  //         ),
+  //       )
+  //       .catchError(_onError);
+  // }
+
+  // Stream<CoinState> _getNextMarketCoins(String currency, String order,
+  //     int pageNumber, int perPage, String sparkline) async* {
+  //   yield _loadingState();
+  //   yield await _getMarketCoinsUseCase(
+  //           currency, order, pageNumber, perPage, sparkline)
+  //       .then(
+  //         (List<Coin> coin) => CoinState(
+  //           BlocStatus.Loaded,
+  //           <Coin>[
+  //             ...state.coins,
+  //             ...coin,
+  //           ],
+  //         ),
+  //       )
+  //       .catchError(_onError);
+  // }
 
   CoinState _loadingState() => CoinState(BlocStatus.Loading, state.coins);
 

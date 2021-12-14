@@ -12,29 +12,22 @@ part 'state.dart';
 class GlobalDataBloc extends Bloc<GlobalDataEvent, GlobalDataState> {
   final GetGlobalDataUseCase _getGlobalDataUseCase;
   GlobalDataBloc(this._getGlobalDataUseCase)
-      : super(
-          const GlobalDataState(
-            BlocStatus.Loading,
-            null,
-          ),
-        );
+      : super(const GlobalDataState(BlocStatus.Loading, null)) {
+    on<GetGlobalDataEvent>(
+        (GetGlobalDataEvent event, Emitter<GlobalDataState> emit) async {
+      await _getGlobalData(emit, event);
+    });
+  }
 
-  @override
-  Stream<GlobalDataState> mapEventToState(
-    GlobalDataEvent event,
-  ) =>
-      event.when(
-        getGlobalData: _getGlobalData,
-      );
-
-  Stream<GlobalDataState> _getGlobalData() async* {
-    yield _loadingState();
-    yield await _getGlobalDataUseCase()
+  Future<void> _getGlobalData(
+      Emitter<GlobalDataState> emit, GetGlobalDataEvent event) async {
+    emit(_loadingState());
+    emit(await _getGlobalDataUseCase()
         .then(
           (GlobalData globalData) =>
               GlobalDataState(BlocStatus.Loaded, globalData),
         )
-        .catchError(_onError);
+        .catchError(_onError));
   }
 
   GlobalDataState _loadingState() =>

@@ -20,55 +20,94 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc(this._getFiatCurrencyUseCase, this._selectFiatCurrencyUseCase,
       this._getThemeUseCase, this._selectThemeUseCase)
       : super(
-          const SettingsState(BlocStatus.Loading,
-              fiatCurrency: 'usd', themeType: 'night'),
-        );
+          const SettingsState(
+            BlocStatus.Loading,
+          ),
+        ) {
+    on<GetFiatCurrencyEvent>(
+      (GetFiatCurrencyEvent event, Emitter<SettingsState> emit) async {
+        await _getFiatCurrency(emit, event);
+      },
+    );
+    on<SelectFiatCurrencyEvent>(
+      (SelectFiatCurrencyEvent event, Emitter<SettingsState> emit) async {
+        await _selectFiatCurrency(emit, event);
+      },
+    );
+    on<GetThemeEvent>(
+      (GetThemeEvent event, Emitter<SettingsState> emit) async {
+        await _getTheme(emit, event);
+      },
+    );
+    on<SelectThemeEvent>(
+      (SelectThemeEvent event, Emitter<SettingsState> emit) async {
+        await _selectTheme(emit, event);
+      },
+    );
+  }
 
-  @override
-  Stream<SettingsState> mapEventToState(
-    SettingsEvent event,
-  ) =>
-      event.when(
-        getFiatCurrency: _getFiatCurrency,
-        selectFiatCurrency: _selectFiatCurrency,
-        getTheme: _getTheme,
-        selectTheme: _selectTheme,
-      );
-
-  Stream<SettingsState> _getFiatCurrency() async* {
-    yield _loadingState();
-    yield await _getFiatCurrencyUseCase()
+  Future<void> _getFiatCurrency(
+    Emitter<SettingsState> emit,
+    GetFiatCurrencyEvent event,
+  ) async {
+    emit(_loadingState());
+    emit(await _getFiatCurrencyUseCase()
         .then(
-          (String fiatCurrency) => SettingsState(BlocStatus.Loaded,
-              fiatCurrency: fiatCurrency, themeType: state.themeType),
+          (String fiatCurrency) => SettingsState(
+            BlocStatus.Loaded,
+            fiatCurrency: fiatCurrency,
+            themeType: state.themeType,
+          ),
         )
-        .catchError(_onError);
+        .catchError(_onError));
   }
 
-  Stream<SettingsState> _selectFiatCurrency(String fiatCurrency) async* {
-    yield _loadingState();
-    yield await _selectFiatCurrencyUseCase(fiatCurrency)
-        .then((String fiatCurrency) => SettingsState(BlocStatus.Loaded,
-            fiatCurrency: fiatCurrency, themeType: state.themeType))
-        .catchError(_onError);
-  }
-
-  Stream<SettingsState> _getTheme() async* {
-    yield _loadingState();
-    yield await _getThemeUseCase()
+  Future<void> _selectFiatCurrency(
+    Emitter<SettingsState> emit,
+    SelectFiatCurrencyEvent event,
+  ) async {
+    emit(_loadingState());
+    emit(await _selectFiatCurrencyUseCase(event.fiatCurrency)
         .then(
-          (String themeType) => SettingsState(BlocStatus.Loaded,
-              themeType: themeType, fiatCurrency: state.fiatCurrency),
+          (String fiatCurrency) => SettingsState(
+            BlocStatus.Loaded,
+            fiatCurrency: event.fiatCurrency,
+            themeType: state.themeType,
+          ),
         )
-        .catchError(_onError);
+        .catchError(_onError));
   }
 
-  Stream<SettingsState> _selectTheme(String themeType) async* {
-    yield _loadingState();
-    yield await _selectThemeUseCase(themeType)
-        .then((String themeType) => SettingsState(BlocStatus.Loaded,
-            themeType: themeType, fiatCurrency: state.fiatCurrency))
-        .catchError(_onError);
+  Future<void> _getTheme(
+    Emitter<SettingsState> emit,
+    GetThemeEvent event,
+  ) async {
+    emit(_loadingState());
+    emit(await _getThemeUseCase()
+        .then(
+          (String themeType) => SettingsState(
+            BlocStatus.Loaded,
+            fiatCurrency: state.fiatCurrency,
+            themeType: themeType,
+          ),
+        )
+        .catchError(_onError));
+  }
+
+  Future<void> _selectTheme(
+    Emitter<SettingsState> emit,
+    SelectThemeEvent event,
+  ) async {
+    emit(_loadingState());
+    emit(await _selectThemeUseCase(event.themeType)
+        .then(
+          (String fiatCurrency) => SettingsState(
+            BlocStatus.Loaded,
+            fiatCurrency: state.fiatCurrency,
+            themeType: event.themeType,
+          ),
+        )
+        .catchError(_onError));
   }
 
   SettingsState _loadingState() => SettingsState(BlocStatus.Loading,
