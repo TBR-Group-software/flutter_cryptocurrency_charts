@@ -27,17 +27,6 @@ class _$CoinEventTearOff {
       sparkline,
     );
   }
-
-  GetNextMarketCoinsEvent getNextMarketCoins(String currency, String order,
-      int pageNumber, int perPage, String sparkline) {
-    return GetNextMarketCoinsEvent(
-      currency,
-      order,
-      pageNumber,
-      perPage,
-      sparkline,
-    );
-  }
 }
 
 /// @nodoc
@@ -56,9 +45,6 @@ mixin _$CoinEvent {
     required TResult Function(String currency, String order, int pageNumber,
             int perPage, String sparkline)
         getMarketCoins,
-    required TResult Function(String currency, String order, int pageNumber,
-            int perPage, String sparkline)
-        getNextMarketCoins,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,9 +52,6 @@ mixin _$CoinEvent {
     TResult Function(String currency, String order, int pageNumber, int perPage,
             String sparkline)?
         getMarketCoins,
-    TResult Function(String currency, String order, int pageNumber, int perPage,
-            String sparkline)?
-        getNextMarketCoins,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -76,28 +59,22 @@ mixin _$CoinEvent {
     TResult Function(String currency, String order, int pageNumber, int perPage,
             String sparkline)?
         getMarketCoins,
-    TResult Function(String currency, String order, int pageNumber, int perPage,
-            String sparkline)?
-        getNextMarketCoins,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetMarketCoinsEvent value) getMarketCoins,
-    required TResult Function(GetNextMarketCoinsEvent value) getNextMarketCoins,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(GetMarketCoinsEvent value)? getMarketCoins,
-    TResult Function(GetNextMarketCoinsEvent value)? getNextMarketCoins,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetMarketCoinsEvent value)? getMarketCoins,
-    TResult Function(GetNextMarketCoinsEvent value)? getNextMarketCoins,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -282,9 +259,6 @@ class _$GetMarketCoinsEvent extends GetMarketCoinsEvent {
     required TResult Function(String currency, String order, int pageNumber,
             int perPage, String sparkline)
         getMarketCoins,
-    required TResult Function(String currency, String order, int pageNumber,
-            int perPage, String sparkline)
-        getNextMarketCoins,
   }) {
     return getMarketCoins(currency, order, pageNumber, perPage, sparkline);
   }
@@ -295,9 +269,6 @@ class _$GetMarketCoinsEvent extends GetMarketCoinsEvent {
     TResult Function(String currency, String order, int pageNumber, int perPage,
             String sparkline)?
         getMarketCoins,
-    TResult Function(String currency, String order, int pageNumber, int perPage,
-            String sparkline)?
-        getNextMarketCoins,
   }) {
     return getMarketCoins?.call(
         currency, order, pageNumber, perPage, sparkline);
@@ -309,9 +280,6 @@ class _$GetMarketCoinsEvent extends GetMarketCoinsEvent {
     TResult Function(String currency, String order, int pageNumber, int perPage,
             String sparkline)?
         getMarketCoins,
-    TResult Function(String currency, String order, int pageNumber, int perPage,
-            String sparkline)?
-        getNextMarketCoins,
     required TResult orElse(),
   }) {
     if (getMarketCoins != null) {
@@ -324,7 +292,6 @@ class _$GetMarketCoinsEvent extends GetMarketCoinsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetMarketCoinsEvent value) getMarketCoins,
-    required TResult Function(GetNextMarketCoinsEvent value) getNextMarketCoins,
   }) {
     return getMarketCoins(this);
   }
@@ -333,7 +300,6 @@ class _$GetMarketCoinsEvent extends GetMarketCoinsEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(GetMarketCoinsEvent value)? getMarketCoins,
-    TResult Function(GetNextMarketCoinsEvent value)? getNextMarketCoins,
   }) {
     return getMarketCoins?.call(this);
   }
@@ -342,7 +308,6 @@ class _$GetMarketCoinsEvent extends GetMarketCoinsEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetMarketCoinsEvent value)? getMarketCoins,
-    TResult Function(GetNextMarketCoinsEvent value)? getNextMarketCoins,
     required TResult orElse(),
   }) {
     if (getMarketCoins != null) {
@@ -370,224 +335,5 @@ abstract class GetMarketCoinsEvent extends CoinEvent {
   @override
   @JsonKey(ignore: true)
   $GetMarketCoinsEventCopyWith<GetMarketCoinsEvent> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GetNextMarketCoinsEventCopyWith<$Res>
-    implements $CoinEventCopyWith<$Res> {
-  factory $GetNextMarketCoinsEventCopyWith(GetNextMarketCoinsEvent value,
-          $Res Function(GetNextMarketCoinsEvent) then) =
-      _$GetNextMarketCoinsEventCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {String currency,
-      String order,
-      int pageNumber,
-      int perPage,
-      String sparkline});
-}
-
-/// @nodoc
-class _$GetNextMarketCoinsEventCopyWithImpl<$Res>
-    extends _$CoinEventCopyWithImpl<$Res>
-    implements $GetNextMarketCoinsEventCopyWith<$Res> {
-  _$GetNextMarketCoinsEventCopyWithImpl(GetNextMarketCoinsEvent _value,
-      $Res Function(GetNextMarketCoinsEvent) _then)
-      : super(_value, (v) => _then(v as GetNextMarketCoinsEvent));
-
-  @override
-  GetNextMarketCoinsEvent get _value => super._value as GetNextMarketCoinsEvent;
-
-  @override
-  $Res call({
-    Object? currency = freezed,
-    Object? order = freezed,
-    Object? pageNumber = freezed,
-    Object? perPage = freezed,
-    Object? sparkline = freezed,
-  }) {
-    return _then(GetNextMarketCoinsEvent(
-      currency == freezed
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      order == freezed
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as String,
-      pageNumber == freezed
-          ? _value.pageNumber
-          : pageNumber // ignore: cast_nullable_to_non_nullable
-              as int,
-      perPage == freezed
-          ? _value.perPage
-          : perPage // ignore: cast_nullable_to_non_nullable
-              as int,
-      sparkline == freezed
-          ? _value.sparkline
-          : sparkline // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GetNextMarketCoinsEvent extends GetNextMarketCoinsEvent {
-  const _$GetNextMarketCoinsEvent(
-      this.currency, this.order, this.pageNumber, this.perPage, this.sparkline)
-      : super._();
-
-  @override
-  final String currency;
-  @override
-  final String order;
-  @override
-  final int pageNumber;
-  @override
-  final int perPage;
-  @override
-  final String sparkline;
-
-  @override
-  String toString() {
-    return 'CoinEvent.getNextMarketCoins(currency: $currency, order: $order, pageNumber: $pageNumber, perPage: $perPage, sparkline: $sparkline)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is GetNextMarketCoinsEvent &&
-            (identical(other.currency, currency) ||
-                const DeepCollectionEquality()
-                    .equals(other.currency, currency)) &&
-            (identical(other.order, order) ||
-                const DeepCollectionEquality().equals(other.order, order)) &&
-            (identical(other.pageNumber, pageNumber) ||
-                const DeepCollectionEquality()
-                    .equals(other.pageNumber, pageNumber)) &&
-            (identical(other.perPage, perPage) ||
-                const DeepCollectionEquality()
-                    .equals(other.perPage, perPage)) &&
-            (identical(other.sparkline, sparkline) ||
-                const DeepCollectionEquality()
-                    .equals(other.sparkline, sparkline)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(currency) ^
-      const DeepCollectionEquality().hash(order) ^
-      const DeepCollectionEquality().hash(pageNumber) ^
-      const DeepCollectionEquality().hash(perPage) ^
-      const DeepCollectionEquality().hash(sparkline);
-
-  @JsonKey(ignore: true)
-  @override
-  $GetNextMarketCoinsEventCopyWith<GetNextMarketCoinsEvent> get copyWith =>
-      _$GetNextMarketCoinsEventCopyWithImpl<GetNextMarketCoinsEvent>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String currency, String order, int pageNumber,
-            int perPage, String sparkline)
-        getMarketCoins,
-    required TResult Function(String currency, String order, int pageNumber,
-            int perPage, String sparkline)
-        getNextMarketCoins,
-  }) {
-    return getNextMarketCoins(currency, order, pageNumber, perPage, sparkline);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String currency, String order, int pageNumber, int perPage,
-            String sparkline)?
-        getMarketCoins,
-    TResult Function(String currency, String order, int pageNumber, int perPage,
-            String sparkline)?
-        getNextMarketCoins,
-  }) {
-    return getNextMarketCoins?.call(
-        currency, order, pageNumber, perPage, sparkline);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String currency, String order, int pageNumber, int perPage,
-            String sparkline)?
-        getMarketCoins,
-    TResult Function(String currency, String order, int pageNumber, int perPage,
-            String sparkline)?
-        getNextMarketCoins,
-    required TResult orElse(),
-  }) {
-    if (getNextMarketCoins != null) {
-      return getNextMarketCoins(
-          currency, order, pageNumber, perPage, sparkline);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(GetMarketCoinsEvent value) getMarketCoins,
-    required TResult Function(GetNextMarketCoinsEvent value) getNextMarketCoins,
-  }) {
-    return getNextMarketCoins(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetMarketCoinsEvent value)? getMarketCoins,
-    TResult Function(GetNextMarketCoinsEvent value)? getNextMarketCoins,
-  }) {
-    return getNextMarketCoins?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(GetMarketCoinsEvent value)? getMarketCoins,
-    TResult Function(GetNextMarketCoinsEvent value)? getNextMarketCoins,
-    required TResult orElse(),
-  }) {
-    if (getNextMarketCoins != null) {
-      return getNextMarketCoins(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GetNextMarketCoinsEvent extends CoinEvent {
-  const factory GetNextMarketCoinsEvent(
-      String currency,
-      String order,
-      int pageNumber,
-      int perPage,
-      String sparkline) = _$GetNextMarketCoinsEvent;
-  const GetNextMarketCoinsEvent._() : super._();
-
-  @override
-  String get currency => throw _privateConstructorUsedError;
-  @override
-  String get order => throw _privateConstructorUsedError;
-  @override
-  int get pageNumber => throw _privateConstructorUsedError;
-  @override
-  int get perPage => throw _privateConstructorUsedError;
-  @override
-  String get sparkline => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  $GetNextMarketCoinsEventCopyWith<GetNextMarketCoinsEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
