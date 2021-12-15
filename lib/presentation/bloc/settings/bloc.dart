@@ -5,7 +5,6 @@ import 'package:clean_app/domain/usecase/get_theme.dart';
 import 'package:clean_app/domain/usecase/select_fiat_currency.dart';
 import 'package:clean_app/domain/usecase/select_theme.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:meta/meta.dart';
 
 part 'bloc.freezed.dart';
 part 'event.dart';

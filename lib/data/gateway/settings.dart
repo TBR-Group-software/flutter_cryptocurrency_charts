@@ -1,19 +1,12 @@
 import 'package:clean_app/data/gateway/constants.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class SettingsGateway {
   Box<String>? _testBox;
   Box<String>? _darkThemeBox;
-  // Box<String>? _fiatCurrencyBox;
-  // Box<String>? _languageBox;
 
   Future<void> _openBoxes() async {
     await Hive.initFlutter();
-    // _testBox = await Hive.openBox<String>('testBox');
-    // _darkThemeBox = await Hive.openBox<String>('darkThemeBox');
-    // _fiatCurrencyBox = await Hive.openBox<String>('fiatCurrencyBox');
-    // _languageBox = await Hive.openBox<String>('languageBox');
   }
 
   Future<String> getFiatCurrency() async {
