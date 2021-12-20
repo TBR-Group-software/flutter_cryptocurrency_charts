@@ -16,7 +16,6 @@ class RestGateway {
   );
 
   Future<List<CoinDto>> getMarketsCoins(
-    // ignore: avoid_positional_boolean_parameters
     String currency,
     String order,
     int pageNumber,

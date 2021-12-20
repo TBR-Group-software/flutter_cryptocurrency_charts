@@ -37,45 +37,6 @@ class CoinBloc extends Bloc<CoinEvent, CoinState> {
         )
         .catchError(_onError));
   }
-  // @override
-  // Stream<CoinState> mapEventToState(
-  //   CoinEvent event,
-  // ) =>
-  //     event.when(
-  //       getMarketCoins: _getMarketCoins,
-  //       getNextMarketCoins: _getNextMarketCoins
-  //     );
-
-  // Stream<CoinState> _getMarketCoins(String currency, String order,
-  //     int pageNumber, int perPage, String sparkline) async* {
-  //   yield _loadingState();
-  //   yield await _getMarketCoinsUseCase(
-  //           currency, order, pageNumber, perPage, sparkline)
-  //       .then(
-  //         (List<Coin> coin) => CoinState(
-  //           BlocStatus.Loaded,
-  //           coin,
-  //         ),
-  //       )
-  //       .catchError(_onError);
-  // }
-
-  // Stream<CoinState> _getNextMarketCoins(String currency, String order,
-  //     int pageNumber, int perPage, String sparkline) async* {
-  //   yield _loadingState();
-  //   yield await _getMarketCoinsUseCase(
-  //           currency, order, pageNumber, perPage, sparkline)
-  //       .then(
-  //         (List<Coin> coin) => CoinState(
-  //           BlocStatus.Loaded,
-  //           <Coin>[
-  //             ...state.coins,
-  //             ...coin,
-  //           ],
-  //         ),
-  //       )
-  //       .catchError(_onError);
-  // }
 
   CoinState _loadingState() => CoinState(BlocStatus.Loading, state.coins);
 
