@@ -13,11 +13,6 @@ This project has been built using the Flutter framework, which allows to build a
   <img src="https://user-images.githubusercontent.com/86306159/145789962-c20229aa-d1ad-40dd-9270-e3733e589b00.gif" width="250" />
 </p>
 
-
-
-
-
-
 ## Features
 - Beautiful and clean UI.
 - Browse cryptocurrencies and markets data.
