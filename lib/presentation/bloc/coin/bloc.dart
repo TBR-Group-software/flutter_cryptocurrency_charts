@@ -29,12 +29,7 @@ class CoinBloc extends Bloc<CoinEvent, CoinState> {
     emit(_loadingState());
     emit(await _getMarketCoinsUseCase(
             currency, order, pageNumber, perPage, sparkline)
-        .then(
-          (List<Coin> coin) => CoinState(
-            BlocStatus.Loaded,
-            coin,
-          ),
-        )
+        .then((List<Coin> coin) => CoinState(BlocStatus.Loaded, coin))
         .catchError(_onError));
   }
 
