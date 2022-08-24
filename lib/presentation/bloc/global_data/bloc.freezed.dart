@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'bloc.dart';
@@ -11,19 +12,7 @@ part of 'bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$GlobalDataEventTearOff {
-  const _$GlobalDataEventTearOff();
-
-  GetGlobalDataEvent getGlobalData() {
-    return const GetGlobalDataEvent();
-  }
-}
-
-/// @nodoc
-const $GlobalDataEvent = _$GlobalDataEventTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$GlobalDataEvent {
@@ -79,22 +68,22 @@ class _$GlobalDataEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class $GetGlobalDataEventCopyWith<$Res> {
-  factory $GetGlobalDataEventCopyWith(
-          GetGlobalDataEvent value, $Res Function(GetGlobalDataEvent) then) =
-      _$GetGlobalDataEventCopyWithImpl<$Res>;
+abstract class _$$GetGlobalDataEventCopyWith<$Res> {
+  factory _$$GetGlobalDataEventCopyWith(_$GetGlobalDataEvent value,
+          $Res Function(_$GetGlobalDataEvent) then) =
+      __$$GetGlobalDataEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$GetGlobalDataEventCopyWithImpl<$Res>
+class __$$GetGlobalDataEventCopyWithImpl<$Res>
     extends _$GlobalDataEventCopyWithImpl<$Res>
-    implements $GetGlobalDataEventCopyWith<$Res> {
-  _$GetGlobalDataEventCopyWithImpl(
-      GetGlobalDataEvent _value, $Res Function(GetGlobalDataEvent) _then)
-      : super(_value, (v) => _then(v as GetGlobalDataEvent));
+    implements _$$GetGlobalDataEventCopyWith<$Res> {
+  __$$GetGlobalDataEventCopyWithImpl(
+      _$GetGlobalDataEvent _value, $Res Function(_$GetGlobalDataEvent) _then)
+      : super(_value, (v) => _then(v as _$GetGlobalDataEvent));
 
   @override
-  GetGlobalDataEvent get _value => super._value as GetGlobalDataEvent;
+  _$GetGlobalDataEvent get _value => super._value as _$GetGlobalDataEvent;
 }
 
 /// @nodoc
@@ -109,7 +98,8 @@ class _$GetGlobalDataEvent extends GetGlobalDataEvent {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is GetGlobalDataEvent);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GetGlobalDataEvent);
   }
 
   @override

@@ -47,7 +47,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: screenSize,
-      builder: () => BlocBuilder<SettingsBloc, SettingsState>(
+      builder: (BuildContext context, Widget? child) =>
+          BlocBuilder<SettingsBloc, SettingsState>(
         bloc: settingsBloc,
         builder: (_, SettingsState state) {
           return MaterialApp.router(

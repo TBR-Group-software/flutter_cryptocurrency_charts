@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'bloc.dart';
@@ -11,35 +12,7 @@ part of 'bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$SettingsEventTearOff {
-  const _$SettingsEventTearOff();
-
-  GetFiatCurrencyEvent getFiatCurrency() {
-    return const GetFiatCurrencyEvent();
-  }
-
-  SelectFiatCurrencyEvent selectFiatCurrency(String fiatCurrency) {
-    return SelectFiatCurrencyEvent(
-      fiatCurrency,
-    );
-  }
-
-  GetThemeEvent getTheme() {
-    return const GetThemeEvent();
-  }
-
-  SelectThemeEvent selectTheme(String themeType) {
-    return SelectThemeEvent(
-      themeType,
-    );
-  }
-}
-
-/// @nodoc
-const $SettingsEvent = _$SettingsEventTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$SettingsEvent {
@@ -113,22 +86,22 @@ class _$SettingsEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class $GetFiatCurrencyEventCopyWith<$Res> {
-  factory $GetFiatCurrencyEventCopyWith(GetFiatCurrencyEvent value,
-          $Res Function(GetFiatCurrencyEvent) then) =
-      _$GetFiatCurrencyEventCopyWithImpl<$Res>;
+abstract class _$$GetFiatCurrencyEventCopyWith<$Res> {
+  factory _$$GetFiatCurrencyEventCopyWith(_$GetFiatCurrencyEvent value,
+          $Res Function(_$GetFiatCurrencyEvent) then) =
+      __$$GetFiatCurrencyEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$GetFiatCurrencyEventCopyWithImpl<$Res>
+class __$$GetFiatCurrencyEventCopyWithImpl<$Res>
     extends _$SettingsEventCopyWithImpl<$Res>
-    implements $GetFiatCurrencyEventCopyWith<$Res> {
-  _$GetFiatCurrencyEventCopyWithImpl(
-      GetFiatCurrencyEvent _value, $Res Function(GetFiatCurrencyEvent) _then)
-      : super(_value, (v) => _then(v as GetFiatCurrencyEvent));
+    implements _$$GetFiatCurrencyEventCopyWith<$Res> {
+  __$$GetFiatCurrencyEventCopyWithImpl(_$GetFiatCurrencyEvent _value,
+      $Res Function(_$GetFiatCurrencyEvent) _then)
+      : super(_value, (v) => _then(v as _$GetFiatCurrencyEvent));
 
   @override
-  GetFiatCurrencyEvent get _value => super._value as GetFiatCurrencyEvent;
+  _$GetFiatCurrencyEvent get _value => super._value as _$GetFiatCurrencyEvent;
 }
 
 /// @nodoc
@@ -143,7 +116,8 @@ class _$GetFiatCurrencyEvent extends GetFiatCurrencyEvent {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is GetFiatCurrencyEvent);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GetFiatCurrencyEvent);
   }
 
   @override
@@ -230,29 +204,30 @@ abstract class GetFiatCurrencyEvent extends SettingsEvent {
 }
 
 /// @nodoc
-abstract class $SelectFiatCurrencyEventCopyWith<$Res> {
-  factory $SelectFiatCurrencyEventCopyWith(SelectFiatCurrencyEvent value,
-          $Res Function(SelectFiatCurrencyEvent) then) =
-      _$SelectFiatCurrencyEventCopyWithImpl<$Res>;
+abstract class _$$SelectFiatCurrencyEventCopyWith<$Res> {
+  factory _$$SelectFiatCurrencyEventCopyWith(_$SelectFiatCurrencyEvent value,
+          $Res Function(_$SelectFiatCurrencyEvent) then) =
+      __$$SelectFiatCurrencyEventCopyWithImpl<$Res>;
   $Res call({String fiatCurrency});
 }
 
 /// @nodoc
-class _$SelectFiatCurrencyEventCopyWithImpl<$Res>
+class __$$SelectFiatCurrencyEventCopyWithImpl<$Res>
     extends _$SettingsEventCopyWithImpl<$Res>
-    implements $SelectFiatCurrencyEventCopyWith<$Res> {
-  _$SelectFiatCurrencyEventCopyWithImpl(SelectFiatCurrencyEvent _value,
-      $Res Function(SelectFiatCurrencyEvent) _then)
-      : super(_value, (v) => _then(v as SelectFiatCurrencyEvent));
+    implements _$$SelectFiatCurrencyEventCopyWith<$Res> {
+  __$$SelectFiatCurrencyEventCopyWithImpl(_$SelectFiatCurrencyEvent _value,
+      $Res Function(_$SelectFiatCurrencyEvent) _then)
+      : super(_value, (v) => _then(v as _$SelectFiatCurrencyEvent));
 
   @override
-  SelectFiatCurrencyEvent get _value => super._value as SelectFiatCurrencyEvent;
+  _$SelectFiatCurrencyEvent get _value =>
+      super._value as _$SelectFiatCurrencyEvent;
 
   @override
   $Res call({
     Object? fiatCurrency = freezed,
   }) {
-    return _then(SelectFiatCurrencyEvent(
+    return _then(_$SelectFiatCurrencyEvent(
       fiatCurrency == freezed
           ? _value.fiatCurrency
           : fiatCurrency // ignore: cast_nullable_to_non_nullable
@@ -277,20 +252,20 @@ class _$SelectFiatCurrencyEvent extends SelectFiatCurrencyEvent {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is SelectFiatCurrencyEvent &&
-            (identical(other.fiatCurrency, fiatCurrency) ||
-                const DeepCollectionEquality()
-                    .equals(other.fiatCurrency, fiatCurrency)));
+        (other.runtimeType == runtimeType &&
+            other is _$SelectFiatCurrencyEvent &&
+            const DeepCollectionEquality()
+                .equals(other.fiatCurrency, fiatCurrency));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(fiatCurrency);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(fiatCurrency));
 
   @JsonKey(ignore: true)
   @override
-  $SelectFiatCurrencyEventCopyWith<SelectFiatCurrencyEvent> get copyWith =>
-      _$SelectFiatCurrencyEventCopyWithImpl<SelectFiatCurrencyEvent>(
+  _$$SelectFiatCurrencyEventCopyWith<_$SelectFiatCurrencyEvent> get copyWith =>
+      __$$SelectFiatCurrencyEventCopyWithImpl<_$SelectFiatCurrencyEvent>(
           this, _$identity);
 
   @override
@@ -369,33 +344,33 @@ class _$SelectFiatCurrencyEvent extends SelectFiatCurrencyEvent {
 }
 
 abstract class SelectFiatCurrencyEvent extends SettingsEvent {
-  const factory SelectFiatCurrencyEvent(String fiatCurrency) =
+  const factory SelectFiatCurrencyEvent(final String fiatCurrency) =
       _$SelectFiatCurrencyEvent;
   const SelectFiatCurrencyEvent._() : super._();
 
-  String get fiatCurrency => throw _privateConstructorUsedError;
+  String get fiatCurrency;
   @JsonKey(ignore: true)
-  $SelectFiatCurrencyEventCopyWith<SelectFiatCurrencyEvent> get copyWith =>
+  _$$SelectFiatCurrencyEventCopyWith<_$SelectFiatCurrencyEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GetThemeEventCopyWith<$Res> {
-  factory $GetThemeEventCopyWith(
-          GetThemeEvent value, $Res Function(GetThemeEvent) then) =
-      _$GetThemeEventCopyWithImpl<$Res>;
+abstract class _$$GetThemeEventCopyWith<$Res> {
+  factory _$$GetThemeEventCopyWith(
+          _$GetThemeEvent value, $Res Function(_$GetThemeEvent) then) =
+      __$$GetThemeEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$GetThemeEventCopyWithImpl<$Res>
+class __$$GetThemeEventCopyWithImpl<$Res>
     extends _$SettingsEventCopyWithImpl<$Res>
-    implements $GetThemeEventCopyWith<$Res> {
-  _$GetThemeEventCopyWithImpl(
-      GetThemeEvent _value, $Res Function(GetThemeEvent) _then)
-      : super(_value, (v) => _then(v as GetThemeEvent));
+    implements _$$GetThemeEventCopyWith<$Res> {
+  __$$GetThemeEventCopyWithImpl(
+      _$GetThemeEvent _value, $Res Function(_$GetThemeEvent) _then)
+      : super(_value, (v) => _then(v as _$GetThemeEvent));
 
   @override
-  GetThemeEvent get _value => super._value as GetThemeEvent;
+  _$GetThemeEvent get _value => super._value as _$GetThemeEvent;
 }
 
 /// @nodoc
@@ -410,7 +385,8 @@ class _$GetThemeEvent extends GetThemeEvent {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is GetThemeEvent);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GetThemeEvent);
   }
 
   @override
@@ -497,29 +473,29 @@ abstract class GetThemeEvent extends SettingsEvent {
 }
 
 /// @nodoc
-abstract class $SelectThemeEventCopyWith<$Res> {
-  factory $SelectThemeEventCopyWith(
-          SelectThemeEvent value, $Res Function(SelectThemeEvent) then) =
-      _$SelectThemeEventCopyWithImpl<$Res>;
+abstract class _$$SelectThemeEventCopyWith<$Res> {
+  factory _$$SelectThemeEventCopyWith(
+          _$SelectThemeEvent value, $Res Function(_$SelectThemeEvent) then) =
+      __$$SelectThemeEventCopyWithImpl<$Res>;
   $Res call({String themeType});
 }
 
 /// @nodoc
-class _$SelectThemeEventCopyWithImpl<$Res>
+class __$$SelectThemeEventCopyWithImpl<$Res>
     extends _$SettingsEventCopyWithImpl<$Res>
-    implements $SelectThemeEventCopyWith<$Res> {
-  _$SelectThemeEventCopyWithImpl(
-      SelectThemeEvent _value, $Res Function(SelectThemeEvent) _then)
-      : super(_value, (v) => _then(v as SelectThemeEvent));
+    implements _$$SelectThemeEventCopyWith<$Res> {
+  __$$SelectThemeEventCopyWithImpl(
+      _$SelectThemeEvent _value, $Res Function(_$SelectThemeEvent) _then)
+      : super(_value, (v) => _then(v as _$SelectThemeEvent));
 
   @override
-  SelectThemeEvent get _value => super._value as SelectThemeEvent;
+  _$SelectThemeEvent get _value => super._value as _$SelectThemeEvent;
 
   @override
   $Res call({
     Object? themeType = freezed,
   }) {
-    return _then(SelectThemeEvent(
+    return _then(_$SelectThemeEvent(
       themeType == freezed
           ? _value.themeType
           : themeType // ignore: cast_nullable_to_non_nullable
@@ -544,20 +520,19 @@ class _$SelectThemeEvent extends SelectThemeEvent {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is SelectThemeEvent &&
-            (identical(other.themeType, themeType) ||
-                const DeepCollectionEquality()
-                    .equals(other.themeType, themeType)));
+        (other.runtimeType == runtimeType &&
+            other is _$SelectThemeEvent &&
+            const DeepCollectionEquality().equals(other.themeType, themeType));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(themeType);
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(themeType));
 
   @JsonKey(ignore: true)
   @override
-  $SelectThemeEventCopyWith<SelectThemeEvent> get copyWith =>
-      _$SelectThemeEventCopyWithImpl<SelectThemeEvent>(this, _$identity);
+  _$$SelectThemeEventCopyWith<_$SelectThemeEvent> get copyWith =>
+      __$$SelectThemeEventCopyWithImpl<_$SelectThemeEvent>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -635,11 +610,11 @@ class _$SelectThemeEvent extends SelectThemeEvent {
 }
 
 abstract class SelectThemeEvent extends SettingsEvent {
-  const factory SelectThemeEvent(String themeType) = _$SelectThemeEvent;
+  const factory SelectThemeEvent(final String themeType) = _$SelectThemeEvent;
   const SelectThemeEvent._() : super._();
 
-  String get themeType => throw _privateConstructorUsedError;
+  String get themeType;
   @JsonKey(ignore: true)
-  $SelectThemeEventCopyWith<SelectThemeEvent> get copyWith =>
+  _$$SelectThemeEventCopyWith<_$SelectThemeEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
