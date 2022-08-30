@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'bloc.dart';
@@ -11,26 +12,7 @@ part of 'bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$CoinEventTearOff {
-  const _$CoinEventTearOff();
-
-  GetMarketCoinsEvent getMarketCoins(String currency, String order,
-      int pageNumber, int perPage, String sparkline) {
-    return GetMarketCoinsEvent(
-      currency,
-      order,
-      pageNumber,
-      perPage,
-      sparkline,
-    );
-  }
-}
-
-/// @nodoc
-const $CoinEvent = _$CoinEventTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$CoinEvent {
@@ -39,7 +21,6 @@ mixin _$CoinEvent {
   int get pageNumber => throw _privateConstructorUsedError;
   int get perPage => throw _privateConstructorUsedError;
   String get sparkline => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String currency, String order, int pageNumber,
@@ -138,11 +119,11 @@ class _$CoinEventCopyWithImpl<$Res> implements $CoinEventCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class $GetMarketCoinsEventCopyWith<$Res>
+abstract class _$$GetMarketCoinsEventCopyWith<$Res>
     implements $CoinEventCopyWith<$Res> {
-  factory $GetMarketCoinsEventCopyWith(
-          GetMarketCoinsEvent value, $Res Function(GetMarketCoinsEvent) then) =
-      _$GetMarketCoinsEventCopyWithImpl<$Res>;
+  factory _$$GetMarketCoinsEventCopyWith(_$GetMarketCoinsEvent value,
+          $Res Function(_$GetMarketCoinsEvent) then) =
+      __$$GetMarketCoinsEventCopyWithImpl<$Res>;
   @override
   $Res call(
       {String currency,
@@ -153,15 +134,15 @@ abstract class $GetMarketCoinsEventCopyWith<$Res>
 }
 
 /// @nodoc
-class _$GetMarketCoinsEventCopyWithImpl<$Res>
+class __$$GetMarketCoinsEventCopyWithImpl<$Res>
     extends _$CoinEventCopyWithImpl<$Res>
-    implements $GetMarketCoinsEventCopyWith<$Res> {
-  _$GetMarketCoinsEventCopyWithImpl(
-      GetMarketCoinsEvent _value, $Res Function(GetMarketCoinsEvent) _then)
-      : super(_value, (v) => _then(v as GetMarketCoinsEvent));
+    implements _$$GetMarketCoinsEventCopyWith<$Res> {
+  __$$GetMarketCoinsEventCopyWithImpl(
+      _$GetMarketCoinsEvent _value, $Res Function(_$GetMarketCoinsEvent) _then)
+      : super(_value, (v) => _then(v as _$GetMarketCoinsEvent));
 
   @override
-  GetMarketCoinsEvent get _value => super._value as GetMarketCoinsEvent;
+  _$GetMarketCoinsEvent get _value => super._value as _$GetMarketCoinsEvent;
 
   @override
   $Res call({
@@ -171,7 +152,7 @@ class _$GetMarketCoinsEventCopyWithImpl<$Res>
     Object? perPage = freezed,
     Object? sparkline = freezed,
   }) {
-    return _then(GetMarketCoinsEvent(
+    return _then(_$GetMarketCoinsEvent(
       currency == freezed
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -222,36 +203,30 @@ class _$GetMarketCoinsEvent extends GetMarketCoinsEvent {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is GetMarketCoinsEvent &&
-            (identical(other.currency, currency) ||
-                const DeepCollectionEquality()
-                    .equals(other.currency, currency)) &&
-            (identical(other.order, order) ||
-                const DeepCollectionEquality().equals(other.order, order)) &&
-            (identical(other.pageNumber, pageNumber) ||
-                const DeepCollectionEquality()
-                    .equals(other.pageNumber, pageNumber)) &&
-            (identical(other.perPage, perPage) ||
-                const DeepCollectionEquality()
-                    .equals(other.perPage, perPage)) &&
-            (identical(other.sparkline, sparkline) ||
-                const DeepCollectionEquality()
-                    .equals(other.sparkline, sparkline)));
+        (other.runtimeType == runtimeType &&
+            other is _$GetMarketCoinsEvent &&
+            const DeepCollectionEquality().equals(other.currency, currency) &&
+            const DeepCollectionEquality().equals(other.order, order) &&
+            const DeepCollectionEquality()
+                .equals(other.pageNumber, pageNumber) &&
+            const DeepCollectionEquality().equals(other.perPage, perPage) &&
+            const DeepCollectionEquality().equals(other.sparkline, sparkline));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(currency) ^
-      const DeepCollectionEquality().hash(order) ^
-      const DeepCollectionEquality().hash(pageNumber) ^
-      const DeepCollectionEquality().hash(perPage) ^
-      const DeepCollectionEquality().hash(sparkline);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(currency),
+      const DeepCollectionEquality().hash(order),
+      const DeepCollectionEquality().hash(pageNumber),
+      const DeepCollectionEquality().hash(perPage),
+      const DeepCollectionEquality().hash(sparkline));
 
   @JsonKey(ignore: true)
   @override
-  $GetMarketCoinsEventCopyWith<GetMarketCoinsEvent> get copyWith =>
-      _$GetMarketCoinsEventCopyWithImpl<GetMarketCoinsEvent>(this, _$identity);
+  _$$GetMarketCoinsEventCopyWith<_$GetMarketCoinsEvent> get copyWith =>
+      __$$GetMarketCoinsEventCopyWithImpl<_$GetMarketCoinsEvent>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -318,22 +293,26 @@ class _$GetMarketCoinsEvent extends GetMarketCoinsEvent {
 }
 
 abstract class GetMarketCoinsEvent extends CoinEvent {
-  const factory GetMarketCoinsEvent(String currency, String order,
-      int pageNumber, int perPage, String sparkline) = _$GetMarketCoinsEvent;
+  const factory GetMarketCoinsEvent(
+      final String currency,
+      final String order,
+      final int pageNumber,
+      final int perPage,
+      final String sparkline) = _$GetMarketCoinsEvent;
   const GetMarketCoinsEvent._() : super._();
 
   @override
-  String get currency => throw _privateConstructorUsedError;
+  String get currency;
   @override
-  String get order => throw _privateConstructorUsedError;
+  String get order;
   @override
-  int get pageNumber => throw _privateConstructorUsedError;
+  int get pageNumber;
   @override
-  int get perPage => throw _privateConstructorUsedError;
+  int get perPage;
   @override
-  String get sparkline => throw _privateConstructorUsedError;
+  String get sparkline;
   @override
   @JsonKey(ignore: true)
-  $GetMarketCoinsEventCopyWith<GetMarketCoinsEvent> get copyWith =>
+  _$$GetMarketCoinsEventCopyWith<_$GetMarketCoinsEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
