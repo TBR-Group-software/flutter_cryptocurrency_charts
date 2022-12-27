@@ -42,7 +42,7 @@ class _RatingsPageState extends State<RatingsPage> {
       (SettingsState state) {
         if (state.status == BlocStatus.Loaded) {
           setState(() {
-            fiatCurrency = state.fiatCurrency!;
+            fiatCurrency = state.fiatCurrency;
           });
           globalDataBloc.add(const GlobalDataEvent.getGlobalData());
           coinBloc.add(CoinEvent.getMarketCoins(

@@ -1,9 +1,9 @@
 import 'package:clean_app/data/gateway/settings.dart';
 import 'package:clean_app/domain/service/settings.dart';
 
-class HiveSettingsSerivce implements SettingsService {
+class HiveSettingsService implements SettingsService {
   final SettingsGateway _gateway;
-  HiveSettingsSerivce(this._gateway);
+  HiveSettingsService(this._gateway);
 
   @override
   Future<String> getFiatCurrency() => _gateway.getFiatCurrency();

@@ -65,7 +65,7 @@ void init() {
       () => RestGlobalDataService(sl.get(), sl.get()));
 
   sl.registerLazySingleton<SettingsService>(
-      () => HiveSettingsSerivce(sl.get()));
+      () => HiveSettingsService(sl.get()));
   //UseCase
   sl.registerLazySingleton<GetMarketCoinsUseCase>(
       () => RestGetMarketCoinsUseCase(sl.get()));
