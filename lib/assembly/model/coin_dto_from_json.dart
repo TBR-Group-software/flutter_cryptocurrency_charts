@@ -11,6 +11,6 @@ class CoinDtoFromJsonFactory implements Factory<CoinDto, Map<String, dynamic>> {
         param['current_price'] as num?,
         param['market_cap'] as num?,
         param['price_change_percentage_24h'] as num?,
-        param['sparkline_in_7d']['price'] as List<dynamic>,
+        param['sparkline_in_7d']?['price'] as List<dynamic>?,
       );
 }

@@ -34,7 +34,17 @@ import 'package:clean_app/presentation/page/search/search_page.dart';
         AutoRoute<dynamic>(
           path: 'presentation/page/search/search_page',
           name: 'SearchPageRouter',
-          page: SearchPage,
+          page: EmptyRouterPage,
+          children: <AutoRoute<dynamic>>[
+            AutoRoute<dynamic>(
+              path: '',
+              page: SearchPage,
+            ),
+            AutoRoute<dynamic>(
+              path: '',
+              page: DetailInfoPage,
+            ),
+          ],
         ),
         AutoRoute<dynamic>(
           path: 'presentation/page/portfolio/portfolio_page',

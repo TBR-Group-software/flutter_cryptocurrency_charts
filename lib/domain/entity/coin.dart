@@ -6,7 +6,7 @@ class Coin {
   final num? currentPrice;
   final num? marketCap;
   final num? priceChangePercentage;
-  final List<dynamic> sparkline;
+  final List<dynamic>? sparkline;
 
   Coin(
     this.id,

@@ -13,20 +13,25 @@ import 'package:clean_app/data/model/market_cap_percentage.dart';
 import 'package:clean_app/data/service/hive_settings.dart';
 import 'package:clean_app/data/service/rest_coins.dart';
 import 'package:clean_app/data/service/rest_global_data.dart';
+import 'package:clean_app/data/service/rest_search_service.dart';
 import 'package:clean_app/domain/entity/coin.dart';
 import 'package:clean_app/domain/entity/global_data.dart';
 import 'package:clean_app/domain/entity/market_cap_percentage.dart';
 import 'package:clean_app/domain/service/coin.dart';
 import 'package:clean_app/domain/service/global_data.dart';
+import 'package:clean_app/domain/service/search_service.dart';
 import 'package:clean_app/domain/service/settings.dart';
 import 'package:clean_app/domain/usecase/get_fiat_currency.dart';
 import 'package:clean_app/domain/usecase/get_global_data.dart';
 import 'package:clean_app/domain/usecase/get_market_coins.dart';
+import 'package:clean_app/domain/usecase/get_searched_coins.dart';
 import 'package:clean_app/domain/usecase/get_theme.dart';
+import 'package:clean_app/domain/usecase/get_trending_coins.dart';
 import 'package:clean_app/domain/usecase/select_fiat_currency.dart';
 import 'package:clean_app/domain/usecase/select_theme.dart';
 import 'package:clean_app/presentation/bloc/coin/bloc.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
+import 'package:clean_app/presentation/bloc/search/search_bloc.dart';
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -63,6 +68,8 @@ void init() {
       () => RestCoinService(sl.get(), sl.get()));
   sl.registerLazySingleton<GlobalDataService>(
       () => RestGlobalDataService(sl.get(), sl.get()));
+  sl.registerLazySingleton<SearchService>(
+      () => RestSearchService(sl.get(), sl.get()));
 
   sl.registerLazySingleton<SettingsService>(
       () => HiveSettingsService(sl.get()));
@@ -79,9 +86,14 @@ void init() {
       () => RestGetThemeUseCase(sl.get()));
   sl.registerLazySingleton<SelectThemeUseCase>(
       () => RestSelectThemeUseCase(sl.get()));
+  sl.registerLazySingleton<GetSearchResultsUseCase>(
+      () => RestGetSearchResultsUseCase(sl.get()));
+  sl.registerLazySingleton<GetTrendingCoinsUseCase>(
+          () => RestGetTrendingCoinsUseCase(sl.get()));
   //Bloc
   sl.registerLazySingleton<CoinBloc>(() => CoinBloc(sl.get()));
   sl.registerLazySingleton<GlobalDataBloc>(() => GlobalDataBloc(sl.get()));
   sl.registerLazySingleton<SettingsBloc>(
       () => SettingsBloc(sl.get(), sl.get(), sl.get(), sl.get()));
+  sl.registerLazySingleton<SearchBloc>(() => SearchBloc(sl.get(), sl.get()));
 }

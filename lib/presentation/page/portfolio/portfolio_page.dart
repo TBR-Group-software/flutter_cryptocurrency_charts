@@ -138,7 +138,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                                 final List<FlSpot> flSpotList = <FlSpot>[];
                                 final List<double> newSparkline = <double>[];
                                 double i = 0;
-                                coinList[index].sparkline.forEach(
+                                coinList[index].sparkline?.forEach(
                                   (dynamic element) {
                                     i++;
                                     newSparkline.add(element as double);

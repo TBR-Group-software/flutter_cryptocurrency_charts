@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 class RestGateway {
   final Factory<CoinDto, Map<String, dynamic>> _coinDtoFactory;
   final Factory<GlobalDataDto, Map<String, dynamic>> _globalDataDtoFactory;
+
   RestGateway(
     this._coinDtoFactory,
     this._globalDataDtoFactory,
@@ -49,6 +50,47 @@ class RestGateway {
         jsonResponse['data'] as Map<String, dynamic>;
 
     return _globalDataDtoFactory.create(globalDataJson);
+  }
+
+  Future<List<CoinDto>> getTrendingCoins() async {
+    final http.Response response = await _getRequest(baseUrl, trendingCoinsUrl);
+    final Map<String, dynamic> jsonResponse =
+        json.decode(response.body) as Map<String, dynamic>;
+    final List<dynamic> trendingCoinsData =
+        jsonResponse['coins'] as List<dynamic>;
+    print(trendingCoinsData);
+
+    final List<Map<String, dynamic>> jsonList = trendingCoinsData
+        .map((dynamic d) =>
+            (d as Map<String, dynamic>)['item'] as Map<String, dynamic>)
+        .toList();
+
+    return jsonList
+        .map((Map<String, dynamic> json) => _coinDtoFactory.create(json))
+        .toList();
+  }
+
+  Future<List<CoinDto>> getSearchResult(String query) async {
+    final http.Response response = await _getRequest(
+      baseUrl,
+      searchCoinsUrl,
+      queryParams: <String, String>{
+        'query': query,
+      },
+    );
+    final Map<String, dynamic> jsonResponse =
+        json.decode(response.body) as Map<String, dynamic>;
+    print(jsonResponse['coins']);
+    final List<dynamic> trendingCoinsData =
+        jsonResponse['coins'] as List<dynamic>;
+
+    final List<Map<String, dynamic>> jsonList = trendingCoinsData
+        .map((dynamic d) => d as Map<String, dynamic>)
+        .toList();
+
+    return jsonList
+        .map((Map<String, dynamic> json) => _coinDtoFactory.create(json))
+        .toList();
   }
 
   Future<http.Response> _getRequest(String baseUrl, String path,

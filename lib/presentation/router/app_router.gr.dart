@@ -18,10 +18,10 @@ import 'package:flutter/material.dart' as _i9;
 
 import '../page/navigation_page.dart' as _i1;
 import '../page/portfolio/portfolio_page.dart' as _i7;
-import '../page/profile/profile_page.dart' as _i4;
-import '../page/ratings/detail_info_page.dart' as _i6;
-import '../page/ratings/ratings_page.dart' as _i5;
-import '../page/search/search_page.dart' as _i3;
+import '../page/profile/profile_page.dart' as _i3;
+import '../page/ratings/detail_info_page.dart' as _i5;
+import '../page/ratings/ratings_page.dart' as _i4;
+import '../page/search/search_page.dart' as _i6;
 
 class AppRouter extends _i8.RootStackRouter {
   AppRouter([_i9.GlobalKey<_i9.NavigatorState>? navigatorKey])
@@ -39,7 +39,7 @@ class AppRouter extends _i8.RootStackRouter {
     },
     SearchPageRouter.name: (routeData) {
       return _i8.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i3.SearchPage());
+          routeData: routeData, child: const _i2.EmptyRouterPage());
     },
     PortfolioPageRouter.name: (routeData) {
       return _i8.MaterialPageX<dynamic>(
@@ -47,17 +47,17 @@ class AppRouter extends _i8.RootStackRouter {
     },
     ProfilePageRouter.name: (routeData) {
       return _i8.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i4.ProfilePage());
+          routeData: routeData, child: const _i3.ProfilePage());
     },
     RatingsRoute.name: (routeData) {
       return _i8.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i5.RatingsPage());
+          routeData: routeData, child: _i4.RatingsPage());
     },
     DetailInfoRoute.name: (routeData) {
       final args = routeData.argsAs<DetailInfoRouteArgs>();
       return _i8.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i6.DetailInfoPage(
+          child: _i5.DetailInfoPage(
               coinName: args.coinName,
               currentPrice: args.currentPrice,
               priceChangePercentage: args.priceChangePercentage,
@@ -69,6 +69,10 @@ class AppRouter extends _i8.RootStackRouter {
               flSpotList: args.flSpotList,
               fiatCurrency: args.fiatCurrency,
               key: args.key));
+    },
+    SearchRoute.name: (routeData) {
+      return _i8.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i6.SearchPage());
     },
     PortfolioRoute.name: (routeData) {
       return _i8.MaterialPageX<dynamic>(
@@ -96,7 +100,13 @@ class AppRouter extends _i8.RootStackRouter {
                   ]),
               _i8.RouteConfig(SearchPageRouter.name,
                   path: 'presentation/page/search/search_page',
-                  parent: NavigationPageRouter.name),
+                  parent: NavigationPageRouter.name,
+                  children: [
+                    _i8.RouteConfig(SearchRoute.name,
+                        path: '', parent: SearchPageRouter.name),
+                    _i8.RouteConfig(DetailInfoRoute.name,
+                        path: '', parent: SearchPageRouter.name)
+                  ]),
               _i8.RouteConfig(PortfolioPageRouter.name,
                   path: 'presentation/page/portfolio/portfolio_page',
                   parent: NavigationPageRouter.name,
@@ -135,11 +145,12 @@ class RatingsPageRouter extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.SearchPage]
+/// [_i2.EmptyRouterPage]
 class SearchPageRouter extends _i8.PageRouteInfo<void> {
-  const SearchPageRouter()
+  const SearchPageRouter({List<_i8.PageRouteInfo>? children})
       : super(SearchPageRouter.name,
-            path: 'presentation/page/search/search_page');
+            path: 'presentation/page/search/search_page',
+            initialChildren: children);
 
   static const String name = 'SearchPageRouter';
 }
@@ -156,7 +167,7 @@ class PortfolioPageRouter extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.ProfilePage]
+/// [_i3.ProfilePage]
 class ProfilePageRouter extends _i8.PageRouteInfo<void> {
   const ProfilePageRouter()
       : super(ProfilePageRouter.name,
@@ -166,7 +177,7 @@ class ProfilePageRouter extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.RatingsPage]
+/// [_i4.RatingsPage]
 class RatingsRoute extends _i8.PageRouteInfo<void> {
   const RatingsRoute() : super(RatingsRoute.name, path: '');
 
@@ -174,7 +185,7 @@ class RatingsRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.DetailInfoPage]
+/// [_i5.DetailInfoPage]
 class DetailInfoRoute extends _i8.PageRouteInfo<DetailInfoRouteArgs> {
   DetailInfoRoute(
       {required String coinName,
@@ -246,6 +257,14 @@ class DetailInfoRouteArgs {
   String toString() {
     return 'DetailInfoRouteArgs{coinName: $coinName, currentPrice: $currentPrice, priceChangePercentage: $priceChangePercentage, marketCap: $marketCap, imageUrl: $imageUrl, coinIndex: $coinIndex, symbol: $symbol, sparkline: $sparkline, flSpotList: $flSpotList, fiatCurrency: $fiatCurrency, key: $key}';
   }
+}
+
+/// generated route for
+/// [_i6.SearchPage]
+class SearchRoute extends _i8.PageRouteInfo<void> {
+  const SearchRoute() : super(SearchRoute.name, path: '');
+
+  static const String name = 'SearchRoute';
 }
 
 /// generated route for

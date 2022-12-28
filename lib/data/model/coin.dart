@@ -6,7 +6,7 @@ class CoinDto {
   final num? currentPrice;
   final num? marketCap;
   final num? priceChangePercentage;
-  final List<dynamic> sparklineIn7d;
+  final List<dynamic>? sparklineIn7d;
 
   CoinDto(
     this.id,
