@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:clean_app/assembly/factory.dart';
 import 'package:clean_app/backbone/rest_api_urls.dart';
 import 'package:clean_app/data/model/coin.dart';
+import 'package:clean_app/data/model/coin_brief_data.dart';
 import 'package:clean_app/data/model/global_data.dart';
 import 'package:http/http.dart' as http;
 
@@ -45,20 +46,18 @@ class RestGateway {
     final http.Response response = await _getRequest(baseUrl, globalDataUrl);
     final Map<String, dynamic> jsonResponse =
         json.decode(response.body) as Map<String, dynamic>;
-    print(response.body);
     final Map<String, dynamic> globalDataJson =
         jsonResponse['data'] as Map<String, dynamic>;
 
     return _globalDataDtoFactory.create(globalDataJson);
   }
 
-  Future<List<CoinDto>> getTrendingCoins() async {
+  Future<List<CoinBriefData>> getTrendingCoins() async {
     final http.Response response = await _getRequest(baseUrl, trendingCoinsUrl);
     final Map<String, dynamic> jsonResponse =
         json.decode(response.body) as Map<String, dynamic>;
     final List<dynamic> trendingCoinsData =
         jsonResponse['coins'] as List<dynamic>;
-    print(trendingCoinsData);
 
     final List<Map<String, dynamic>> jsonList = trendingCoinsData
         .map((dynamic d) =>
@@ -66,11 +65,11 @@ class RestGateway {
         .toList();
 
     return jsonList
-        .map((Map<String, dynamic> json) => _coinDtoFactory.create(json))
+        .map((Map<String, dynamic> json) => CoinBriefData.fromJson(json))
         .toList();
   }
 
-  Future<List<CoinDto>> getSearchResult(String query) async {
+  Future<List<CoinBriefData>> getSearchByQuery(String query) async {
     final http.Response response = await _getRequest(
       baseUrl,
       searchCoinsUrl,
@@ -80,7 +79,6 @@ class RestGateway {
     );
     final Map<String, dynamic> jsonResponse =
         json.decode(response.body) as Map<String, dynamic>;
-    print(jsonResponse['coins']);
     final List<dynamic> trendingCoinsData =
         jsonResponse['coins'] as List<dynamic>;
 
@@ -89,8 +87,26 @@ class RestGateway {
         .toList();
 
     return jsonList
-        .map((Map<String, dynamic> json) => _coinDtoFactory.create(json))
+        .map((Map<String, dynamic> json) => CoinBriefData.fromJson(json))
         .toList();
+  }
+
+  Future<CoinDto> getSingleCoinData(String coinID, String currency) async {
+    final http.Response response = await _getRequest(
+      baseUrl,
+      coinByIDUrl + coinID,
+      queryParams: <String, String>{
+        'localization': 'false',
+        'community_data': 'false',
+        'developer_data': 'false',
+        'tickers': 'false',
+        'sparkline': 'true',
+      },
+    );
+    final Map<String, dynamic> jsonResponse =
+        json.decode(response.body) as Map<String, dynamic>;
+
+    return CoinDto.fromIDJson(jsonResponse, currency.toLowerCase());
   }
 
   Future<http.Response> _getRequest(String baseUrl, String path,

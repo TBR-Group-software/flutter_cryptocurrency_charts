@@ -18,4 +18,19 @@ class CoinDto {
     this.priceChangePercentage,
     this.sparklineIn7d,
   );
+
+  factory CoinDto.fromIDJson(Map<String, dynamic> json, String currency) {
+    final Map<String, dynamic> marketData =
+    json['market_data'] as Map<String, dynamic>;
+    return CoinDto(
+      json['id'] as String?,
+      json['symbol'] as String?,
+      json['name'] as String?,
+      json['image']['thumb'] as String?,
+      marketData['current_price'][currency] as num?,
+      marketData['market_cap'][currency] as num?,
+      marketData['price_change_percentage_24h'] as num?,
+      marketData['sparkline_7d']?['price'] as List<dynamic>?,
+    );
+  }
 }

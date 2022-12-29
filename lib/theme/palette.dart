@@ -7,6 +7,7 @@ class Palette {
   static const Color base2 = Color(0xFF1D1B1A);
   static const Color base3 = Color(0xFF2A2827);
   static const Color base4 = Color(0xFF3D3C3A);
+  static const Color searchBase = Color(0xFF242322);
   static const Color baseHover = Color(0xFF22211F);
 
   static const Color overlay1 = Color(0xFFF7F7F7);

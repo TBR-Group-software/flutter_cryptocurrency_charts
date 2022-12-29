@@ -25,6 +25,7 @@ import 'package:clean_app/domain/usecase/get_fiat_currency.dart';
 import 'package:clean_app/domain/usecase/get_global_data.dart';
 import 'package:clean_app/domain/usecase/get_market_coins.dart';
 import 'package:clean_app/domain/usecase/get_searched_coins.dart';
+import 'package:clean_app/domain/usecase/get_single_coin_data.dart';
 import 'package:clean_app/domain/usecase/get_theme.dart';
 import 'package:clean_app/domain/usecase/get_trending_coins.dart';
 import 'package:clean_app/domain/usecase/select_fiat_currency.dart';
@@ -66,10 +67,14 @@ void init() {
   //Service
   sl.registerLazySingleton<CoinService>(
       () => RestCoinService(sl.get(), sl.get()));
-  sl.registerLazySingleton<GlobalDataService>(
-      () => RestGlobalDataService(sl.get(), sl.get()));
-  sl.registerLazySingleton<SearchService>(
-      () => RestSearchService(sl.get(), sl.get()));
+  sl.registerLazySingleton<GlobalDataService>(() => RestGlobalDataService(
+        sl.get(),
+        sl.get(),
+      ));
+  sl.registerLazySingleton<SearchService>(() => RestSearchService(
+        sl.get(),
+        sl.get(),
+      ));
 
   sl.registerLazySingleton<SettingsService>(
       () => HiveSettingsService(sl.get()));
@@ -89,11 +94,21 @@ void init() {
   sl.registerLazySingleton<GetSearchResultsUseCase>(
       () => RestGetSearchResultsUseCase(sl.get()));
   sl.registerLazySingleton<GetTrendingCoinsUseCase>(
-          () => RestGetTrendingCoinsUseCase(sl.get()));
+      () => RestGetTrendingCoinsUseCase(sl.get()));
+  sl.registerLazySingleton<GetSingleCoinDataUseCase>(
+      () => RestGetSingleCoinDataUseCase(sl.get()));
   //Bloc
   sl.registerLazySingleton<CoinBloc>(() => CoinBloc(sl.get()));
   sl.registerLazySingleton<GlobalDataBloc>(() => GlobalDataBloc(sl.get()));
-  sl.registerLazySingleton<SettingsBloc>(
-      () => SettingsBloc(sl.get(), sl.get(), sl.get(), sl.get()));
-  sl.registerLazySingleton<SearchBloc>(() => SearchBloc(sl.get(), sl.get()));
+  sl.registerLazySingleton<SettingsBloc>(() => SettingsBloc(
+        sl.get(),
+        sl.get(),
+        sl.get(),
+        sl.get(),
+      ));
+  sl.registerLazySingleton<SearchBloc>(() => SearchBloc(
+        sl.get(),
+        sl.get(),
+        sl.get(),
+      ));
 }

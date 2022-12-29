@@ -35,4 +35,16 @@ class TextStyles {
     fontWeight: FontWeight.w600,
     color: Palette.overlay3,
   );
+
+  static TextStyle searchPageStyle = TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+  );
+
+  static TextStyle searchMarketCapRank = const TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+  );
 }

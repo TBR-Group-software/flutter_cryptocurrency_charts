@@ -10,3 +10,13 @@ class CoinSearchQuery extends SearchEvent {
 
   CoinSearchQuery(this.query);
 }
+
+class CoinTapForDetails extends SearchEvent {
+  final String coinID;
+  final String currency;
+
+  CoinTapForDetails({
+    required this.coinID,
+    required this.currency,
+  });
+}
