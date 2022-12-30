@@ -4,7 +4,7 @@ class CoinBriefModel {
   final String id;
   final String name;
   final String thumb;
-  final int marketCapRank;
+  final int? marketCapRank;
 
   CoinBriefModel({
     required this.id,

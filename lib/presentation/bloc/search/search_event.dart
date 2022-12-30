@@ -20,3 +20,5 @@ class CoinTapForDetails extends SearchEvent {
     required this.currency,
   });
 }
+
+class ResultPagePop extends SearchEvent {}

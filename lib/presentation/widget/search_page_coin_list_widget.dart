@@ -15,8 +15,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchPageCoinListWidget extends StatefulWidget {
+  final SearchListMode listMode;
+
   const SearchPageCoinListWidget({
     Key? key,
+    this.listMode = SearchListMode.Trending,
   }) : super(key: key);
 
   @override
@@ -28,7 +31,7 @@ class _SearchPageCoinListWidgetState extends State<SearchPageCoinListWidget> {
   final SearchBloc _searchBloc = dep_inj.sl.get();
   final SettingsBloc _settingsBloc = dep_inj.sl.get();
   final Toasts _toasts = Toasts();
-  int _selectCoinMarketRank = 0;
+  int? _selectCoinMarketRank;
   String? fiatCurrency;
 
   @override
@@ -58,6 +61,11 @@ class _SearchPageCoinListWidgetState extends State<SearchPageCoinListWidget> {
         listener: _handleSearchBlocListening,
         builder: (BuildContext context, SearchState state) {
           final BlocStatus blocStatus = state.blocStatus;
+          final List<CoinBriefModel> coinsList =
+              widget.listMode == SearchListMode.Trending
+                  ? state.topCoins
+                  : state.searchedCoins;
+
           if (blocStatus == BlocStatus.Loading) {
             return const Center(
               child: CircularProgressIndicator(
@@ -65,25 +73,14 @@ class _SearchPageCoinListWidgetState extends State<SearchPageCoinListWidget> {
               ),
             );
           } else if (blocStatus == BlocStatus.Loaded) {
-            final List<CoinBriefModel> topCoins = state.topCoins;
             return ListView.builder(
-              itemCount: topCoins.length,
+              itemCount: coinsList.length,
               itemBuilder: (BuildContext context, int index) {
-                final CoinBriefModel coinData = topCoins[index];
+                final CoinBriefModel coinData = coinsList[index];
+                final int? marketCapRank = coinData.marketCapRank;
+
                 return GestureDetector(
-                  onTap: () {
-                    final String? currency = fiatCurrency;
-                    final String coinId = coinData.id;
-                    _selectCoinMarketRank = coinData.marketCapRank;
-                    if (currency != null) {
-                      _searchBloc.add(
-                        CoinTapForDetails(
-                          coinID: coinId,
-                          currency: currency,
-                        ),
-                      );
-                    }
-                  },
+                  onTap: () => _handleCoinTap(coinData),
                   child: ListTile(
                     contentPadding: EdgeInsets.zero,
                     leading: Image.network(
@@ -106,8 +103,10 @@ class _SearchPageCoinListWidgetState extends State<SearchPageCoinListWidget> {
                         ),
                       ),
                       child: Text(
-                        '${coinData.marketCapRank}',
-                        style: TextStyles.searchMarketCapRank,
+                        marketCapRank != null
+                            ? '${coinData.marketCapRank}'
+                            : 'N/A',
+                        style: _marketCapRankSelect(marketCapRank),
                       ),
                     ),
                   ),
@@ -159,4 +158,33 @@ class _SearchPageCoinListWidgetState extends State<SearchPageCoinListWidget> {
       ),
     );
   }
+
+  void _handleCoinTap(CoinBriefModel coinData) {
+    final String? currency = fiatCurrency;
+    final String coinId = coinData.id;
+    final int? marketCapRank = coinData.marketCapRank;
+    _selectCoinMarketRank =
+        marketCapRank == null ? marketCapRank : marketCapRank - 1;
+    if (currency != null) {
+      _searchBloc.add(
+        CoinTapForDetails(
+          coinID: coinId,
+          currency: currency,
+        ),
+      );
+    }
+  }
+
+  TextStyle _marketCapRankSelect(int? capRank) {
+    if (capRank == null || '$capRank'.length < 4) {
+      return TextStyles.searchMarketCapRank;
+    } else {
+      return TextStyles.searchMarketCapRankS;
+    }
+  }
+}
+
+enum SearchListMode {
+  Trending,
+  Result,
 }

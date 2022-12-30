@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:clean_app/backbone/dependency_injection.dart' as dep_inj;
 import 'package:clean_app/presentation/bloc/search/search_bloc.dart';
+import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:clean_app/presentation/widget/search_page_coin_list_widget.dart';
 import 'package:clean_app/theme/palette.dart';
 import 'package:clean_app/theme/text_styles.dart';
@@ -17,11 +19,17 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final SearchBloc _searchBloc = dep_inj.sl.get();
+  static const OutlineInputBorder _inputBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(12)),
+    borderSide: BorderSide(color: Colors.transparent),
+  );
 
   @override
   void initState() {
     super.initState();
-    _searchBloc.add(InitialTrendingCoinsFetch());
+    if (_searchBloc.state.topCoins.isEmpty) {
+      _searchBloc.add(InitialTrendingCoinsFetch());
+    }
   }
 
   @override
@@ -43,22 +51,36 @@ class _SearchPageState extends State<SearchPage> {
                   0,
                 ),
                 child: Column(
-                  children: [
+                  children: <Widget>[
                     Container(
                       width: double.infinity,
-                      height: 58,
+                      height: 58.h,
                       margin: EdgeInsets.only(bottom: 44.w),
-                      decoration: const BoxDecoration(
-                        color: Palette.searchBase,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(12),
-                        ),
-                      ),
-                      child: const TextField(
+                      child: TextField(
+                        textInputAction: TextInputAction.search,
+                        onSubmitted: (String query) {
+                          context.router.replace(
+                            SearchResultRoute(query: query),
+                          );
+                          _searchBloc.add(CoinSearchQuery(query));
+                        },
+                        style: TextStyles.searchInputStyle,
                         decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(),
+                          hintText: 'search'.tr(),
+                          suffixIcon: const Icon(
+                            Icons.search,
+                            color: Palette.primary,
+                          ),
+                          hintStyle: TextStyles.searchHintStyle,
+                          filled: true,
+                          fillColor: Palette.searchBase,
+                          border: _inputBorder,
+                          enabledBorder: _inputBorder,
                           focusColor: Palette.primary,
-                          focusedBorder: OutlineInputBorder(),
+                          focusedBorder: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                            borderSide: BorderSide(color: Palette.primary),
+                          ),
                         ),
                       ),
                     ),

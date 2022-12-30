@@ -2,7 +2,7 @@ class CoinBriefData {
   final String id;
   final String name;
   final String thumb;
-  final int marketCapRank;
+  final int? marketCapRank;
 
   CoinBriefData({
     required this.id,
@@ -16,7 +16,7 @@ class CoinBriefData {
       id: json['id'] as String,
       name: json['name'] as String,
       thumb: json['thumb'] as String,
-      marketCapRank: json['market_cap_rank'] as int,
+      marketCapRank: json['market_cap_rank'] as int?,
     );
   }
 }

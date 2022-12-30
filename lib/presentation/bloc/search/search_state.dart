@@ -13,7 +13,7 @@ class SearchState {
     this.blocStatus,
     this.topCoins,
     this.searchedCoins, {
-    this.detStatus = DetailsStatus.Empty,
+    this.detStatus = DetailsStatus.Idle,
     this.singleCoinData,
     this.error,
   });
@@ -39,5 +39,5 @@ class SearchState {
 
 enum DetailsStatus {
   Fetching,
-  Empty,
+  Idle,
 }

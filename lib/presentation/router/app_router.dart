@@ -6,6 +6,7 @@ import 'package:clean_app/presentation/page/profile/profile_page.dart';
 import 'package:clean_app/presentation/page/ratings/detail_info_page.dart';
 import 'package:clean_app/presentation/page/ratings/ratings_page.dart';
 import 'package:clean_app/presentation/page/search/search_page.dart';
+import 'package:clean_app/presentation/page/search/search_result_page.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -39,6 +40,10 @@ import 'package:clean_app/presentation/page/search/search_page.dart';
             AutoRoute<dynamic>(
               path: '',
               page: SearchPage,
+            ),
+            AutoRoute<dynamic>(
+              path: '',
+              page: SearchResultPage,
             ),
             AutoRoute<dynamic>(
               path: '',

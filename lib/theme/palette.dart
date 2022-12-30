@@ -15,6 +15,8 @@ class Palette {
   static const Color overlay3 = Color(0xFFA19999);
   static const Color overlay4 = Color(0xFF595857);
 
+  static const Color hintText = Color(0xFFBDBDBD);
+
   static const Color primary = Color(0xFF6BE7C8);
   static const Color secondary = Color(0xFF03C9A9);
   static const Color tertriary = Color(0xFF00A0AF);

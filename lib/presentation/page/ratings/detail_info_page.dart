@@ -10,7 +10,7 @@ class DetailInfoPage extends StatefulWidget {
   final String coinName;
   final num currentPrice, priceChangePercentage, marketCap;
   final String imageUrl;
-  final int coinIndex;
+  final int? coinIndex;
   final String symbol;
   final List<double>? sparkline;
   final List<FlSpot>? flSpotList;
@@ -36,6 +36,8 @@ class DetailInfoPage extends StatefulWidget {
 class _DetailInfoPageState extends State<DetailInfoPage> {
   @override
   Widget build(BuildContext context) {
+    final int? coinIndex = widget.coinIndex;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: PreferredSize(
@@ -73,7 +75,7 @@ class _DetailInfoPageState extends State<DetailInfoPage> {
                   ),
                 ),
                 child: Text(
-                  '${widget.coinIndex + 1}',
+                  coinIndex != null ? '${coinIndex + 1}' : 'N/A',
                   style: TextStyles.semiBold14
                       .copyWith(color: Theme.of(context).hintColor),
                 ),

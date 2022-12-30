@@ -47,4 +47,29 @@ class TextStyles {
     fontWeight: FontWeight.w700,
     color: Colors.white,
   );
+
+  static TextStyle searchMarketCapRankS = const TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+  );
+
+  static TextStyle searchHintStyle = const TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: Palette.hintText,
+  );
+
+  static TextStyle searchInputStyle = const TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: Colors.white,
+    decoration: TextDecoration.none,
+  );
+
+  static TextStyle searchResultHeader = const TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+  );
 }

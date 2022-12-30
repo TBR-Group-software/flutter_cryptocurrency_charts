@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:clean_app/backbone/bloc_status.dart';
 import 'package:clean_app/domain/entity/coin.dart';
@@ -22,36 +20,54 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     this._getTrendingCoinsUseCase,
     this._getSearchResultsUseCase,
     this._getSingleCoinDataUseCase,
-  ) : super(const SearchState(
-          BlocStatus.Loading,
-          <CoinBriefModel>[],
-          <CoinBriefModel>[],
-        )) {
+  ) : super(
+          const SearchState(
+            BlocStatus.Loading,
+            <CoinBriefModel>[],
+            <CoinBriefModel>[],
+          ),
+        ) {
     on<InitialTrendingCoinsFetch>(
-        (InitialTrendingCoinsFetch event, Emitter<SearchState> emit) async {
-      final List<CoinBriefModel> result = await _getTrendingCoinsUseCase();
-      emit(state.copyWith(
-        blocStatus: BlocStatus.Loaded,
-        topCoins: result,
-      ));
-    });
+      (InitialTrendingCoinsFetch event, Emitter<SearchState> emit) async {
+        final List<CoinBriefModel> result = await _getTrendingCoinsUseCase();
+        emit(state.copyWith(
+          blocStatus: BlocStatus.Loaded,
+          topCoins: result,
+        ));
+      },
+    );
 
     on<CoinSearchQuery>(
-        (CoinSearchQuery event, Emitter<SearchState> emit) async {
-      final List<CoinBriefModel> result =
-          await _getSearchResultsUseCase(event.query);
-      print(result.first.name);
-    });
+      (CoinSearchQuery event, Emitter<SearchState> emit) async {
+        emit(state.copyWith(blocStatus: BlocStatus.Loading));
+        final List<CoinBriefModel> result =
+            await _getSearchResultsUseCase(event.query);
+        emit(state.copyWith(
+          blocStatus: BlocStatus.Loaded,
+          searchedCoins: result,
+        ));
+      },
+    );
 
     on<CoinTapForDetails>(
-        (CoinTapForDetails event, Emitter<SearchState> emit) async {
-      emit(state.copyWith(detStatus: DetailsStatus.Fetching));
-      final Coin result =
-          await _getSingleCoinDataUseCase(event.coinID, event.currency);
-      emit(state.copyWith(
-        detStatus: DetailsStatus.Empty,
-        singleCoinData: result,
-      ));
-    });
+      (CoinTapForDetails event, Emitter<SearchState> emit) async {
+        emit(state.copyWith(detStatus: DetailsStatus.Fetching));
+        final Coin result =
+            await _getSingleCoinDataUseCase(event.coinID, event.currency);
+        emit(state.copyWith(
+          detStatus: DetailsStatus.Idle,
+          singleCoinData: result,
+        ));
+      },
+    );
+
+    on<ResultPagePop>(
+      (ResultPagePop event, Emitter<SearchState> emit) async {
+        emit(state.copyWith(
+          blocStatus: BlocStatus.Loaded,
+          searchedCoins: <CoinBriefModel>[],
+        ));
+      },
+    );
   }
 }
