@@ -5,13 +5,13 @@ import 'package:clean_app/domain/entity/coin.dart';
 class CoinFromDtoFactory implements Factory<Coin, CoinDto> {
   @override
   Coin create(CoinDto param) => Coin(
-        param.id,
-        param.symbol,
-        param.name,
-        param.image,
-        param.currentPrice,
-        param.marketCap,
-        param.priceChangePercentage,
-        param.sparklineIn7d,
+        id: param.id,
+        symbol: param.symbol,
+        name: param.name,
+        image: param.image,
+        currentPrice: param.currentPrice,
+        marketCap: param.marketCap,
+        priceChangePercentage: param.priceChangePercentage,
+        sparkline: param.sparklineIn7d,
       );
 }

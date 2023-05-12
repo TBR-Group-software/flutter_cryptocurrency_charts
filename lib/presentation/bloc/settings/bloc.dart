@@ -20,7 +20,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       this._getThemeUseCase, this._selectThemeUseCase)
       : super(
           const SettingsState(
-            BlocStatus.Loading,
+            BlocStatus.loading,
           ),
         ) {
     on<GetFiatCurrencyEvent>(
@@ -53,7 +53,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(await _getFiatCurrencyUseCase()
         .then(
           (String fiatCurrency) => SettingsState(
-            BlocStatus.Loaded,
+            BlocStatus.loaded,
             fiatCurrency: fiatCurrency,
             themeType: state.themeType,
           ),
@@ -69,7 +69,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(await _selectFiatCurrencyUseCase(event.fiatCurrency)
         .then(
           (String fiatCurrency) => SettingsState(
-            BlocStatus.Loaded,
+            BlocStatus.loaded,
             fiatCurrency: event.fiatCurrency,
             themeType: state.themeType,
           ),
@@ -85,7 +85,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(await _getThemeUseCase()
         .then(
           (String themeType) => SettingsState(
-            BlocStatus.Loaded,
+            BlocStatus.loaded,
             fiatCurrency: state.fiatCurrency,
             themeType: themeType,
           ),
@@ -101,7 +101,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(await _selectThemeUseCase(event.themeType)
         .then(
           (String fiatCurrency) => SettingsState(
-            BlocStatus.Loaded,
+            BlocStatus.loaded,
             fiatCurrency: state.fiatCurrency,
             themeType: event.themeType,
           ),
@@ -109,11 +109,11 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         .catchError(_onError));
   }
 
-  SettingsState _loadingState() => SettingsState(BlocStatus.Loading,
+  SettingsState _loadingState() => SettingsState(BlocStatus.loading,
       fiatCurrency: state.fiatCurrency, themeType: state.themeType);
 
   Future<SettingsState> _onError(Object error) async => SettingsState(
-        BlocStatus.Error,
+        BlocStatus.error,
         fiatCurrency: state.fiatCurrency,
         themeType: state.themeType,
         error: error,

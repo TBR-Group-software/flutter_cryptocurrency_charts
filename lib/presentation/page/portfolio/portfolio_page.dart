@@ -43,7 +43,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
     settingsBloc.add(const SettingsEvent.getFiatCurrency());
     settingsBloc.stream.listen(
       (SettingsState state) {
-        if (state.status == BlocStatus.Loaded) {
+        if (state.status == BlocStatus.loaded) {
           setState(() {
             fiatCurrency = state.fiatCurrency!;
           });
@@ -60,7 +60,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
     );
     globalDataBloc.stream.listen((GlobalDataState state) {
       setState(() {
-        if (state.status == BlocStatus.Error) {
+        if (state.status == BlocStatus.error) {
           internetIsConnected = false;
         } else {
           internetIsConnected = true;
@@ -69,7 +69,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
     });
     coinBloc.stream.listen((CoinState state) {
       setState(() {
-        if (state.status == BlocStatus.Error) {
+        if (state.status == BlocStatus.error) {
           internetIsConnected = false;
         } else {
           internetIsConnected = true;
@@ -97,10 +97,10 @@ class _PortfolioPageState extends State<PortfolioPage> {
                     BlocBuilder<GlobalDataBloc, GlobalDataState>(
                       bloc: globalDataBloc,
                       builder: (_, GlobalDataState state) {
-                        if (state.status == BlocStatus.Loading) {
+                        if (state.status == BlocStatus.loading) {
                           return const ShimmerMarketData();
                         }
-                        if (state.status == BlocStatus.Error) {
+                        if (state.status == BlocStatus.error) {
                           return const SizedBox();
                         } else {
                           final List<MarketCapPercentage> marketCapList = state
@@ -119,12 +119,12 @@ class _PortfolioPageState extends State<PortfolioPage> {
                     BlocBuilder<CoinBloc, CoinState>(
                       bloc: coinBloc,
                       builder: (_, CoinState state) {
-                        if (state.status == BlocStatus.Loading) {
+                        if (state.status == BlocStatus.loading) {
                           return Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16.w),
                             child: const ShimmerCoinListView(itemCount: 5),
                           );
-                        } else if (state.status == BlocStatus.Loaded) {
+                        } else if (state.status == BlocStatus.loaded) {
                           coinList = state.coins;
                           return Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -162,19 +162,9 @@ class _PortfolioPageState extends State<PortfolioPage> {
                                   onTap: () {
                                     context.router.push(
                                       DetailInfoRoute(
-                                        coinIndex: index,
-                                        coinName: coinList[index].name!,
-                                        currentPrice:
-                                            coinList[index].currentPrice!,
-                                        imageUrl: coinList[index].image!,
-                                        symbol: coinList[index].symbol!,
-                                        priceChangePercentage: coinList[index]
-                                            .priceChangePercentage!,
-                                        marketCap: coinList[index].marketCap!,
-                                        sparkline: newSparkline,
-                                        flSpotList: flSpotList,
-                                        fiatCurrency: fiatCurrency.toString(),
-                                      ),
+                                          coinIndex: index,
+                                          coinId:
+                                              coinList[index].id ?? 'Empty'),
                                     );
                                   },
                                 );

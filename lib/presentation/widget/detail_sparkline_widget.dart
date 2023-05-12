@@ -53,8 +53,8 @@ class _SparklineWidgetState extends State<DetailSparklineWidget> {
         getDrawingVerticalLine: (double value) {
           return FlLine(
             color: widget.pricePercentage >= 0
-                ? const Color(0xff37434d)
-                : const Color(0xff4D3737),
+                ? Palette.darkBlue
+                : Palette.darkRed,
             strokeWidth: 1,
           );
         },

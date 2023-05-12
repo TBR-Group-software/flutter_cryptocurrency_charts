@@ -12,7 +12,7 @@ class CoinBloc extends Bloc<CoinEvent, CoinState> {
   final GetMarketCoinsUseCase _getMarketCoinsUseCase;
 
   CoinBloc(this._getMarketCoinsUseCase)
-      : super(const CoinState(BlocStatus.Loading, <Coin>[])) {
+      : super(const CoinState(BlocStatus.loading, <Coin>[])) {
     on<GetMarketCoinsEvent>(
       (GetMarketCoinsEvent event, Emitter<CoinState> emit) async {
         await event.when(
@@ -29,12 +29,12 @@ class CoinBloc extends Bloc<CoinEvent, CoinState> {
     emit(_loadingState());
     emit(await _getMarketCoinsUseCase(
             currency, order, pageNumber, perPage, sparkline)
-        .then((List<Coin> coin) => CoinState(BlocStatus.Loaded, coin))
+        .then((List<Coin> coin) => CoinState(BlocStatus.loaded, coin))
         .catchError(_onError));
   }
 
-  CoinState _loadingState() => CoinState(BlocStatus.Loading, state.coins);
+  CoinState _loadingState() => CoinState(BlocStatus.loading, state.coins);
 
   Future<CoinState> _onError(Object error) async =>
-      CoinState(BlocStatus.Error, state.coins, error: error);
+      CoinState(BlocStatus.error, state.coins, error: error);
 }

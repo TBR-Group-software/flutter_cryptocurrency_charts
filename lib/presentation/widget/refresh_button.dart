@@ -32,7 +32,7 @@ class _RefreshButtonState extends State<RefreshButton> {
         settingsBloc.add(const SettingsEvent.getFiatCurrency());
         settingsBloc.stream.listen(
           (SettingsState state) {
-            if (state.status == BlocStatus.Loaded) {
+            if (state.status == BlocStatus.loaded) {
               globalDataBloc.add(const GlobalDataEvent.getGlobalData());
               coinBloc.add(CoinEvent.getMarketCoins(
                 state.fiatCurrency!,

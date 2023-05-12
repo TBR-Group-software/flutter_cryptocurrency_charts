@@ -40,9 +40,9 @@ class _RatingsPageState extends State<RatingsPage> {
     settingsBloc.add(const SettingsEvent.getFiatCurrency());
     settingsBloc.stream.listen(
       (SettingsState state) {
-        if (state.status == BlocStatus.Loaded) {
+        if (state.status == BlocStatus.loaded) {
           setState(() {
-            fiatCurrency = state.fiatCurrency!;
+            fiatCurrency = state.fiatCurrency;
           });
           globalDataBloc.add(const GlobalDataEvent.getGlobalData());
           coinBloc.add(CoinEvent.getMarketCoins(
@@ -72,7 +72,7 @@ class _RatingsPageState extends State<RatingsPage> {
                   settingsBloc.add(const SettingsEvent.getFiatCurrency());
                   settingsBloc.stream.listen(
                     (SettingsState state) {
-                      if (state.status == BlocStatus.Loaded) {
+                      if (state.status == BlocStatus.loaded) {
                         coinBloc.add(CoinEvent.getMarketCoins(
                           state.fiatCurrency!,
                           order,
@@ -91,12 +91,12 @@ class _RatingsPageState extends State<RatingsPage> {
                   bloc: coinBloc,
                   builder: (_, CoinState state) {
                     coinList = state.coins;
-                    if (state.status == BlocStatus.Loading) {
+                    if (state.status == BlocStatus.loading) {
                       return Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.w),
                         child: const ShimmerCoinListView(itemCount: 15),
                       );
-                    } else if (state.status == BlocStatus.Loaded) {
+                    } else if (state.status == BlocStatus.loaded) {
                       return ListView.builder(
                         itemCount: coinList.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -126,27 +126,24 @@ class _RatingsPageState extends State<RatingsPage> {
                             onTap: () {
                               context.router.push(
                                 DetailInfoRoute(
-                                  coinIndex: index,
-                                  coinName: coinList[index].name!,
-                                  currentPrice: coinList[index].currentPrice!,
-                                  imageUrl: coinList[index].image!,
-                                  symbol: coinList[index].symbol!,
-                                  priceChangePercentage:
-                                      coinList[index].priceChangePercentage!,
-                                  marketCap: coinList[index].marketCap!,
-                                  sparkline: newSparkline,
-                                  flSpotList: flSpotList,
-                                  fiatCurrency: fiatCurrency.toString(),
-                                ),
+                                    coinIndex: index,
+                                    coinId: coinList[index].id ?? 'Empty'),
                               );
                             },
                           );
                         },
                       );
-                    } else {
+                    } else if (state.status == BlocStatus.error) {
+                      print('State error ${state.error}');
                       toasts.errorConnectionToast();
                       return const Center(
                         child: RefreshButton(),
+                      );
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Palette.secondary,
+                        ),
                       );
                     }
                   },

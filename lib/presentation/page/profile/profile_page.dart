@@ -50,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
           child: BlocBuilder<SettingsBloc, SettingsState>(
             bloc: settingsBloc,
             builder: (_, SettingsState state) {
-              if (BlocStatus.Loaded == state.status) {
+              if (BlocStatus.loaded == state.status) {
                 fiatCurrency = state.fiatCurrency;
                 themeType = state.themeType;
               }

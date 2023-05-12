@@ -7,15 +7,16 @@ class Coin {
   final num? marketCap;
   final num? priceChangePercentage;
   final List<dynamic> sparkline;
+  final Map<String, dynamic>? fiats;
 
   Coin(
-    this.id,
-    this.symbol,
-    this.name,
-    this.image,
-    this.currentPrice,
-    this.marketCap,
-    this.priceChangePercentage,
-    this.sparkline,
-  );
+      {required this.sparkline,
+      this.id,
+      this.symbol,
+      this.name,
+      this.image,
+      this.currentPrice,
+      this.marketCap,
+      this.priceChangePercentage,
+      this.fiats});
 }

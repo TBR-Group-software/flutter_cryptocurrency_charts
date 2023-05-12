@@ -1,5 +1,5 @@
 enum BlocStatus {
-  Loading,
-  Loaded,
-  Error,
+  loading,
+  loaded,
+  error,
 }
