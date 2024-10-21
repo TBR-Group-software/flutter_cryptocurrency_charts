@@ -1,7 +1,7 @@
 import 'package:clean_app/domain/service/settings.dart';
 
 abstract class GetFiatCurrencyUseCase {
-  Future<String> call();
+  Future<String?> call();
 }
 
 class RestGetFiatCurrencyUseCase implements GetFiatCurrencyUseCase {
@@ -10,5 +10,5 @@ class RestGetFiatCurrencyUseCase implements GetFiatCurrencyUseCase {
   RestGetFiatCurrencyUseCase(this._service);
 
   @override
-  Future<String> call() => _service.getFiatCurrency();
+  Future<String?> call() => _service.getFiatCurrency();
 }

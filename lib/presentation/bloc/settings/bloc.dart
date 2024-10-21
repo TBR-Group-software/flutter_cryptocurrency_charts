@@ -52,7 +52,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(_loadingState());
     emit(await _getFiatCurrencyUseCase()
         .then(
-          (String fiatCurrency) => SettingsState(
+          (String? fiatCurrency) => SettingsState(
             BlocStatus.Loaded,
             fiatCurrency: fiatCurrency,
             themeType: state.themeType,
@@ -68,7 +68,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(_loadingState());
     emit(await _selectFiatCurrencyUseCase(event.fiatCurrency)
         .then(
-          (String fiatCurrency) => SettingsState(
+          (String? fiatCurrency) => SettingsState(
             BlocStatus.Loaded,
             fiatCurrency: event.fiatCurrency,
             themeType: state.themeType,
@@ -84,7 +84,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(_loadingState());
     emit(await _getThemeUseCase()
         .then(
-          (String themeType) => SettingsState(
+          (String? themeType) => SettingsState(
             BlocStatus.Loaded,
             fiatCurrency: state.fiatCurrency,
             themeType: themeType,
@@ -100,7 +100,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(_loadingState());
     emit(await _selectThemeUseCase(event.themeType)
         .then(
-          (String fiatCurrency) => SettingsState(
+          (String? fiatCurrency) => SettingsState(
             BlocStatus.Loaded,
             fiatCurrency: state.fiatCurrency,
             themeType: event.themeType,

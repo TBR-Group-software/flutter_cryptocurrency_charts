@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:clean_app/theme/palette.dart';
 import 'package:clean_app/theme/text_styles.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -29,7 +28,6 @@ class _SparklineWidgetState extends State<DetailSparklineWidget> {
   Widget build(BuildContext context) {
     return LineChart(
       mainData(),
-      swapAnimationCurve: Curves.linear,
     );
   }
 
@@ -38,6 +36,7 @@ class _SparklineWidgetState extends State<DetailSparklineWidget> {
       if (widget.pricePercentage >= 0) Palette.accentBlue else Palette.errorRed,
       if (widget.pricePercentage >= 0) Palette.primary else Palette.lightRed,
     ];
+
     return LineChartData(
       gridData: FlGridData(
         show: true,
@@ -60,38 +59,43 @@ class _SparklineWidgetState extends State<DetailSparklineWidget> {
         },
       ),
       titlesData: FlTitlesData(
-        rightTitles: SideTitles(showTitles: false),
-        topTitles: SideTitles(showTitles: false),
-        leftTitles: SideTitles(
-          showTitles: false,
-          reservedSize: 40,
-          getTextStyles: (BuildContext context, double value) =>
-              TextStyles.overlay3Bold11,
+        rightTitles:
+            const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        leftTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: false,
+            reservedSize: 40,
+            getTitlesWidget: (double value, TitleMeta meta) => Text(
+              value.toString(),
+              style: TextStyles.overlay3Bold11,
+            ),
+          ),
         ),
-        bottomTitles: SideTitles(
-          showTitles: true,
-          getTextStyles: (BuildContext context, double value) =>
-              TextStyles.overlay3Bold11,
-          getTitles: (double value) {
-            switch (value.toInt()) {
-              case 0:
-                return '1${'day'.tr()}';
-              case 24:
-                return '2${'day'.tr()}';
-              case 48:
-                return '3${'day'.tr()}';
-              case 72:
-                return '4${'day'.tr()}';
-              case 96:
-                return '5${'day'.tr()}';
-              case 120:
-                return '6${'day'.tr()}';
-              case 144:
-                return '7${'day'.tr()}';
-            }
-            return '';
-          },
-          interval: 1,
+        bottomTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: true,
+            getTitlesWidget: (double value, TitleMeta meta) {
+              switch (value.toInt()) {
+                case 0:
+                  return Text('1${'day'.tr()}');
+                case 24:
+                  return Text('2${'day'.tr()}');
+                case 48:
+                  return Text('3${'day'.tr()}');
+                case 72:
+                  return Text('4${'day'.tr()}');
+                case 96:
+                  return Text('5${'day'.tr()}');
+                case 120:
+                  return Text('6${'day'.tr()}');
+                case 144:
+                  return Text('7${'day'.tr()}');
+              }
+              return const Text('');
+            },
+            interval: 1,
+          ),
         ),
         show: true,
       ),
@@ -111,24 +115,24 @@ class _SparklineWidgetState extends State<DetailSparklineWidget> {
         ),
       ),
       minX: 0,
-      maxX: widget.sparkline?.length.toDouble(),
-      minY: widget.sparkline?.reduce(min),
-      maxY: widget.sparkline?.reduce(max),
+      maxX: widget.sparkline!.length.toDouble(),
+      minY: widget.sparkline!.reduce(min),
+      maxY: widget.sparkline!.reduce(max),
       lineBarsData: <LineChartBarData>[
         LineChartBarData(
-          spots: widget.flSpotList,
+          spots: widget.flSpotList!,
           isCurved: false,
-          colors: gradientColors,
+          color: gradientColors[0],
           barWidth: 2,
           isStrokeCapRound: false,
-          dotData: FlDotData(
-            show: false,
-          ),
+          dotData: const FlDotData(show: false),
           belowBarData: BarAreaData(
             show: widget.showBarArea,
-            colors: gradientColors
-                .map((Color color) => color.withOpacity(0.3))
-                .toList(),
+            gradient: LinearGradient(
+              colors: gradientColors
+                  .map((Color color) => color.withOpacity(0.3))
+                  .toList(),
+            ),
           ),
         ),
       ],

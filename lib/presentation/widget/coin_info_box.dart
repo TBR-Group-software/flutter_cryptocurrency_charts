@@ -13,8 +13,8 @@ class CoinInfoBox extends StatelessWidget {
   final String imageUrl;
   final int coinIndex;
   final String symbol;
-  final List<double>? sparkline;
-  final List<FlSpot>? flSpotList;
+  final List<double> sparkline;
+  final List<FlSpot> flSpotList;
   final String fiatCurrency;
   const CoinInfoBox({
     required this.coinName,
@@ -25,8 +25,8 @@ class CoinInfoBox extends StatelessWidget {
     required this.priceChangePercentage,
     required this.marketCap,
     required this.fiatCurrency,
-    this.sparkline,
-    this.flSpotList,
+    required this.sparkline,
+    required this.flSpotList,
   });
 
   @override

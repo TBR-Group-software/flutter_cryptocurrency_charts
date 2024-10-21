@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:clean_app/theme/palette.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +30,6 @@ class _SparklineWidgetState extends State<SparklineWidget> {
           aspectRatio: 1,
           child: LineChart(
             mainData(),
-            swapAnimationCurve: Curves.linear,
           ),
         ),
       ],
@@ -43,6 +41,7 @@ class _SparklineWidgetState extends State<SparklineWidget> {
       if (widget.pricePercentage >= 0) Palette.accentBlue else Palette.errorRed,
       if (widget.pricePercentage >= 0) Palette.primary else Palette.lightRed,
     ];
+
     return LineChartData(
       gridData: FlGridData(
         show: false,
@@ -64,35 +63,36 @@ class _SparklineWidgetState extends State<SparklineWidget> {
           );
         },
       ),
-      titlesData: FlTitlesData(
+      titlesData: const FlTitlesData(
         show: false,
       ),
       borderData: FlBorderData(
-          show: false,
-          border: Border.all(
-              color: widget.pricePercentage >= 0
-                  ? Palette.darkBlue
-                  : Palette.darkRed,
-              width: 1)),
+        show: false,
+        border: Border.all(
+          color:
+              widget.pricePercentage >= 0 ? Palette.darkBlue : Palette.darkRed,
+          width: 1,
+        ),
+      ),
       minX: 0,
       maxX: widget.sparkline?.length.toDouble(),
       minY: widget.sparkline?.reduce(min),
       maxY: widget.sparkline?.reduce(max),
       lineBarsData: <LineChartBarData>[
         LineChartBarData(
-          spots: widget.flSpotList,
+          spots: widget.flSpotList!,
           isCurved: true,
-          colors: gradientColors,
+          color: gradientColors[0],
           barWidth: 1,
           isStrokeCapRound: false,
-          dotData: FlDotData(
-            show: false,
-          ),
+          dotData: const FlDotData(show: false),
           belowBarData: BarAreaData(
             show: widget.showBarArea,
-            colors: gradientColors
-                .map((Color color) => color.withOpacity(0.3))
-                .toList(),
+            gradient: LinearGradient(
+              colors: gradientColors
+                  .map((Color color) => color.withOpacity(0.3))
+                  .toList(),
+            ),
           ),
         ),
       ],

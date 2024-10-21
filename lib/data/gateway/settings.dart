@@ -9,7 +9,7 @@ class SettingsGateway {
     await Hive.initFlutter();
   }
 
-  Future<String> getFiatCurrency() async {
+  Future<String?> getFiatCurrency() async {
     await _openBoxes();
     _testBox = await Hive.openBox<String>('testBox');
     String? fiatCurrency;
@@ -19,17 +19,17 @@ class SettingsGateway {
       await _testBox?.put('fiatCurrency', currencyUSD);
     }
     fiatCurrency = _testBox?.get('fiatCurrency');
-    return fiatCurrency!;
+    return fiatCurrency;
   }
 
-  Future<String> selectFiatCurrency(String selectedFiatCurrency) async {
+  Future<String?> selectFiatCurrency(String selectedFiatCurrency) async {
     String? fiatCurrency;
     _testBox?.put('fiatCurrency', selectedFiatCurrency);
     fiatCurrency = _testBox?.get('fiatCurrency');
-    return fiatCurrency!;
+    return fiatCurrency;
   }
 
-  Future<String> getTheme() async {
+  Future<String?> getTheme() async {
     await _openBoxes();
     _darkThemeBox = await Hive.openBox<String>('darkThemeBox');
     String? themeType;
@@ -39,13 +39,13 @@ class SettingsGateway {
       await _darkThemeBox?.put('themeType', 'night');
     }
     themeType = _darkThemeBox?.get('themeType');
-    return themeType!;
+    return themeType;
   }
 
-  Future<String> selectTheme(String selectedThemeType) async {
+  Future<String?> selectTheme(String selectedThemeType) async {
     String? themeType;
     _darkThemeBox?.put('themeType', selectedThemeType);
     themeType = _darkThemeBox?.get('themeType');
-    return themeType!;
+    return themeType;
   }
 }

@@ -24,10 +24,8 @@ class _NavigationPageState extends State<NavigationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
+    return PopScope(
+      canPop: false,
       child: AutoTabsScaffold(
         backgroundColor: Theme.of(context).primaryColor,
         routes: const <PageRouteInfo<dynamic>>[

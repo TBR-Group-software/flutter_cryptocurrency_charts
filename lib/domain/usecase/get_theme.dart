@@ -1,7 +1,7 @@
 import 'package:clean_app/domain/service/settings.dart';
 
 abstract class GetThemeUseCase {
-  Future<String> call();
+  Future<String?> call();
 }
 
 class RestGetThemeUseCase implements GetThemeUseCase {
@@ -10,5 +10,5 @@ class RestGetThemeUseCase implements GetThemeUseCase {
   RestGetThemeUseCase(this._service);
 
   @override
-  Future<String> call() => _service.getTheme();
+  Future<String?> call() => _service.getTheme();
 }

@@ -15,13 +15,13 @@ dependencies:
   auto_route: 5.0.1
   convex_bottom_bar: 3.0.0
   cupertino_icons: ^1.0.2
-  easy_localization: 3.0.1
-  fl_chart: 0.40.2
-  flutter_bloc: 8.1.1
+  easy_localization: ^3.0.7
+  fl_chart: ^0.69.0
+  flutter_bloc: ^8.1.6
   flutter_native_splash: 2.2.8
-  flutter_screenutil: 5.5.3+2
+  flutter_screenutil: ^5.9.3
   fluttertoast: 8.0.9
-  get_it: 7.2.0
+  get_it: ^8.0.0
   hive_flutter: 1.1.0
   http: 0.13.5
   salomon_bottom_bar: 3.3.1
