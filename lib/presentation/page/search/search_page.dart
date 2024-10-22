@@ -8,9 +8,13 @@ import 'package:clean_app/domain/entity/coin.dart';
 import 'package:clean_app/presentation/bloc/coin/bloc.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
+import 'package:clean_app/presentation/widget/back_icon.dart';
 import 'package:clean_app/presentation/widget/error_toast_widget.dart';
+import 'package:clean_app/presentation/widget/search_icon.dart';
 import 'package:clean_app/theme/palette.dart';
+import 'package:clean_app/theme/text_styles.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -144,21 +148,11 @@ class _SearchPageState extends State<SearchPage> {
                       Expanded(
                         child: TextField(
                           controller: searchController,
-                          style: const TextStyle(
-                            fontFamily: 'Inter',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                            color: Palette.white,
-                          ),
-                          decoration: const InputDecoration(
+                          style: TextStyles.whiteRegularInter14,
+                          decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Search',
-                            hintStyle: TextStyle(
-                              fontFamily: 'Inter',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: Palette.overlay3,
-                            ),
+                            hintText: 'search'.tr(),
+                            hintStyle: TextStyles.overlay3RegularInter14,
                           ),
                           onSubmitted: (String value) {
                             startSearch();
@@ -168,11 +162,7 @@ class _SearchPageState extends State<SearchPage> {
                       const SizedBox(width: 15),
                       GestureDetector(
                         onTap: startSearch,
-                        child: const Icon(
-                          Icons.search,
-                          color: Palette.primary,
-                          size: 28,
-                        ),
+                        child: const SearchIcon(),
                       ),
                     ],
                   ),
@@ -183,34 +173,20 @@ class _SearchPageState extends State<SearchPage> {
                 children: <Widget>[
                   GestureDetector(
                     onTap: stopSearch,
-                    child: const Icon(
-                      Icons.arrow_back,
-                      color: Palette.white,
-                      size: 28,
-                    ),
+                    child: const BackIcon(),
                   ),
                   const SizedBox(width: 40),
                   Text(
-                    "Search results for '${searchController.text}'",
-                    style: const TextStyle(
-                      fontFamily: 'Inter',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Palette.white,
-                    ),
+                    "${'search_results_for'.tr()} '${searchController.text}'",
+                    style: TextStyles.whiteBoldInter16,
                   ),
                 ],
               ),
             if (!showSearchResults) const SizedBox(height: 44),
             if (!showSearchResults)
-              const Text(
-                'Top 7 Trending Coins',
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: Palette.white,
-                ),
+              Text(
+                'top7'.tr(),
+                style: TextStyles.whiteBoldInter18,
               ),
             const SizedBox(height: 48),
             Expanded(
@@ -220,10 +196,10 @@ class _SearchPageState extends State<SearchPage> {
                   if (state.status == BlocStatus.Loading) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (state.status == BlocStatus.Error) {
-                    return const Center(
+                    return Center(
                       child: Text(
-                        'Failed to load data',
-                        style: TextStyle(color: Palette.white),
+                        'failed_to_load'.tr(),
+                        style: TextStyles.whiteRegularInter14,
                       ),
                     );
                   } else if (state.status == BlocStatus.Loaded) {
@@ -248,7 +224,7 @@ class _SearchPageState extends State<SearchPage> {
                                     height: 34,
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: Colors.grey,
+                                      color: Palette.overlay3,
                                     ),
                                   );
                                 },
@@ -256,12 +232,7 @@ class _SearchPageState extends State<SearchPage> {
                               const SizedBox(width: 21),
                               Text(
                                 coin.name!,
-                                style: const TextStyle(
-                                  fontFamily: 'Inter',
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  color: Palette.white,
-                                ),
+                                style: TextStyles.whiteBoldInter18,
                               ),
                               const Spacer(),
                               Container(
@@ -276,12 +247,7 @@ class _SearchPageState extends State<SearchPage> {
                                 child: Center(
                                   child: Text(
                                     '${index + 1}',
-                                    style: const TextStyle(
-                                      fontFamily: 'Inter',
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w600,
-                                      color: Palette.white,
-                                    ),
+                                    style: TextStyles.whiteSemiBoldInter11,
                                   ),
                                 ),
                               ),
@@ -291,7 +257,7 @@ class _SearchPageState extends State<SearchPage> {
                       },
                     );
                   }
-                  return const Center(child: Text('No coins available'));
+                  return Center(child: Text('no_coins_available'.tr()));
                 },
               ),
             ),

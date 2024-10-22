@@ -17,5 +17,10 @@
     "switch_to_day_mode": "Сменить на Дневную тему",
     "switch_to_night_mode": "Сменить на Ночную тему",
     "top_five_coins": "Топ 5 Монет",
-    "day": "д"
+    "day": "д",
+    "search": "Поиск",
+    "search_results_for": "Результаты за запросом",
+    "top7": "Топ 7 Трендовых Монет",
+    "failed_to_load": "Не удалось загрузить данные",
+    "no_coins_available": "Монеты не найдены"
 }

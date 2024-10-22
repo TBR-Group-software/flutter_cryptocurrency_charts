@@ -71,7 +71,7 @@ class _NavigationPageState extends State<NavigationPage> {
                     color: Theme.of(context).hintColor,
                   ),
                   title: Text(
-                    'Search'.tr(),
+                    'search'.tr(),
                   ),
                 ),
                 SalomonBottomBarItem(

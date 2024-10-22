@@ -17,5 +17,10 @@
     "switch_to_day_mode": "Switch to Day Mode",
     "switch_to_night_mode": "Switch to Night Mode",
     "top_five_coins": "Top 5 Coins",
-    "day": "d"
+    "day": "d",
+    "search": "Search",
+    "search_results_for": "Search results for",
+    "top7": "Top 7 Trending Coins",
+    "failed_to_load": "Failed to load data",
+    "no_coins_available": "No coins available"
 }
