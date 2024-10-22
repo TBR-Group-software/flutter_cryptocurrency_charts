@@ -26,6 +26,7 @@ dependencies:
   http: ^1.2.2
   salomon_bottom_bar: ^3.3.2
   shimmer: ^3.0.0
+  connectivity_plus: ^4.0.2
 
 dev_dependencies:
   flutter_test:

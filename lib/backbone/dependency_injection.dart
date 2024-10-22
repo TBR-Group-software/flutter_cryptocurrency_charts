@@ -1,10 +1,10 @@
 import 'package:clean_app/assembly/entity/coin_from_dto.dart';
 import 'package:clean_app/assembly/entity/global_data_from_dto.dart';
-import 'package:clean_app/assembly/entity/market_cap_percentage.dart';
+import 'package:clean_app/assembly/entity/market_cap_percentage_from_dto.dart';
 import 'package:clean_app/assembly/factory.dart';
 import 'package:clean_app/assembly/model/coin_dto_from_json.dart';
 import 'package:clean_app/assembly/model/global_data_dto_from_json.dart';
-import 'package:clean_app/assembly/model/market_cap_percentage.dart';
+import 'package:clean_app/assembly/model/market_cap_percentage_dto_from_json.dart';
 import 'package:clean_app/data/gateway/rest.dart';
 import 'package:clean_app/data/gateway/settings.dart';
 import 'package:clean_app/data/model/coin.dart';
