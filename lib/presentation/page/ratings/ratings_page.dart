@@ -6,7 +6,7 @@ import 'package:clean_app/domain/entity/coin.dart';
 import 'package:clean_app/presentation/bloc/coin/bloc.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
-import 'package:clean_app/presentation/router/app_router.gr.dart';
+import 'package:clean_app/presentation/router/app_router.dart';
 import 'package:clean_app/presentation/widget/coin_info_box.dart';
 import 'package:clean_app/presentation/widget/error_toast_widget.dart';
 import 'package:clean_app/presentation/widget/ratings_tab_row.dart';
@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+@RoutePage()
 class RatingsPage extends StatefulWidget {
   @override
   _RatingsPageState createState() => _RatingsPageState();
@@ -40,9 +41,9 @@ class _RatingsPageState extends State<RatingsPage> {
     settingsBloc.add(const SettingsEvent.getFiatCurrency());
     settingsBloc.stream.listen(
       (SettingsState state) {
-        if (state.status == BlocStatus.Loaded) {
+        if (state.status == BlocStatus.Loaded && state.fiatCurrency != null) {
           setState(() {
-            fiatCurrency = state.fiatCurrency!;
+            fiatCurrency = state.fiatCurrency;
           });
           globalDataBloc.add(const GlobalDataEvent.getGlobalData());
           coinBloc.add(CoinEvent.getMarketCoins(

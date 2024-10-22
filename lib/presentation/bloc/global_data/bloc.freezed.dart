@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'bloc.dart';
 
@@ -12,7 +12,7 @@ part of 'bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$GlobalDataEvent {
@@ -23,7 +23,7 @@ mixin _$GlobalDataEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? getGlobalData,
+    TResult? Function()? getGlobalData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,7 +39,7 @@ mixin _$GlobalDataEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetGlobalDataEvent value)? getGlobalData,
+    TResult? Function(GetGlobalDataEvent value)? getGlobalData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,42 +54,46 @@ mixin _$GlobalDataEvent {
 abstract class $GlobalDataEventCopyWith<$Res> {
   factory $GlobalDataEventCopyWith(
           GlobalDataEvent value, $Res Function(GlobalDataEvent) then) =
-      _$GlobalDataEventCopyWithImpl<$Res>;
+      _$GlobalDataEventCopyWithImpl<$Res, GlobalDataEvent>;
 }
 
 /// @nodoc
-class _$GlobalDataEventCopyWithImpl<$Res>
+class _$GlobalDataEventCopyWithImpl<$Res, $Val extends GlobalDataEvent>
     implements $GlobalDataEventCopyWith<$Res> {
   _$GlobalDataEventCopyWithImpl(this._value, this._then);
 
-  final GlobalDataEvent _value;
   // ignore: unused_field
-  final $Res Function(GlobalDataEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of GlobalDataEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$GetGlobalDataEventCopyWith<$Res> {
-  factory _$$GetGlobalDataEventCopyWith(_$GetGlobalDataEvent value,
-          $Res Function(_$GetGlobalDataEvent) then) =
-      __$$GetGlobalDataEventCopyWithImpl<$Res>;
+abstract class _$$GetGlobalDataEventImplCopyWith<$Res> {
+  factory _$$GetGlobalDataEventImplCopyWith(_$GetGlobalDataEventImpl value,
+          $Res Function(_$GetGlobalDataEventImpl) then) =
+      __$$GetGlobalDataEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$GetGlobalDataEventCopyWithImpl<$Res>
-    extends _$GlobalDataEventCopyWithImpl<$Res>
-    implements _$$GetGlobalDataEventCopyWith<$Res> {
-  __$$GetGlobalDataEventCopyWithImpl(
-      _$GetGlobalDataEvent _value, $Res Function(_$GetGlobalDataEvent) _then)
-      : super(_value, (v) => _then(v as _$GetGlobalDataEvent));
+class __$$GetGlobalDataEventImplCopyWithImpl<$Res>
+    extends _$GlobalDataEventCopyWithImpl<$Res, _$GetGlobalDataEventImpl>
+    implements _$$GetGlobalDataEventImplCopyWith<$Res> {
+  __$$GetGlobalDataEventImplCopyWithImpl(_$GetGlobalDataEventImpl _value,
+      $Res Function(_$GetGlobalDataEventImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$GetGlobalDataEvent get _value => super._value as _$GetGlobalDataEvent;
+  /// Create a copy of GlobalDataEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$GetGlobalDataEvent extends GetGlobalDataEvent {
-  const _$GetGlobalDataEvent() : super._();
+class _$GetGlobalDataEventImpl extends GetGlobalDataEvent {
+  const _$GetGlobalDataEventImpl() : super._();
 
   @override
   String toString() {
@@ -97,9 +101,9 @@ class _$GetGlobalDataEvent extends GetGlobalDataEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetGlobalDataEvent);
+        (other.runtimeType == runtimeType && other is _$GetGlobalDataEventImpl);
   }
 
   @override
@@ -116,7 +120,7 @@ class _$GetGlobalDataEvent extends GetGlobalDataEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? getGlobalData,
+    TResult? Function()? getGlobalData,
   }) {
     return getGlobalData?.call();
   }
@@ -144,7 +148,7 @@ class _$GetGlobalDataEvent extends GetGlobalDataEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetGlobalDataEvent value)? getGlobalData,
+    TResult? Function(GetGlobalDataEvent value)? getGlobalData,
   }) {
     return getGlobalData?.call(this);
   }
@@ -163,6 +167,6 @@ class _$GetGlobalDataEvent extends GetGlobalDataEvent {
 }
 
 abstract class GetGlobalDataEvent extends GlobalDataEvent {
-  const factory GetGlobalDataEvent() = _$GetGlobalDataEvent;
+  const factory GetGlobalDataEvent() = _$GetGlobalDataEventImpl;
   const GetGlobalDataEvent._() : super._();
 }

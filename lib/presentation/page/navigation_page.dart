@@ -1,12 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
-import 'package:clean_app/presentation/router/app_router.gr.dart';
+import 'package:clean_app/presentation/router/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
+@RoutePage()
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
 
@@ -29,9 +30,10 @@ class _NavigationPageState extends State<NavigationPage> {
       child: AutoTabsScaffold(
         backgroundColor: Theme.of(context).primaryColor,
         routes: const <PageRouteInfo<dynamic>>[
-          RatingsPageRouter(),
-          PortfolioPageRouter(),
-          ProfilePageRouter(),
+          RatingsRoute(),
+          SearchRoute(),
+          PortfolioRoute(),
+          ProfileRoute(),
         ],
         bottomNavigationBuilder: (_, TabsRouter tabsRouter) {
           return Padding(
@@ -57,6 +59,19 @@ class _NavigationPageState extends State<NavigationPage> {
                   ),
                   title: Text(
                     'ratings'.tr(),
+                  ),
+                ),
+                SalomonBottomBarItem(
+                  activeIcon: Icon(
+                    Icons.search,
+                    color: Theme.of(context).focusColor,
+                  ),
+                  icon: Icon(
+                    Icons.search,
+                    color: Theme.of(context).hintColor,
+                  ),
+                  title: Text(
+                    'search'.tr(),
                   ),
                 ),
                 SalomonBottomBarItem(

@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:clean_app/backbone/bloc_status.dart';
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
-import 'package:clean_app/presentation/router/app_router.gr.dart';
+import 'package:clean_app/presentation/router/app_router.dart';
 import 'package:clean_app/presentation/widget/chevron_icon.dart';
 import 'package:clean_app/presentation/widget/fiat_currency_bottom_sheet.dart';
 import 'package:clean_app/presentation/widget/language_bottom_sheet_selector.dart';
@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+@RoutePage()
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -137,11 +138,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             language = selectedLanguage;
                             if (language == 'russian'.tr()) {
                               context.setLocale(const Locale('ru'));
-                              context.router.push(const NavigationPageRouter());
+                              context.router.push(const NavigationRoute());
                             }
                             if (language == 'english'.tr()) {
                               context.setLocale(const Locale('en'));
-                              context.router.push(const NavigationPageRouter());
+                              context.router.push(const NavigationRoute());
                             }
                           });
                         },
