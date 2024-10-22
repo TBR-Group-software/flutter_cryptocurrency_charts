@@ -31,7 +31,7 @@ class _SparklineWidgetState extends State<SparklineWidget> {
           aspectRatio: 1,
           child: LineChart(
             mainData(),
-            swapAnimationCurve: Curves.linear,
+            curve: Curves.linear,
           ),
         ),
       ],
@@ -64,7 +64,7 @@ class _SparklineWidgetState extends State<SparklineWidget> {
           );
         },
       ),
-      titlesData: FlTitlesData(
+      titlesData: const FlTitlesData(
         show: false,
       ),
       borderData: FlBorderData(
@@ -80,19 +80,21 @@ class _SparklineWidgetState extends State<SparklineWidget> {
       maxY: widget.sparkline?.reduce(max),
       lineBarsData: <LineChartBarData>[
         LineChartBarData(
-          spots: widget.flSpotList,
+          spots: widget.flSpotList ?? <FlSpot>[],
           isCurved: true,
-          colors: gradientColors,
+          gradient: LinearGradient(colors: gradientColors),
           barWidth: 1,
           isStrokeCapRound: false,
-          dotData: FlDotData(
+          dotData: const FlDotData(
             show: false,
           ),
           belowBarData: BarAreaData(
             show: widget.showBarArea,
-            colors: gradientColors
-                .map((Color color) => color.withOpacity(0.3))
-                .toList(),
+            gradient: LinearGradient(
+              colors: gradientColors
+                  .map((Color color) => color.withOpacity(0.3))
+                  .toList(),
+            ),
           ),
         ),
       ],

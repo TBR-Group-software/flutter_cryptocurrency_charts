@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
+@RoutePage()
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
 
@@ -31,9 +32,9 @@ class _NavigationPageState extends State<NavigationPage> {
       child: AutoTabsScaffold(
         backgroundColor: Theme.of(context).primaryColor,
         routes: const <PageRouteInfo<dynamic>>[
-          RatingsPageRouter(),
-          PortfolioPageRouter(),
-          ProfilePageRouter(),
+          RatingsRoute(),
+          PortfolioRoute(),
+          ProfileRoute(),
         ],
         bottomNavigationBuilder: (_, TabsRouter tabsRouter) {
           return Padding(

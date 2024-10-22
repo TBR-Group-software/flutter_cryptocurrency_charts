@@ -1,185 +1,95 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// AutoRouteGenerator
+// AutoRouterGenerator
 // **************************************************************************
 
-import 'package:auto_route/auto_route.dart' as _i1;
-import 'package:fl_chart/fl_chart.dart' as _i8;
-import 'package:flutter/cupertino.dart' as _i9;
-import 'package:flutter/material.dart' as _i2;
+// ignore_for_file: type=lint
+// coverage:ignore-file
 
-import '../page/navigation_page.dart' as _i3;
-import '../page/portfolio/portfolio_page.dart' as _i7;
-import '../page/profile/profile_page.dart' as _i4;
-import '../page/ratings/detail_info_page.dart' as _i6;
-import '../page/ratings/ratings_page.dart' as _i5;
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:auto_route/auto_route.dart' as _i6;
+import 'package:clean_app/presentation/page/navigation_page.dart' as _i2;
+import 'package:clean_app/presentation/page/portfolio/portfolio_page.dart'
+    as _i3;
+import 'package:clean_app/presentation/page/profile/profile_page.dart' as _i4;
+import 'package:clean_app/presentation/page/ratings/detail_info_page.dart'
+    as _i1;
+import 'package:clean_app/presentation/page/ratings/ratings_page.dart' as _i5;
+import 'package:fl_chart/fl_chart.dart' as _i7;
+import 'package:flutter/material.dart' as _i8;
 
-class AppRouter extends _i1.RootStackRouter {
-  AppRouter([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
-
-  @override
-  final Map<String, _i1.PageFactory> pagesMap = {
-    NavigationPageRouter.name: (routeData) => _i1.MaterialPageX<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return const _i3.NavigationPage();
-        }),
-    RatingsPageRouter.name: (routeData) => _i1.MaterialPageX<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return const _i1.EmptyRouterPage();
-        }),
-    PortfolioPageRouter.name: (routeData) => _i1.MaterialPageX<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return const _i1.EmptyRouterPage();
-        }),
-    ProfilePageRouter.name: (routeData) => _i1.MaterialPageX<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return const _i4.ProfilePage();
-        }),
-    RatingsRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return _i5.RatingsPage();
-        }),
-    DetailInfoRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
-        routeData: routeData,
-        builder: (data) {
-          final args = data.argsAs<DetailInfoRouteArgs>();
-          return _i6.DetailInfoPage(
-              coinName: args.coinName,
-              currentPrice: args.currentPrice,
-              priceChangePercentage: args.priceChangePercentage,
-              marketCap: args.marketCap,
-              imageUrl: args.imageUrl,
-              coinIndex: args.coinIndex,
-              symbol: args.symbol,
-              sparkline: args.sparkline,
-              flSpotList: args.flSpotList,
-              fiatCurrency: args.fiatCurrency,
-              key: args.key);
-        }),
-    PortfolioRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return const _i7.PortfolioPage();
-        })
-  };
-
-  @override
-  List<_i1.RouteConfig> get routes => [
-        _i1.RouteConfig('/#redirect',
-            path: '/',
-            redirectTo: 'presentation/navigation_page',
-            fullMatch: true),
-        _i1.RouteConfig(NavigationPageRouter.name,
-            path: 'presentation/navigation_page',
-            children: [
-              _i1.RouteConfig(RatingsPageRouter.name,
-                  path: 'presentation/page/ratings/ratings_page',
-                  children: [
-                    _i1.RouteConfig(RatingsRoute.name, path: ''),
-                    _i1.RouteConfig(DetailInfoRoute.name, path: '')
-                  ]),
-              _i1.RouteConfig(PortfolioPageRouter.name,
-                  path: 'presentation/page/portfolio/portfolio_page',
-                  children: [
-                    _i1.RouteConfig(PortfolioRoute.name, path: ''),
-                    _i1.RouteConfig(DetailInfoRoute.name, path: '')
-                  ]),
-              _i1.RouteConfig(ProfilePageRouter.name,
-                  path: 'presentation/page/profile/profile_page')
-            ])
-      ];
-}
-
-class NavigationPageRouter extends _i1.PageRouteInfo<void> {
-  const NavigationPageRouter({List<_i1.PageRouteInfo>? children})
-      : super(name,
-            path: 'presentation/navigation_page', initialChildren: children);
-
-  static const String name = 'NavigationPageRouter';
-}
-
-class RatingsPageRouter extends _i1.PageRouteInfo<void> {
-  const RatingsPageRouter({List<_i1.PageRouteInfo>? children})
-      : super(name,
-            path: 'presentation/page/ratings/ratings_page',
-            initialChildren: children);
-
-  static const String name = 'RatingsPageRouter';
-}
-
-class PortfolioPageRouter extends _i1.PageRouteInfo<void> {
-  const PortfolioPageRouter({List<_i1.PageRouteInfo>? children})
-      : super(name,
-            path: 'presentation/page/portfolio/portfolio_page',
-            initialChildren: children);
-
-  static const String name = 'PortfolioPageRouter';
-}
-
-class ProfilePageRouter extends _i1.PageRouteInfo<void> {
-  const ProfilePageRouter()
-      : super(name, path: 'presentation/page/profile/profile_page');
-
-  static const String name = 'ProfilePageRouter';
-}
-
-class RatingsRoute extends _i1.PageRouteInfo<void> {
-  const RatingsRoute() : super(name, path: '');
-
-  static const String name = 'RatingsRoute';
-}
-
-class DetailInfoRoute extends _i1.PageRouteInfo<DetailInfoRouteArgs> {
-  DetailInfoRoute(
-      {required String coinName,
-      required num currentPrice,
-      required num priceChangePercentage,
-      required num marketCap,
-      required String imageUrl,
-      required int coinIndex,
-      required String symbol,
-      required List<double>? sparkline,
-      required List<_i8.FlSpot>? flSpotList,
-      required String fiatCurrency,
-      _i9.Key? key})
-      : super(name,
-            path: '',
-            args: DetailInfoRouteArgs(
-                coinName: coinName,
-                currentPrice: currentPrice,
-                priceChangePercentage: priceChangePercentage,
-                marketCap: marketCap,
-                imageUrl: imageUrl,
-                coinIndex: coinIndex,
-                symbol: symbol,
-                sparkline: sparkline,
-                flSpotList: flSpotList,
-                fiatCurrency: fiatCurrency,
-                key: key));
+/// generated route for
+/// [_i1.DetailInfoPage]
+class DetailInfoRoute extends _i6.PageRouteInfo<DetailInfoRouteArgs> {
+  DetailInfoRoute({
+    required String coinName,
+    required num currentPrice,
+    required num priceChangePercentage,
+    required num marketCap,
+    required String imageUrl,
+    required int coinIndex,
+    required String symbol,
+    required List<double>? sparkline,
+    required List<_i7.FlSpot>? flSpotList,
+    required String fiatCurrency,
+    _i8.Key? key,
+    List<_i6.PageRouteInfo>? children,
+  }) : super(
+          DetailInfoRoute.name,
+          args: DetailInfoRouteArgs(
+            coinName: coinName,
+            currentPrice: currentPrice,
+            priceChangePercentage: priceChangePercentage,
+            marketCap: marketCap,
+            imageUrl: imageUrl,
+            coinIndex: coinIndex,
+            symbol: symbol,
+            sparkline: sparkline,
+            flSpotList: flSpotList,
+            fiatCurrency: fiatCurrency,
+            key: key,
+          ),
+          initialChildren: children,
+        );
 
   static const String name = 'DetailInfoRoute';
+
+  static _i6.PageInfo page = _i6.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<DetailInfoRouteArgs>();
+      return _i1.DetailInfoPage(
+        coinName: args.coinName,
+        currentPrice: args.currentPrice,
+        priceChangePercentage: args.priceChangePercentage,
+        marketCap: args.marketCap,
+        imageUrl: args.imageUrl,
+        coinIndex: args.coinIndex,
+        symbol: args.symbol,
+        sparkline: args.sparkline,
+        flSpotList: args.flSpotList,
+        fiatCurrency: args.fiatCurrency,
+        key: args.key,
+      );
+    },
+  );
 }
 
 class DetailInfoRouteArgs {
-  const DetailInfoRouteArgs(
-      {required this.coinName,
-      required this.currentPrice,
-      required this.priceChangePercentage,
-      required this.marketCap,
-      required this.imageUrl,
-      required this.coinIndex,
-      required this.symbol,
-      required this.sparkline,
-      required this.flSpotList,
-      required this.fiatCurrency,
-      this.key});
+  const DetailInfoRouteArgs({
+    required this.coinName,
+    required this.currentPrice,
+    required this.priceChangePercentage,
+    required this.marketCap,
+    required this.imageUrl,
+    required this.coinIndex,
+    required this.symbol,
+    required this.sparkline,
+    required this.flSpotList,
+    required this.fiatCurrency,
+    this.key,
+  });
 
   final String coinName;
 
@@ -197,15 +107,90 @@ class DetailInfoRouteArgs {
 
   final List<double>? sparkline;
 
-  final List<_i8.FlSpot>? flSpotList;
+  final List<_i7.FlSpot>? flSpotList;
 
   final String fiatCurrency;
 
-  final _i9.Key? key;
+  final _i8.Key? key;
+
+  @override
+  String toString() {
+    return 'DetailInfoRouteArgs{coinName: $coinName, currentPrice: $currentPrice, priceChangePercentage: $priceChangePercentage, marketCap: $marketCap, imageUrl: $imageUrl, coinIndex: $coinIndex, symbol: $symbol, sparkline: $sparkline, flSpotList: $flSpotList, fiatCurrency: $fiatCurrency, key: $key}';
+  }
 }
 
-class PortfolioRoute extends _i1.PageRouteInfo<void> {
-  const PortfolioRoute() : super(name, path: '');
+/// generated route for
+/// [_i2.NavigationPage]
+class NavigationRoute extends _i6.PageRouteInfo<void> {
+  const NavigationRoute({List<_i6.PageRouteInfo>? children})
+      : super(
+          NavigationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'NavigationRoute';
+
+  static _i6.PageInfo page = _i6.PageInfo(
+    name,
+    builder: (data) {
+      return const _i2.NavigationPage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i3.PortfolioPage]
+class PortfolioRoute extends _i6.PageRouteInfo<void> {
+  const PortfolioRoute({List<_i6.PageRouteInfo>? children})
+      : super(
+          PortfolioRoute.name,
+          initialChildren: children,
+        );
 
   static const String name = 'PortfolioRoute';
+
+  static _i6.PageInfo page = _i6.PageInfo(
+    name,
+    builder: (data) {
+      return const _i3.PortfolioPage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i4.ProfilePage]
+class ProfileRoute extends _i6.PageRouteInfo<void> {
+  const ProfileRoute({List<_i6.PageRouteInfo>? children})
+      : super(
+          ProfileRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfileRoute';
+
+  static _i6.PageInfo page = _i6.PageInfo(
+    name,
+    builder: (data) {
+      return const _i4.ProfilePage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i5.RatingsPage]
+class RatingsRoute extends _i6.PageRouteInfo<void> {
+  const RatingsRoute({List<_i6.PageRouteInfo>? children})
+      : super(
+          RatingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RatingsRoute';
+
+  static _i6.PageInfo page = _i6.PageInfo(
+    name,
+    builder: (data) {
+      return _i5.RatingsPage();
+    },
+  );
 }

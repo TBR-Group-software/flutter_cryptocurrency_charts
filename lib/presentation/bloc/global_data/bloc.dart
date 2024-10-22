@@ -3,7 +3,6 @@ import 'package:clean_app/backbone/bloc_status.dart';
 import 'package:clean_app/domain/entity/global_data.dart';
 import 'package:clean_app/domain/usecase/get_global_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:meta/meta.dart';
 
 part 'bloc.freezed.dart';
 part 'event.dart';
