@@ -19,3 +19,17 @@ class CoinDto {
     this.sparklineIn7d,
   );
 }
+
+class TrendingCoinDto {
+  final String? id;
+  final String? name;
+  final String? image;
+  final num? marketCap;
+
+  TrendingCoinDto(
+    this.id,
+    this.name,
+    this.image,
+    this.marketCap,
+  );
+}

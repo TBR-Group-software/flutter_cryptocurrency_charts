@@ -1,4 +1,5 @@
 import 'package:clean_app/assembly/factory.dart';
+import 'package:clean_app/backbone/rest_api_urls.dart';
 import 'package:clean_app/data/gateway/rest.dart';
 import 'package:clean_app/data/model/coin.dart';
 import 'package:clean_app/domain/entity/coin.dart';
@@ -7,7 +8,8 @@ import 'package:clean_app/domain/service/coin.dart';
 class RestCoinService implements CoinService {
   final RestGateway _gateway;
   final Factory<Coin, CoinDto> _factory;
-  RestCoinService(this._gateway, this._factory);
+  final Factory<TrendingCoin, TrendingCoinDto> _trendingFactory;
+  RestCoinService(this._gateway, this._factory, this._trendingFactory);
 
   @override
   Future<List<Coin>> getMarketsCoins(String currency, String order,
@@ -20,5 +22,14 @@ class RestCoinService implements CoinService {
       sparkline,
     );
     return dtoList.map((CoinDto dto) => _factory.create(dto)).toList();
+  }
+
+  @override
+  Future<List<TrendingCoin>> getTrendingCoins() async {
+    final List<TrendingCoinDto> dtoList =
+        await _gateway.getTrendingCoins(searchTrendingUrl);
+    return dtoList
+        .map((TrendingCoinDto dto) => _trendingFactory.create(dto))
+        .toList();
   }
 }

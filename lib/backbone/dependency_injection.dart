@@ -23,11 +23,13 @@ import 'package:clean_app/domain/usecase/get_fiat_currency.dart';
 import 'package:clean_app/domain/usecase/get_global_data.dart';
 import 'package:clean_app/domain/usecase/get_market_coins.dart';
 import 'package:clean_app/domain/usecase/get_theme.dart';
+import 'package:clean_app/domain/usecase/get_trending_coins.dart';
 import 'package:clean_app/domain/usecase/select_fiat_currency.dart';
 import 'package:clean_app/domain/usecase/select_theme.dart';
 import 'package:clean_app/presentation/bloc/coin/bloc.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
+import 'package:clean_app/presentation/bloc/trending_coin/bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final GetIt sl = GetIt.instance;
@@ -35,10 +37,13 @@ final GetIt sl = GetIt.instance;
 void init() {
   //From Dto Factory
   sl.registerLazySingleton<Factory<Coin, CoinDto>>(() => CoinFromDtoFactory());
+  sl.registerLazySingleton<Factory<TrendingCoin, TrendingCoinDto>>(
+      () => TrendingCoinFromDtoFactory());
   sl.registerLazySingleton<Factory<GlobalData, GlobalDataDto>>(
       () => GlobalDataFromDtoFactory(
             sl.get(),
           ));
+
   sl.registerLazySingleton<
           Factory<MarketCapPercentage, MarketCapPercentageDto>>(
       () => MarketCapPercentageFromDtoFactory());
@@ -46,6 +51,8 @@ void init() {
   //From Json Factory
   sl.registerLazySingleton<Factory<CoinDto, Map<String, dynamic>>>(
       () => CoinDtoFromJsonFactory());
+  sl.registerLazySingleton<Factory<TrendingCoinDto, Map<String, dynamic>>>(
+      () => TrendingCoinDtoFromJsonFactory());
   sl.registerLazySingleton<Factory<GlobalDataDto, Map<String, dynamic>>>(
       () => GlobalDataDtoFromJsonFactory());
   sl.registerLazySingleton<
@@ -55,12 +62,13 @@ void init() {
   sl.registerLazySingleton<RestGateway>(() => RestGateway(
         sl.get(),
         sl.get(),
+        sl.get(),
       ));
   sl.registerLazySingleton<SettingsGateway>(() => SettingsGateway());
 
   //Service
   sl.registerLazySingleton<CoinService>(
-      () => RestCoinService(sl.get(), sl.get()));
+      () => RestCoinService(sl.get(), sl.get(), sl.get()));
   sl.registerLazySingleton<GlobalDataService>(
       () => RestGlobalDataService(sl.get(), sl.get()));
 
@@ -79,8 +87,12 @@ void init() {
       () => RestGetThemeUseCase(sl.get()));
   sl.registerLazySingleton<SelectThemeUseCase>(
       () => RestSelectThemeUseCase(sl.get()));
+  sl.registerLazySingleton<GetTrendingCoinsUseCase>(
+      () => GetTrendingCoinsUseCase(sl.get()));
+
   //Bloc
   sl.registerLazySingleton<CoinBloc>(() => CoinBloc(sl.get()));
+  sl.registerLazySingleton<TrendingCoinBloc>(() => TrendingCoinBloc(sl.get()));
   sl.registerLazySingleton<GlobalDataBloc>(() => GlobalDataBloc(sl.get()));
   sl.registerLazySingleton<SettingsBloc>(
       () => SettingsBloc(sl.get(), sl.get(), sl.get(), sl.get()));

@@ -3,11 +3,10 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:clean_app/backbone/bloc_status.dart';
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
-import 'package:clean_app/data/gateway/constants.dart';
 import 'package:clean_app/domain/entity/coin.dart';
-import 'package:clean_app/presentation/bloc/coin/bloc.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
+import 'package:clean_app/presentation/bloc/trending_coin/bloc.dart';
 import 'package:clean_app/presentation/widget/back_icon.dart';
 import 'package:clean_app/presentation/widget/error_toast_widget.dart';
 import 'package:clean_app/presentation/widget/search_icon.dart';
@@ -31,13 +30,14 @@ class _SearchPageState extends State<SearchPage> {
   bool showSearchResults = false;
   TextEditingController searchController = TextEditingController();
 
-  List<Coin> coinList = <Coin>[];
-  final CoinBloc coinBloc = di.sl.get();
+  List<TrendingCoin> coinList = <TrendingCoin>[];
+  final TrendingCoinBloc trendingCoinBloc = di.sl.get();
   final GlobalDataBloc globalDataBloc = di.sl.get();
   final SettingsBloc settingsBloc = di.sl.get();
   Toasts toasts = Toasts();
 
-  StreamSubscription<ConnectivityResult>? connectivityToInternetSubscription;
+  StreamSubscription<ConnectivityResult>?
+      connectivityToInternetSubscription; // Subscription to Internet connection variable
   bool isConnectedToInternet = true; // Internet connection tracking variable
   int retryConnectToInternetCount =
       0; // Counter for internet connection retries
@@ -81,16 +81,13 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  void loadData() {
+  Future<void> loadData() async {
     if (isConnectedToInternet) {
-      globalDataBloc.add(const GlobalDataEvent.getGlobalData());
-      coinBloc.add(CoinEvent.getMarketCoins(
-        fiatCurrency!,
-        order,
-        pageNumber,
-        perPage100,
-        sparkLineIsTrue,
-      ));
+      while (isConnectedToInternet) {
+        globalDataBloc.add(const GlobalDataEvent.getGlobalData());
+        trendingCoinBloc.add(const TrendingCoinEvent.getTrendingCoins());
+        await Future<void>.delayed(const Duration(seconds: 10));
+      }
     } else {
       retryConnectToInternetCount++;
       toasts.errorConnectionToast();
@@ -190,9 +187,9 @@ class _SearchPageState extends State<SearchPage> {
               ),
             const SizedBox(height: 48),
             Expanded(
-              child: BlocBuilder<CoinBloc, CoinState>(
-                bloc: coinBloc,
-                builder: (BuildContext context, CoinState state) {
+              child: BlocBuilder<TrendingCoinBloc, TrendingCoinState>(
+                bloc: trendingCoinBloc,
+                builder: (BuildContext context, TrendingCoinState state) {
                   if (state.status == BlocStatus.Loading) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (state.status == BlocStatus.Error) {
@@ -207,7 +204,7 @@ class _SearchPageState extends State<SearchPage> {
                       padding: EdgeInsets.zero,
                       itemCount: 7,
                       itemBuilder: (BuildContext context, int index) {
-                        final Coin coin = state.coins[index];
+                        final TrendingCoin coin = state.coins[index];
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 30),
                           child: Row(
@@ -237,7 +234,7 @@ class _SearchPageState extends State<SearchPage> {
                               const Spacer(),
                               Container(
                                 height: 25,
-                                width: 33,
+                                width: 40,
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 6),
                                 decoration: BoxDecoration(
@@ -246,7 +243,7 @@ class _SearchPageState extends State<SearchPage> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    '${index + 1}',
+                                    '${coin.marketCap}',
                                     style: TextStyles.whiteSemiBoldInter11,
                                   ),
                                 ),

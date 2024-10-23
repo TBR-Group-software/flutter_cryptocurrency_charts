@@ -19,3 +19,17 @@ class Coin {
     this.sparkline,
   );
 }
+
+class TrendingCoin {
+  final String? id;
+  final String? name;
+  final String? image;
+  final num? marketCap;
+
+  TrendingCoin(
+    this.id,
+    this.name,
+    this.image,
+    this.marketCap,
+  );
+}

@@ -9,9 +9,11 @@ import 'package:http/http.dart' as http;
 
 class RestGateway {
   final Factory<CoinDto, Map<String, dynamic>> _coinDtoFactory;
+  final Factory<TrendingCoinDto, Map<String, dynamic>> _trendingCoinDtoFactory;
   final Factory<GlobalDataDto, Map<String, dynamic>> _globalDataDtoFactory;
   RestGateway(
     this._coinDtoFactory,
+    this._trendingCoinDtoFactory,
     this._globalDataDtoFactory,
   );
 
@@ -62,12 +64,44 @@ class RestGateway {
     } on SocketException catch (_) {
       print('not connected');
     }
-    return http.get(
+    int retryCount = 0;
+    const int maxRetries = 3;
+    const Duration retryDelay = Duration(seconds: 60);
+
+    while (retryCount < maxRetries) {
+      final http.Response response = await http.get(
         Uri.parse(
           Uri.https(baseUrl, path, queryParams ?? <String, String>{})
               .toString(),
         ),
-        headers: headers);
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        return response;
+      } else if (response.statusCode == 429) {
+        print('Rate limit exceeded. Retrying in 60 seconds...');
+        await Future<void>.delayed(retryDelay);
+        retryCount++;
+      } else {
+        throw HttpException(
+            'Failed to load data. Status code: ${response.statusCode}');
+      }
+    }
+
+    throw const HttpException('Exceeded max retries due to rate limit');
+  }
+
+  Future<List<TrendingCoinDto>> getTrendingCoins(String url) async {
+    final http.Response response = await _getRequest(baseUrl, url);
+    final Map<String, dynamic> jsonResponse =
+        json.decode(response.body) as Map<String, dynamic>;
+    final List<dynamic> trendingCoins = jsonResponse['coins'];
+
+    return trendingCoins
+        .map((dynamic d) =>
+            _trendingCoinDtoFactory.create(d['item'] as Map<String, dynamic>))
+        .toList();
   }
 
   // ignore: unused_element

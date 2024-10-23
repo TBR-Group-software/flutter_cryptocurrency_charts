@@ -8,4 +8,5 @@ abstract class CoinService {
     int perPage,
     String sparkline,
   );
+  Future<List<TrendingCoin>> getTrendingCoins();
 }

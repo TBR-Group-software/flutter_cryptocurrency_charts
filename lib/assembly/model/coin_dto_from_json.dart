@@ -14,3 +14,14 @@ class CoinDtoFromJsonFactory implements Factory<CoinDto, Map<String, dynamic>> {
         param['sparkline_in_7d']['price'] as List<dynamic>,
       );
 }
+
+class TrendingCoinDtoFromJsonFactory
+    implements Factory<TrendingCoinDto, Map<String, dynamic>> {
+  @override
+  TrendingCoinDto create(Map<String, dynamic> param) => TrendingCoinDto(
+        param['id'] as String?,
+        param['name'] as String?,
+        param['thumb'] as String?,
+        param['market_cap_rank'] as num?,
+      );
+}

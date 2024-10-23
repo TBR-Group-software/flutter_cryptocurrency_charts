@@ -15,3 +15,14 @@ class CoinFromDtoFactory implements Factory<Coin, CoinDto> {
         param.sparklineIn7d,
       );
 }
+
+class TrendingCoinFromDtoFactory
+    implements Factory<TrendingCoin, TrendingCoinDto> {
+  @override
+  TrendingCoin create(TrendingCoinDto param) => TrendingCoin(
+        param.id,
+        param.name,
+        param.image,
+        param.marketCap,
+      );
+}
