@@ -66,7 +66,7 @@ class RestGateway {
     }
     int retryCount = 0;
     const int maxRetries = 3;
-    const Duration retryDelay = Duration(seconds: 60);
+    const Duration retryDelay = Duration(seconds: 15);
 
     while (retryCount < maxRetries) {
       final http.Response response = await http.get(
@@ -80,7 +80,7 @@ class RestGateway {
       if (response.statusCode == 200) {
         return response;
       } else if (response.statusCode == 429) {
-        print('Rate limit exceeded. Retrying in 60 seconds...');
+        print('Rate limit exceeded. Retrying in 15 seconds...');
         await Future<void>.delayed(retryDelay);
         retryCount++;
       } else {

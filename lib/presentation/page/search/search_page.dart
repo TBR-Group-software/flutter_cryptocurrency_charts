@@ -7,6 +7,7 @@ import 'package:clean_app/domain/entity/coin.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:clean_app/presentation/bloc/trending_coin/bloc.dart';
+import 'package:clean_app/presentation/router/app_router.dart';
 import 'package:clean_app/presentation/widget/back_icon.dart';
 import 'package:clean_app/presentation/widget/error_toast_widget.dart';
 import 'package:clean_app/presentation/widget/search_icon.dart';
@@ -179,7 +180,8 @@ class _SearchPageState extends State<SearchPage> {
                   const SizedBox(width: 40),
                   Text(
                     "${'search_results_for'.tr()} '${searchController.text}'",
-                    style: TextStyles.whiteBoldInter16,
+                    style: TextStyles.whiteBoldInter16
+                        .copyWith(color: Theme.of(context).hintColor),
                   ),
                 ],
               ),
@@ -187,7 +189,8 @@ class _SearchPageState extends State<SearchPage> {
             if (!showSearchResults)
               Text(
                 'top7'.tr(),
-                style: TextStyles.whiteBoldInter18,
+                style: TextStyles.whiteBoldInter18
+                    .copyWith(color: Theme.of(context).hintColor),
               ),
             const SizedBox(height: 48),
             Expanded(
@@ -200,7 +203,8 @@ class _SearchPageState extends State<SearchPage> {
                     return Center(
                       child: Text(
                         'failed_to_load'.tr(),
-                        style: TextStyles.whiteRegularInter14,
+                        style: TextStyles.whiteRegularInter14
+                            .copyWith(color: Theme.of(context).hintColor),
                       ),
                     );
                   } else if (state.status == BlocStatus.Loaded) {
@@ -208,12 +212,16 @@ class _SearchPageState extends State<SearchPage> {
                       return Center(
                         child: Text(
                           'no_trending_coins_found'.tr(),
-                          style: TextStyles.whiteRegularInter14,
+                          style: TextStyles.whiteRegularInter14
+                              .copyWith(color: Theme.of(context).hintColor),
                         ),
                       );
                     }
-                    final int itemCount =
-                        showSearchResults ? state.coins.length : 7;
+                    final int itemCount = showSearchResults
+                        ? state.coins.length
+                        : state.coins.length < 7
+                            ? state.coins.length
+                            : 7;
 
                     return ListView.builder(
                       padding: EdgeInsets.zero,
@@ -224,27 +232,32 @@ class _SearchPageState extends State<SearchPage> {
                           padding: const EdgeInsets.only(bottom: 30),
                           child: Row(
                             children: <Widget>[
-                              Image.network(
-                                coin.image!,
-                                width: 34,
-                                height: 34,
-                                fit: BoxFit.cover,
-                                errorBuilder: (BuildContext context,
-                                    Object exception, StackTrace? stackTrace) {
-                                  return Container(
-                                    width: 34,
-                                    height: 34,
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Palette.overlay3,
-                                    ),
-                                  );
-                                },
+                              GestureDetector(
+                                onTap: () {},
+                                child: Image.network(
+                                  coin.image!,
+                                  width: 34,
+                                  height: 34,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (BuildContext context,
+                                      Object exception,
+                                      StackTrace? stackTrace) {
+                                    return Container(
+                                      width: 34,
+                                      height: 34,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Palette.overlay3,
+                                      ),
+                                    );
+                                  },
+                                ),
                               ),
                               const SizedBox(width: 21),
                               Text(
                                 coin.name!,
-                                style: TextStyles.whiteBoldInter18,
+                                style: TextStyles.whiteBoldInter18.copyWith(
+                                    color: Theme.of(context).hintColor),
                               ),
                               const Spacer(),
                               Container(
@@ -269,7 +282,12 @@ class _SearchPageState extends State<SearchPage> {
                       },
                     );
                   }
-                  return Center(child: Text('no_coins_available'.tr()));
+                  return Center(
+                      child: Text(
+                    'no_coins_available'.tr(),
+                    style: TextStyles.whiteRegularInter14
+                        .copyWith(color: Theme.of(context).hintColor),
+                  ));
                 },
               ),
             ),

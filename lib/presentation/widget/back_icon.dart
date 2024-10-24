@@ -1,4 +1,3 @@
-import 'package:clean_app/theme/palette.dart';
 import 'package:flutter/material.dart';
 
 class BackIcon extends StatelessWidget {
@@ -6,9 +5,9 @@ class BackIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Icon(
+    return Icon(
       Icons.arrow_back,
-      color: Palette.white,
+      color: Theme.of(context).hintColor,
       size: 28,
     );
   }
