@@ -85,8 +85,10 @@ class _SearchPageState extends State<SearchPage> {
     if (isConnectedToInternet) {
       while (isConnectedToInternet) {
         globalDataBloc.add(const GlobalDataEvent.getGlobalData());
-        trendingCoinBloc.add(const TrendingCoinEvent.getTrendingCoins());
-        await Future<void>.delayed(const Duration(seconds: 10));
+        if (!showSearchResults) {
+          trendingCoinBloc.add(const TrendingCoinEvent.getTrendingCoins());
+          await Future<void>.delayed(const Duration(seconds: 60));
+        }
       }
     } else {
       retryConnectToInternetCount++;
@@ -102,12 +104,14 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void startSearch() {
+    trendingCoinBloc.add(TrendingCoinEvent.searchCoins(searchController.text));
     setState(() {
       showSearchResults = true;
     });
   }
 
   void stopSearch() {
+    trendingCoinBloc.add(const TrendingCoinEvent.getTrendingCoins());
     setState(() {
       showSearchResults = false;
     });
@@ -200,9 +204,20 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                     );
                   } else if (state.status == BlocStatus.Loaded) {
+                    if (state.coins.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'no_trending_coins_found'.tr(),
+                          style: TextStyles.whiteRegularInter14,
+                        ),
+                      );
+                    }
+                    final int itemCount =
+                        showSearchResults ? state.coins.length : 7;
+
                     return ListView.builder(
                       padding: EdgeInsets.zero,
-                      itemCount: 7,
+                      itemCount: itemCount,
                       itemBuilder: (BuildContext context, int index) {
                         final TrendingCoin coin = state.coins[index];
                         return Padding(

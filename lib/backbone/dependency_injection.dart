@@ -24,6 +24,7 @@ import 'package:clean_app/domain/usecase/get_global_data.dart';
 import 'package:clean_app/domain/usecase/get_market_coins.dart';
 import 'package:clean_app/domain/usecase/get_theme.dart';
 import 'package:clean_app/domain/usecase/get_trending_coins.dart';
+import 'package:clean_app/domain/usecase/search_treding_coins.dart';
 import 'package:clean_app/domain/usecase/select_fiat_currency.dart';
 import 'package:clean_app/domain/usecase/select_theme.dart';
 import 'package:clean_app/presentation/bloc/coin/bloc.dart';
@@ -89,10 +90,13 @@ void init() {
       () => RestSelectThemeUseCase(sl.get()));
   sl.registerLazySingleton<GetTrendingCoinsUseCase>(
       () => GetTrendingCoinsUseCase(sl.get()));
+  sl.registerLazySingleton<SearchTrendingCoinsUseCase>(
+      () => SearchTrendingCoinsUseCase(sl.get()));
 
   //Bloc
   sl.registerLazySingleton<CoinBloc>(() => CoinBloc(sl.get()));
-  sl.registerLazySingleton<TrendingCoinBloc>(() => TrendingCoinBloc(sl.get()));
+  sl.registerLazySingleton<TrendingCoinBloc>(
+      () => TrendingCoinBloc(sl.get(), sl.get()));
   sl.registerLazySingleton<GlobalDataBloc>(() => GlobalDataBloc(sl.get()));
   sl.registerLazySingleton<SettingsBloc>(
       () => SettingsBloc(sl.get(), sl.get(), sl.get(), sl.get()));

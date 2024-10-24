@@ -32,4 +32,19 @@ class RestCoinService implements CoinService {
         .map((TrendingCoinDto dto) => _trendingFactory.create(dto))
         .toList();
   }
+
+  @override
+  Future<List<TrendingCoin>> searchTrendingCoins(String query) async {
+    final List<TrendingCoinDto> dtoList =
+        await _gateway.getTrendingCoins(searchTrendingUrl);
+
+    return dtoList
+        .where((TrendingCoinDto dto) {
+          final String? name = dto.name;
+          return name != null &&
+              name.toLowerCase().contains(query.toLowerCase());
+        })
+        .map((TrendingCoinDto dto) => _trendingFactory.create(dto))
+        .toList();
+  }
 }

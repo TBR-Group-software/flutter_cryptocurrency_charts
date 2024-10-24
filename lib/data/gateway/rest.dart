@@ -104,6 +104,23 @@ class RestGateway {
         .toList();
   }
 
+  Future<List<TrendingCoinDto>> searchTrendingCoins(String query) async {
+    final http.Response response = await _getRequest(
+      baseUrl,
+      searchCoinUrl,
+      queryParams: <String, String>{'query': query},
+    );
+
+    final Map<String, dynamic> jsonResponse =
+        json.decode(response.body) as Map<String, dynamic>;
+    final List<dynamic> coins = jsonResponse['coins'] as List<dynamic>;
+
+    return coins
+        .map((dynamic d) =>
+            _trendingCoinDtoFactory.create(d as Map<String, dynamic>))
+        .toList();
+  }
+
   // ignore: unused_element
   Future<http.Response> _postRequest(String baseUrl, String path,
       {Map<String, String>? headers, Map<String, String>? queryParams}) {

@@ -22,5 +22,6 @@
     "search_results_for": "Search results for",
     "top7": "Top 7 Trending Coins",
     "failed_to_load": "Failed to load data",
-    "no_coins_available": "No coins available"
+    "no_coins_available": "No coins available",
+    "no_trending_coins_found": "No trending coins found"
 }

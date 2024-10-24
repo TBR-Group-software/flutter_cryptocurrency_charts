@@ -9,4 +9,5 @@ abstract class CoinService {
     String sparkline,
   );
   Future<List<TrendingCoin>> getTrendingCoins();
+  Future<List<TrendingCoin>> searchTrendingCoins(String query);
 }
