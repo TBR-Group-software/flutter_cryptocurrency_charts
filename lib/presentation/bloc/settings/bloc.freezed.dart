@@ -551,10 +551,15 @@ class _$SelectThemeEventImpl extends SelectThemeEvent {
       __$$SelectThemeEventImplCopyWithImpl<_$SelectThemeEventImpl>(
           this, _$identity);
 
+  @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getFiatCurrency,
     required TResult Function(String fiatCurrency) selectFiatCurrency,
+    required TResult Function() getTheme,
+    required TResult Function(String themeType) selectTheme,
+  }) {
+    return selectTheme(themeType);
   }
 
   @override
