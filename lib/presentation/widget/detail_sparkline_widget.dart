@@ -58,10 +58,11 @@ class _SparklineWidgetState extends State<DetailSparklineWidget> {
           );
         },
       ),
-      titlesData: const FlTitlesData(
-        rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-        topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-        leftTitles: AxisTitles(
+      titlesData: FlTitlesData(
+        rightTitles:
+            const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        leftTitles: const AxisTitles(
           sideTitles: SideTitles(
             showTitles: false,
             reservedSize: 40,
@@ -69,9 +70,27 @@ class _SparklineWidgetState extends State<DetailSparklineWidget> {
         ),
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
-            showTitles: true,
-            interval: 1,
-          ),
+              showTitles: true,
+              interval: 1,
+              getTitlesWidget: (double index, TitleMeta widget) {
+                switch (index.toInt()) {
+                  case 0:
+                    return Text('1${'day'.tr()}');
+                  case 24:
+                    return Text('2${'day'.tr()}');
+                  case 48:
+                    return Text('3${'day'.tr()}');
+                  case 72:
+                    return Text('4${'day'.tr()}');
+                  case 96:
+                    return Text('5${'day'.tr()}');
+                  case 120:
+                    return Text('6${'day'.tr()}');
+                  case 144:
+                    return Text('7${'day'.tr()}');
+                }
+                return const SizedBox();
+              }),
         ),
         show: true,
       ),

@@ -6,27 +6,22 @@ class AppRouter extends RootStackRouter {
   @override
   RouteType get defaultRouteType => const RouteType.material();
 
-  @override // Override the routes getter
+  @override
   List<AutoRoute> get routes => <AutoRoute>[
-        // Define the main route
         AutoRoute(
-          //path: 'presentation/page/navigation_page',
           initial: true,
           page: NavigationRoute.page,
           children: <AutoRoute>[
-            // Define nested routes for Ratings
+            // Define Ratings route
             AutoRoute(
-              //     path: 'presentation/page/ratings/ratings_page',
               page: RatingsRoute.page,
             ),
-            // Define nested routes for Portfolio (similar structure)
+            // Define Portfolio route
             AutoRoute(
-              //  path: 'presentation/page/portfolio/portfolio_page',
               page: PortfolioRoute.page,
             ),
             // Define Profile route
             AutoRoute(
-              //   path: 'presentation/page/profile/profile_page',
               page: ProfileRoute.page,
             ),
           ],
