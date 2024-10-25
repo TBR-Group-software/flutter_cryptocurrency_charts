@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:clean_app/backbone/bloc_status.dart';
 import 'package:clean_app/domain/entity/global_data.dart';
@@ -10,28 +11,41 @@ part 'state.dart';
 
 class GlobalDataBloc extends Bloc<GlobalDataEvent, GlobalDataState> {
   final GetGlobalDataUseCase _getGlobalDataUseCase;
+
   GlobalDataBloc(this._getGlobalDataUseCase)
       : super(const GlobalDataState(BlocStatus.Loading, null)) {
     on<GetGlobalDataEvent>(
-        (GetGlobalDataEvent event, Emitter<GlobalDataState> emit) async {
-      await _getGlobalData(emit, event);
-    });
+      (GetGlobalDataEvent event, Emitter<GlobalDataState> emit) async {
+        await _getGlobalData(emit);
+      },
+    );
   }
 
-  Future<void> _getGlobalData(
-      Emitter<GlobalDataState> emit, GetGlobalDataEvent event) async {
-    emit(_loadingState());
-    emit(await _getGlobalDataUseCase()
-        .then(
-          (GlobalData globalData) =>
-              GlobalDataState(BlocStatus.Loaded, globalData),
-        )
-        .catchError(_onError));
+  Future<void> _getGlobalData(Emitter<GlobalDataState> emit) async {
+    try {
+      emit(_loadingState());
+
+      final GlobalData globalData = await _getGlobalDataUseCase();
+      emit(GlobalDataState(BlocStatus.Loaded, globalData));
+    } on HttpException catch (e) {
+      if (e.message == '429' && state.globalData != null) {
+        // If status code is 429, emit Loaded state with the current data
+        emit(state.copyWith(status: BlocStatus.Loaded));
+      } else {
+        emit(_errorState('Server error: ${e.message}'));
+      }
+    } on SocketException {
+      emit(_errorState('No internet connection.'));
+    } on FormatException {
+      emit(_errorState('Bad response format.'));
+    } catch (e) {
+      emit(_errorState('An unexpected error occurred: $e'));
+    }
   }
 
   GlobalDataState _loadingState() =>
       GlobalDataState(BlocStatus.Loading, state.globalData);
 
-  Future<GlobalDataState> _onError(Object error) async =>
-      GlobalDataState(BlocStatus.Error, state.globalData, error: error);
+  GlobalDataState _errorState(String message) =>
+      GlobalDataState(BlocStatus.Error, state.globalData, error: message);
 }

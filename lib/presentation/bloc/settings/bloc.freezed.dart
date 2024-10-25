@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'bloc.dart';
 
@@ -12,7 +12,7 @@ part of 'bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SettingsEvent {
@@ -26,10 +26,10 @@ mixin _$SettingsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? getFiatCurrency,
-    TResult Function(String fiatCurrency)? selectFiatCurrency,
-    TResult Function()? getTheme,
-    TResult Function(String themeType)? selectTheme,
+    TResult? Function()? getFiatCurrency,
+    TResult? Function(String fiatCurrency)? selectFiatCurrency,
+    TResult? Function()? getTheme,
+    TResult? Function(String themeType)? selectTheme,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,10 +51,10 @@ mixin _$SettingsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
-    TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
-    TResult Function(GetThemeEvent value)? getTheme,
-    TResult Function(SelectThemeEvent value)? selectTheme,
+    TResult? Function(GetFiatCurrencyEvent value)? getFiatCurrency,
+    TResult? Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult? Function(GetThemeEvent value)? getTheme,
+    TResult? Function(SelectThemeEvent value)? selectTheme,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,42 +72,46 @@ mixin _$SettingsEvent {
 abstract class $SettingsEventCopyWith<$Res> {
   factory $SettingsEventCopyWith(
           SettingsEvent value, $Res Function(SettingsEvent) then) =
-      _$SettingsEventCopyWithImpl<$Res>;
+      _$SettingsEventCopyWithImpl<$Res, SettingsEvent>;
 }
 
 /// @nodoc
-class _$SettingsEventCopyWithImpl<$Res>
+class _$SettingsEventCopyWithImpl<$Res, $Val extends SettingsEvent>
     implements $SettingsEventCopyWith<$Res> {
   _$SettingsEventCopyWithImpl(this._value, this._then);
 
-  final SettingsEvent _value;
   // ignore: unused_field
-  final $Res Function(SettingsEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
-abstract class _$$GetFiatCurrencyEventCopyWith<$Res> {
-  factory _$$GetFiatCurrencyEventCopyWith(_$GetFiatCurrencyEvent value,
-          $Res Function(_$GetFiatCurrencyEvent) then) =
-      __$$GetFiatCurrencyEventCopyWithImpl<$Res>;
+abstract class _$$GetFiatCurrencyEventImplCopyWith<$Res> {
+  factory _$$GetFiatCurrencyEventImplCopyWith(_$GetFiatCurrencyEventImpl value,
+          $Res Function(_$GetFiatCurrencyEventImpl) then) =
+      __$$GetFiatCurrencyEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$GetFiatCurrencyEventCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res>
-    implements _$$GetFiatCurrencyEventCopyWith<$Res> {
-  __$$GetFiatCurrencyEventCopyWithImpl(_$GetFiatCurrencyEvent _value,
-      $Res Function(_$GetFiatCurrencyEvent) _then)
-      : super(_value, (v) => _then(v as _$GetFiatCurrencyEvent));
+class __$$GetFiatCurrencyEventImplCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res, _$GetFiatCurrencyEventImpl>
+    implements _$$GetFiatCurrencyEventImplCopyWith<$Res> {
+  __$$GetFiatCurrencyEventImplCopyWithImpl(_$GetFiatCurrencyEventImpl _value,
+      $Res Function(_$GetFiatCurrencyEventImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$GetFiatCurrencyEvent get _value => super._value as _$GetFiatCurrencyEvent;
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$GetFiatCurrencyEvent extends GetFiatCurrencyEvent {
-  const _$GetFiatCurrencyEvent() : super._();
+class _$GetFiatCurrencyEventImpl extends GetFiatCurrencyEvent {
+  const _$GetFiatCurrencyEventImpl() : super._();
 
   @override
   String toString() {
@@ -115,9 +119,10 @@ class _$GetFiatCurrencyEvent extends GetFiatCurrencyEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetFiatCurrencyEvent);
+        (other.runtimeType == runtimeType &&
+            other is _$GetFiatCurrencyEventImpl);
   }
 
   @override
@@ -137,10 +142,10 @@ class _$GetFiatCurrencyEvent extends GetFiatCurrencyEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? getFiatCurrency,
-    TResult Function(String fiatCurrency)? selectFiatCurrency,
-    TResult Function()? getTheme,
-    TResult Function(String themeType)? selectTheme,
+    TResult? Function()? getFiatCurrency,
+    TResult? Function(String fiatCurrency)? selectFiatCurrency,
+    TResult? Function()? getTheme,
+    TResult? Function(String themeType)? selectTheme,
   }) {
     return getFiatCurrency?.call();
   }
@@ -174,10 +179,10 @@ class _$GetFiatCurrencyEvent extends GetFiatCurrencyEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
-    TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
-    TResult Function(GetThemeEvent value)? getTheme,
-    TResult Function(SelectThemeEvent value)? selectTheme,
+    TResult? Function(GetFiatCurrencyEvent value)? getFiatCurrency,
+    TResult? Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult? Function(GetThemeEvent value)? getTheme,
+    TResult? Function(SelectThemeEvent value)? selectTheme,
   }) {
     return getFiatCurrency?.call(this);
   }
@@ -199,36 +204,38 @@ class _$GetFiatCurrencyEvent extends GetFiatCurrencyEvent {
 }
 
 abstract class GetFiatCurrencyEvent extends SettingsEvent {
-  const factory GetFiatCurrencyEvent() = _$GetFiatCurrencyEvent;
+  const factory GetFiatCurrencyEvent() = _$GetFiatCurrencyEventImpl;
   const GetFiatCurrencyEvent._() : super._();
 }
 
 /// @nodoc
-abstract class _$$SelectFiatCurrencyEventCopyWith<$Res> {
-  factory _$$SelectFiatCurrencyEventCopyWith(_$SelectFiatCurrencyEvent value,
-          $Res Function(_$SelectFiatCurrencyEvent) then) =
-      __$$SelectFiatCurrencyEventCopyWithImpl<$Res>;
+abstract class _$$SelectFiatCurrencyEventImplCopyWith<$Res> {
+  factory _$$SelectFiatCurrencyEventImplCopyWith(
+          _$SelectFiatCurrencyEventImpl value,
+          $Res Function(_$SelectFiatCurrencyEventImpl) then) =
+      __$$SelectFiatCurrencyEventImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({String fiatCurrency});
 }
 
 /// @nodoc
-class __$$SelectFiatCurrencyEventCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res>
-    implements _$$SelectFiatCurrencyEventCopyWith<$Res> {
-  __$$SelectFiatCurrencyEventCopyWithImpl(_$SelectFiatCurrencyEvent _value,
-      $Res Function(_$SelectFiatCurrencyEvent) _then)
-      : super(_value, (v) => _then(v as _$SelectFiatCurrencyEvent));
+class __$$SelectFiatCurrencyEventImplCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res, _$SelectFiatCurrencyEventImpl>
+    implements _$$SelectFiatCurrencyEventImplCopyWith<$Res> {
+  __$$SelectFiatCurrencyEventImplCopyWithImpl(
+      _$SelectFiatCurrencyEventImpl _value,
+      $Res Function(_$SelectFiatCurrencyEventImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$SelectFiatCurrencyEvent get _value =>
-      super._value as _$SelectFiatCurrencyEvent;
-
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? fiatCurrency = freezed,
+    Object? fiatCurrency = null,
   }) {
-    return _then(_$SelectFiatCurrencyEvent(
-      fiatCurrency == freezed
+    return _then(_$SelectFiatCurrencyEventImpl(
+      null == fiatCurrency
           ? _value.fiatCurrency
           : fiatCurrency // ignore: cast_nullable_to_non_nullable
               as String,
@@ -238,8 +245,8 @@ class __$$SelectFiatCurrencyEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SelectFiatCurrencyEvent extends SelectFiatCurrencyEvent {
-  const _$SelectFiatCurrencyEvent(this.fiatCurrency) : super._();
+class _$SelectFiatCurrencyEventImpl extends SelectFiatCurrencyEvent {
+  const _$SelectFiatCurrencyEventImpl(this.fiatCurrency) : super._();
 
   @override
   final String fiatCurrency;
@@ -250,23 +257,25 @@ class _$SelectFiatCurrencyEvent extends SelectFiatCurrencyEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SelectFiatCurrencyEvent &&
-            const DeepCollectionEquality()
-                .equals(other.fiatCurrency, fiatCurrency));
+            other is _$SelectFiatCurrencyEventImpl &&
+            (identical(other.fiatCurrency, fiatCurrency) ||
+                other.fiatCurrency == fiatCurrency));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(fiatCurrency));
+  int get hashCode => Object.hash(runtimeType, fiatCurrency);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$SelectFiatCurrencyEventCopyWith<_$SelectFiatCurrencyEvent> get copyWith =>
-      __$$SelectFiatCurrencyEventCopyWithImpl<_$SelectFiatCurrencyEvent>(
-          this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$SelectFiatCurrencyEventImplCopyWith<_$SelectFiatCurrencyEventImpl>
+      get copyWith => __$$SelectFiatCurrencyEventImplCopyWithImpl<
+          _$SelectFiatCurrencyEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -282,10 +291,10 @@ class _$SelectFiatCurrencyEvent extends SelectFiatCurrencyEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? getFiatCurrency,
-    TResult Function(String fiatCurrency)? selectFiatCurrency,
-    TResult Function()? getTheme,
-    TResult Function(String themeType)? selectTheme,
+    TResult? Function()? getFiatCurrency,
+    TResult? Function(String fiatCurrency)? selectFiatCurrency,
+    TResult? Function()? getTheme,
+    TResult? Function(String themeType)? selectTheme,
   }) {
     return selectFiatCurrency?.call(fiatCurrency);
   }
@@ -319,10 +328,10 @@ class _$SelectFiatCurrencyEvent extends SelectFiatCurrencyEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
-    TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
-    TResult Function(GetThemeEvent value)? getTheme,
-    TResult Function(SelectThemeEvent value)? selectTheme,
+    TResult? Function(GetFiatCurrencyEvent value)? getFiatCurrency,
+    TResult? Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult? Function(GetThemeEvent value)? getTheme,
+    TResult? Function(SelectThemeEvent value)? selectTheme,
   }) {
     return selectFiatCurrency?.call(this);
   }
@@ -345,38 +354,41 @@ class _$SelectFiatCurrencyEvent extends SelectFiatCurrencyEvent {
 
 abstract class SelectFiatCurrencyEvent extends SettingsEvent {
   const factory SelectFiatCurrencyEvent(final String fiatCurrency) =
-      _$SelectFiatCurrencyEvent;
+      _$SelectFiatCurrencyEventImpl;
   const SelectFiatCurrencyEvent._() : super._();
 
   String get fiatCurrency;
-  @JsonKey(ignore: true)
-  _$$SelectFiatCurrencyEventCopyWith<_$SelectFiatCurrencyEvent> get copyWith =>
-      throw _privateConstructorUsedError;
+
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SelectFiatCurrencyEventImplCopyWith<_$SelectFiatCurrencyEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$GetThemeEventCopyWith<$Res> {
-  factory _$$GetThemeEventCopyWith(
-          _$GetThemeEvent value, $Res Function(_$GetThemeEvent) then) =
-      __$$GetThemeEventCopyWithImpl<$Res>;
+abstract class _$$GetThemeEventImplCopyWith<$Res> {
+  factory _$$GetThemeEventImplCopyWith(
+          _$GetThemeEventImpl value, $Res Function(_$GetThemeEventImpl) then) =
+      __$$GetThemeEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$GetThemeEventCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res>
-    implements _$$GetThemeEventCopyWith<$Res> {
-  __$$GetThemeEventCopyWithImpl(
-      _$GetThemeEvent _value, $Res Function(_$GetThemeEvent) _then)
-      : super(_value, (v) => _then(v as _$GetThemeEvent));
+class __$$GetThemeEventImplCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res, _$GetThemeEventImpl>
+    implements _$$GetThemeEventImplCopyWith<$Res> {
+  __$$GetThemeEventImplCopyWithImpl(
+      _$GetThemeEventImpl _value, $Res Function(_$GetThemeEventImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$GetThemeEvent get _value => super._value as _$GetThemeEvent;
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$GetThemeEvent extends GetThemeEvent {
-  const _$GetThemeEvent() : super._();
+class _$GetThemeEventImpl extends GetThemeEvent {
+  const _$GetThemeEventImpl() : super._();
 
   @override
   String toString() {
@@ -384,9 +396,9 @@ class _$GetThemeEvent extends GetThemeEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetThemeEvent);
+        (other.runtimeType == runtimeType && other is _$GetThemeEventImpl);
   }
 
   @override
@@ -406,10 +418,10 @@ class _$GetThemeEvent extends GetThemeEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? getFiatCurrency,
-    TResult Function(String fiatCurrency)? selectFiatCurrency,
-    TResult Function()? getTheme,
-    TResult Function(String themeType)? selectTheme,
+    TResult? Function()? getFiatCurrency,
+    TResult? Function(String fiatCurrency)? selectFiatCurrency,
+    TResult? Function()? getTheme,
+    TResult? Function(String themeType)? selectTheme,
   }) {
     return getTheme?.call();
   }
@@ -443,10 +455,10 @@ class _$GetThemeEvent extends GetThemeEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
-    TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
-    TResult Function(GetThemeEvent value)? getTheme,
-    TResult Function(SelectThemeEvent value)? selectTheme,
+    TResult? Function(GetFiatCurrencyEvent value)? getFiatCurrency,
+    TResult? Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult? Function(GetThemeEvent value)? getTheme,
+    TResult? Function(SelectThemeEvent value)? selectTheme,
   }) {
     return getTheme?.call(this);
   }
@@ -468,35 +480,36 @@ class _$GetThemeEvent extends GetThemeEvent {
 }
 
 abstract class GetThemeEvent extends SettingsEvent {
-  const factory GetThemeEvent() = _$GetThemeEvent;
+  const factory GetThemeEvent() = _$GetThemeEventImpl;
   const GetThemeEvent._() : super._();
 }
 
 /// @nodoc
-abstract class _$$SelectThemeEventCopyWith<$Res> {
-  factory _$$SelectThemeEventCopyWith(
-          _$SelectThemeEvent value, $Res Function(_$SelectThemeEvent) then) =
-      __$$SelectThemeEventCopyWithImpl<$Res>;
+abstract class _$$SelectThemeEventImplCopyWith<$Res> {
+  factory _$$SelectThemeEventImplCopyWith(_$SelectThemeEventImpl value,
+          $Res Function(_$SelectThemeEventImpl) then) =
+      __$$SelectThemeEventImplCopyWithImpl<$Res>;
+  @useResult
   $Res call({String themeType});
 }
 
 /// @nodoc
-class __$$SelectThemeEventCopyWithImpl<$Res>
-    extends _$SettingsEventCopyWithImpl<$Res>
-    implements _$$SelectThemeEventCopyWith<$Res> {
-  __$$SelectThemeEventCopyWithImpl(
-      _$SelectThemeEvent _value, $Res Function(_$SelectThemeEvent) _then)
-      : super(_value, (v) => _then(v as _$SelectThemeEvent));
+class __$$SelectThemeEventImplCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res, _$SelectThemeEventImpl>
+    implements _$$SelectThemeEventImplCopyWith<$Res> {
+  __$$SelectThemeEventImplCopyWithImpl(_$SelectThemeEventImpl _value,
+      $Res Function(_$SelectThemeEventImpl) _then)
+      : super(_value, _then);
 
-  @override
-  _$SelectThemeEvent get _value => super._value as _$SelectThemeEvent;
-
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? themeType = freezed,
+    Object? themeType = null,
   }) {
-    return _then(_$SelectThemeEvent(
-      themeType == freezed
+    return _then(_$SelectThemeEventImpl(
+      null == themeType
           ? _value.themeType
           : themeType // ignore: cast_nullable_to_non_nullable
               as String,
@@ -506,8 +519,8 @@ class __$$SelectThemeEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SelectThemeEvent extends SelectThemeEvent {
-  const _$SelectThemeEvent(this.themeType) : super._();
+class _$SelectThemeEventImpl extends SelectThemeEvent {
+  const _$SelectThemeEventImpl(this.themeType) : super._();
 
   @override
   final String themeType;
@@ -518,21 +531,25 @@ class _$SelectThemeEvent extends SelectThemeEvent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SelectThemeEvent &&
-            const DeepCollectionEquality().equals(other.themeType, themeType));
+            other is _$SelectThemeEventImpl &&
+            (identical(other.themeType, themeType) ||
+                other.themeType == themeType));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(themeType));
+  int get hashCode => Object.hash(runtimeType, themeType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  _$$SelectThemeEventCopyWith<_$SelectThemeEvent> get copyWith =>
-      __$$SelectThemeEventCopyWithImpl<_$SelectThemeEvent>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$SelectThemeEventImplCopyWith<_$SelectThemeEventImpl> get copyWith =>
+      __$$SelectThemeEventImplCopyWithImpl<_$SelectThemeEventImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -548,10 +565,10 @@ class _$SelectThemeEvent extends SelectThemeEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? getFiatCurrency,
-    TResult Function(String fiatCurrency)? selectFiatCurrency,
-    TResult Function()? getTheme,
-    TResult Function(String themeType)? selectTheme,
+    TResult? Function()? getFiatCurrency,
+    TResult? Function(String fiatCurrency)? selectFiatCurrency,
+    TResult? Function()? getTheme,
+    TResult? Function(String themeType)? selectTheme,
   }) {
     return selectTheme?.call(themeType);
   }
@@ -585,10 +602,10 @@ class _$SelectThemeEvent extends SelectThemeEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
-    TResult Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
-    TResult Function(GetThemeEvent value)? getTheme,
-    TResult Function(SelectThemeEvent value)? selectTheme,
+    TResult? Function(GetFiatCurrencyEvent value)? getFiatCurrency,
+    TResult? Function(SelectFiatCurrencyEvent value)? selectFiatCurrency,
+    TResult? Function(GetThemeEvent value)? getTheme,
+    TResult? Function(SelectThemeEvent value)? selectTheme,
   }) {
     return selectTheme?.call(this);
   }
@@ -610,11 +627,15 @@ class _$SelectThemeEvent extends SelectThemeEvent {
 }
 
 abstract class SelectThemeEvent extends SettingsEvent {
-  const factory SelectThemeEvent(final String themeType) = _$SelectThemeEvent;
+  const factory SelectThemeEvent(final String themeType) =
+      _$SelectThemeEventImpl;
   const SelectThemeEvent._() : super._();
 
   String get themeType;
-  @JsonKey(ignore: true)
-  _$$SelectThemeEventCopyWith<_$SelectThemeEvent> get copyWith =>
+
+  /// Create a copy of SettingsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SelectThemeEventImplCopyWith<_$SelectThemeEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

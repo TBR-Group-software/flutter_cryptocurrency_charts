@@ -1,6 +1,6 @@
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
-import 'package:clean_app/presentation/router/app_router.gr.dart';
+import 'package:clean_app/presentation/router/app_router.dart';
 import 'package:clean_app/theme/palette.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -47,8 +47,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: screenSize,
-      builder: (BuildContext context, Widget? child) =>
-          BlocBuilder<SettingsBloc, SettingsState>(
+      builder: (_, Widget? child) => BlocBuilder<SettingsBloc, SettingsState>(
         bloc: settingsBloc,
         builder: (_, SettingsState state) {
           return MaterialApp.router(
@@ -71,8 +70,9 @@ class _MyAppState extends State<MyApp> {
             ),
             debugShowCheckedModeBanner: false,
             title: 'Crypto Aggregator',
-            routerDelegate: _appRouter.delegate(),
-            routeInformationParser: _appRouter.defaultRouteParser(),
+            routerConfig: _appRouter.config(),
+            // routerDelegate: _appRouter.delegate(),
+            // routeInformationParser: _appRouter.defaultRouteParser(),
           );
         },
       ),

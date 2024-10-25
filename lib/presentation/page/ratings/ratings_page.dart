@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+@RoutePage()
 class RatingsPage extends StatefulWidget {
   @override
   _RatingsPageState createState() => _RatingsPageState();
@@ -42,7 +43,7 @@ class _RatingsPageState extends State<RatingsPage> {
       (SettingsState state) {
         if (state.status == BlocStatus.Loaded) {
           setState(() {
-            fiatCurrency = state.fiatCurrency!;
+            fiatCurrency = state.fiatCurrency ?? 'usd';
           });
           globalDataBloc.add(const GlobalDataEvent.getGlobalData());
           coinBloc.add(CoinEvent.getMarketCoins(

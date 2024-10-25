@@ -1,57 +1,31 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:auto_route/empty_router_widgets.dart';
-import 'package:clean_app/presentation/page/navigation_page.dart';
-import 'package:clean_app/presentation/page/portfolio/portfolio_page.dart';
-import 'package:clean_app/presentation/page/profile/profile_page.dart';
-import 'package:clean_app/presentation/page/ratings/detail_info_page.dart';
-import 'package:clean_app/presentation/page/ratings/ratings_page.dart';
+import 'package:clean_app/presentation/router/app_router.gr.dart';
 
-@MaterialAutoRouter(
-  replaceInRouteName: 'Page,Route',
-  routes: <AutoRoute<dynamic>>[
-    AutoRoute<dynamic>(
-      path: 'presentation/navigation_page',
-      name: 'NavigationPageRouter',
-      initial: true,
-      page: NavigationPage,
-      children: <AutoRoute<dynamic>>[
-        AutoRoute<dynamic>(
-          path: 'presentation/page/ratings/ratings_page',
-          name: 'RatingsPageRouter',
-          page: EmptyRouterPage,
-          children: <AutoRoute<dynamic>>[
-            AutoRoute<dynamic>(
-              path: '',
-              page: RatingsPage,
+@AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
+class AppRouter extends RootStackRouter {
+  @override
+  RouteType get defaultRouteType => const RouteType.material();
+
+  @override
+  List<AutoRoute> get routes => <AutoRoute>[
+        AutoRoute(
+          initial: true,
+          page: NavigationRoute.page,
+          children: <AutoRoute>[
+            // Define Ratings route
+            AutoRoute(
+              page: RatingsRoute.page,
             ),
-            AutoRoute<dynamic>(
-              path: '',
-              page: DetailInfoPage,
+            // Define Portfolio route
+            AutoRoute(
+              page: PortfolioRoute.page,
             ),
-          ],
-        ),
-        AutoRoute<dynamic>(
-          path: 'presentation/page/portfolio/portfolio_page',
-          name: 'PortfolioPageRouter',
-          page: EmptyRouterPage,
-          children: <AutoRoute<dynamic>>[
-            AutoRoute<dynamic>(
-              path: '',
-              page: PortfolioPage,
-            ),
-            AutoRoute<dynamic>(
-              path: '',
-              page: DetailInfoPage,
+            // Define Profile route
+            AutoRoute(
+              page: ProfileRoute.page,
             ),
           ],
         ),
-        AutoRoute<dynamic>(
-          path: 'presentation/page/profile/profile_page',
-          name: 'ProfilePageRouter',
-          page: ProfilePage,
-        ),
-      ],
-    ),
-  ],
-)
-class $AppRouter {}
+        AutoRoute(page: DetailInfoRoute.page)
+      ];
+}

@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+@RoutePage()
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -137,11 +138,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             language = selectedLanguage;
                             if (language == 'russian'.tr()) {
                               context.setLocale(const Locale('ru'));
-                              context.router.push(const NavigationPageRouter());
+                              context.router.push(const NavigationRoute());
                             }
                             if (language == 'english'.tr()) {
                               context.setLocale(const Locale('en'));
-                              context.router.push(const NavigationPageRouter());
+                              context.router.push(const NavigationRoute());
                             }
                           });
                         },
