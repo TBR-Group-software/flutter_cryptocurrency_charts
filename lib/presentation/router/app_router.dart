@@ -18,18 +18,11 @@ class AppRouter extends RootStackRouter {
             AutoRoute(
               //     path: 'presentation/page/ratings/ratings_page',
               page: RatingsRoute.page,
-              children: [
-                // Nested routes within Ratings
-                AutoRoute(path: '', page: DetailInfoRoute.page),
-              ],
             ),
             // Define nested routes for Portfolio (similar structure)
             AutoRoute(
               //  path: 'presentation/page/portfolio/portfolio_page',
               page: PortfolioRoute.page,
-              children: [
-                AutoRoute(path: '', page: DetailInfoRoute.page),
-              ],
             ),
             // Define Profile route
             AutoRoute(
@@ -38,5 +31,6 @@ class AppRouter extends RootStackRouter {
             ),
           ],
         ),
+        AutoRoute(page: DetailInfoRoute.page)
       ];
 }
