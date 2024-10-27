@@ -17,6 +17,8 @@ class RestGateway {
     this._globalDataDtoFactory,
   );
 
+  GlobalDataDto? _cachedGlobalData;
+
   Future<List<CoinDto>> getMarketsCoins(
     String currency,
     String order,
@@ -24,25 +26,44 @@ class RestGateway {
     int perPage,
     String sparkline,
   ) async {
-    final http.Response response = await _getRequest(baseUrl, coinsMarketsUrl,
-        queryParams: <String, String>{
-          'vs_currency': currency,
-          'order': order,
-          'page': pageNumber.toString(),
-          'per_page': perPage.toString(),
-          'sparkline': sparkline.toString(),
-        });
-    final List<dynamic> jsonResponse =
-        json.decode(response.body) as List<dynamic>;
-    final List<Map<String, dynamic>> jsonList =
-        jsonResponse.map((dynamic d) => d as Map<String, dynamic>).toList();
+    print('Fetching markets coins with params: '
+        'currency=$currency, order=$order, pageNumber=$pageNumber, perPage=$perPage, sparkline=$sparkline');
 
-    return jsonList
-        .map((Map<String, dynamic> json) => _coinDtoFactory.create(json))
-        .toList();
+    final http.Response response = await _getRequest(
+      baseUrl,
+      coinsMarketsUrl,
+      queryParams: <String, String>{
+        'vs_currency': currency,
+        'order': order,
+        'page': pageNumber.toString(),
+        'per_page': perPage.toString(),
+        'sparkline': sparkline,
+      },
+    );
+
+    print('Response status: ${response.statusCode}, body: ${response.body}');
+
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonResponse =
+          json.decode(response.body) as List<dynamic>;
+      final List<Map<String, dynamic>> jsonList =
+          jsonResponse.map((dynamic d) => d as Map<String, dynamic>).toList();
+
+      return jsonList
+          .map((Map<String, dynamic> json) => _coinDtoFactory.create(json))
+          .toList();
+    } else {
+      print('Failed to fetch markets coins: ${response.statusCode}');
+      throw HttpException(
+          'Failed to load data. Status code: ${response.statusCode}');
+    }
   }
 
   Future<GlobalDataDto> getGlobalData() async {
+    if (_cachedGlobalData != null) {
+      return _cachedGlobalData!;
+    }
+
     final http.Response response = await _getRequest(baseUrl, globalDataUrl);
     final Map<String, dynamic> jsonResponse =
         json.decode(response.body) as Map<String, dynamic>;
@@ -50,20 +71,12 @@ class RestGateway {
     final Map<String, dynamic> globalDataJson =
         jsonResponse['data'] as Map<String, dynamic>;
 
-    return _globalDataDtoFactory.create(globalDataJson);
+    _cachedGlobalData = _globalDataDtoFactory.create(globalDataJson);
+    return _cachedGlobalData!;
   }
 
   Future<http.Response> _getRequest(String baseUrl, String path,
       {Map<String, String>? headers, Map<String, String>? queryParams}) async {
-    try {
-      final List<InternetAddress> result =
-          await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        print('connected');
-      }
-    } on SocketException catch (_) {
-      print('not connected');
-    }
     int retryCount = 0;
     const int maxRetries = 3;
     const Duration retryDelay = Duration(seconds: 15);

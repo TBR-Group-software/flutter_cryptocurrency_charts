@@ -17,6 +17,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nested/nested.dart';
 
 @RoutePage()
 class RatingsPage extends StatefulWidget {
@@ -35,22 +36,29 @@ class _RatingsPageState extends State<RatingsPage> {
 
   Toasts toasts = Toasts();
 
+  bool isCoinDataFetched = false; // For coin data
+  bool isGlobalDataFetched = false; // For global data
+
   @override
   void initState() {
     super.initState();
+    // Initialize fiat currency one time
     settingsBloc.add(const SettingsEvent.getFiatCurrency());
-    settingsBloc.stream.listen(
-      (SettingsState state) {
-        if (state.status == BlocStatus.Loaded && state.fiatCurrency != null) {
-          setState(() {
-            fiatCurrency = state.fiatCurrency;
-          });
-          globalDataBloc.add(const GlobalDataEvent.getGlobalData());
-          coinBloc.add(CoinEvent.getMarketCoins(
-              fiatCurrency.toString(), order, pageNumber, perPage100, 'true'));
-        }
-      },
-    );
+  }
+
+  Future<void> _refreshData() async {
+    // Reset flag and fetch fiat currency again
+    isCoinDataFetched = false;
+    isGlobalDataFetched = false; // Reset global data fetched flag
+    settingsBloc.add(const SettingsEvent.getFiatCurrency());
+  }
+
+  void _fetchCoins() {
+    if (fiatCurrency != null && !isCoinDataFetched) {
+      coinBloc.add(CoinEvent.getMarketCoins(
+          fiatCurrency!, order, pageNumber, perPage100, 'true'));
+      isCoinDataFetched = true; // Set flag to true after fetching data
+    }
   }
 
   @override
@@ -69,88 +77,100 @@ class _RatingsPageState extends State<RatingsPage> {
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 color: Palette.primary,
                 strokeWidth: 2,
-                onRefresh: () {
-                  settingsBloc.add(const SettingsEvent.getFiatCurrency());
-                  settingsBloc.stream.listen(
-                    (SettingsState state) {
-                      if (state.status == BlocStatus.Loaded) {
-                        coinBloc.add(CoinEvent.getMarketCoins(
-                          state.fiatCurrency!,
-                          order,
-                          pageNumber,
-                          perPage100,
-                          sparkLineIsTrue,
-                        ));
+                onRefresh: _refreshData,
+                child: MultiBlocListener(
+                  listeners: <SingleChildWidget>[
+                    BlocListener<SettingsBloc, SettingsState>(
+                      bloc: settingsBloc,
+                      listener: (BuildContext context, SettingsState state) {
+                        if (state.status == BlocStatus.Loaded &&
+                            state.fiatCurrency != null) {
+                          setState(() {
+                            fiatCurrency = state.fiatCurrency;
+                          });
+                          // Call getGlobalData only if it hasn't been called yet
+                          if (!isGlobalDataFetched) {
+                            globalDataBloc
+                                .add(const GlobalDataEvent.getGlobalData());
+                            isGlobalDataFetched = true;
+                          }
+                          _fetchCoins();
+                        }
+                      },
+                    ),
+                    BlocListener<CoinBloc, CoinState>(
+                      bloc: coinBloc,
+                      listener: (BuildContext context, CoinState state) {
+                        if (state.status == BlocStatus.Error) {
+                          toasts.errorConnectionToast();
+                        }
+                      },
+                    ),
+                  ],
+                  child: BlocBuilder<CoinBloc, CoinState>(
+                    bloc: coinBloc,
+                    builder: (_, CoinState state) {
+                      coinList = state.coins;
+                      if (state.status == BlocStatus.Loading) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.w),
+                          child: const ShimmerCoinListView(itemCount: 15),
+                        );
+                      } else if (state.status == BlocStatus.Loaded) {
+                        return ListView.builder(
+                          itemCount: coinList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final List<FlSpot> flSpotList = <FlSpot>[];
+
+                            final List<double> newSparkline = <double>[];
+                            double i = 0;
+                            for (final dynamic element
+                                in coinList[index].sparkline) {
+                              i++;
+                              newSparkline.add(element as double);
+                              flSpotList.add(FlSpot(i, element));
+                            }
+                            return GestureDetector(
+                              child: CoinInfoBox(
+                                coinIndex: index,
+                                coinName: coinList[index].name!,
+                                currentPrice: coinList[index].currentPrice!,
+                                imageUrl: coinList[index].image!,
+                                symbol: coinList[index].symbol!,
+                                priceChangePercentage:
+                                    coinList[index].priceChangePercentage!,
+                                marketCap: coinList[index].marketCap!,
+                                sparkline: newSparkline,
+                                flSpotList: flSpotList,
+                                fiatCurrency: fiatCurrency.toString(),
+                              ),
+                              onTap: () {
+                                context.router.push(
+                                  DetailInfoRoute(
+                                    coinIndex: index,
+                                    coinName: coinList[index].name!,
+                                    currentPrice: coinList[index].currentPrice!,
+                                    imageUrl: coinList[index].image!,
+                                    symbol: coinList[index].symbol!,
+                                    priceChangePercentage:
+                                        coinList[index].priceChangePercentage!,
+                                    marketCap: coinList[index].marketCap!,
+                                    sparkline: newSparkline,
+                                    flSpotList: flSpotList,
+                                    fiatCurrency: fiatCurrency.toString(),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        );
+                      } else {
+                        return const Center(
+                          child: RefreshButton(),
+                        );
                       }
                     },
-                  );
-                  return Future<void>.delayed(
-                    const Duration(seconds: 1),
-                  );
-                },
-                child: BlocBuilder<CoinBloc, CoinState>(
-                  bloc: coinBloc,
-                  builder: (_, CoinState state) {
-                    coinList = state.coins;
-                    if (state.status == BlocStatus.Loading) {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        child: const ShimmerCoinListView(itemCount: 15),
-                      );
-                    } else if (state.status == BlocStatus.Loaded) {
-                      return ListView.builder(
-                        itemCount: coinList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final List<FlSpot> flSpotList = <FlSpot>[];
-
-                          final List<double> newSparkline = <double>[];
-                          double i = 0;
-                          coinList[index].sparkline.forEach((dynamic element) {
-                            i++;
-                            newSparkline.add(element as double);
-                            flSpotList.add(FlSpot(i, element));
-                          });
-                          return GestureDetector(
-                            child: CoinInfoBox(
-                              coinIndex: index,
-                              coinName: coinList[index].name!,
-                              currentPrice: coinList[index].currentPrice!,
-                              imageUrl: coinList[index].image!,
-                              symbol: coinList[index].symbol!,
-                              priceChangePercentage:
-                                  coinList[index].priceChangePercentage!,
-                              marketCap: coinList[index].marketCap!,
-                              sparkline: newSparkline,
-                              flSpotList: flSpotList,
-                              fiatCurrency: fiatCurrency.toString(),
-                            ),
-                            onTap: () {
-                              context.router.push(
-                                DetailInfoRoute(
-                                  coinIndex: index,
-                                  coinName: coinList[index].name!,
-                                  currentPrice: coinList[index].currentPrice!,
-                                  imageUrl: coinList[index].image!,
-                                  symbol: coinList[index].symbol!,
-                                  priceChangePercentage:
-                                      coinList[index].priceChangePercentage!,
-                                  marketCap: coinList[index].marketCap!,
-                                  sparkline: newSparkline,
-                                  flSpotList: flSpotList,
-                                  fiatCurrency: fiatCurrency.toString(),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      );
-                    } else {
-                      toasts.errorConnectionToast();
-                      return const Center(
-                        child: RefreshButton(),
-                      );
-                    }
-                  },
+                  ),
                 ),
               ),
             ),

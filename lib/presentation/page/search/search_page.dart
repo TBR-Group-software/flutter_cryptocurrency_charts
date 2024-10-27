@@ -15,6 +15,8 @@ import 'package:clean_app/theme/palette.dart';
 import 'package:clean_app/theme/text_styles.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fl_chart/fl_chart.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -233,7 +235,18 @@ class _SearchPageState extends State<SearchPage> {
                           child: Row(
                             children: <Widget>[
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () => context.router.push(
+                                    DetailInfoRoute(
+                                        coinName: coin.name!,
+                                        currentPrice: 0,
+                                        priceChangePercentage: 0,
+                                        marketCap: coin.marketCap!,
+                                        imageUrl: coin.image!,
+                                        coinIndex: 0,
+                                        symbol: 'symbol',
+                                        sparkline: const <double>[],
+                                        flSpotList: const <FlSpot>[],
+                                        fiatCurrency: '')),
                                 child: Image.network(
                                   coin.image!,
                                   width: 34,
