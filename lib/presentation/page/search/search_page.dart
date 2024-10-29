@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:clean_app/backbone/bloc_status.dart';
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
+import 'package:clean_app/data/gateway/constants.dart';
 import 'package:clean_app/domain/entity/coin.dart';
+import 'package:clean_app/presentation/bloc/coin/bloc.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:clean_app/presentation/bloc/trending_coin/bloc.dart';
@@ -16,7 +18,6 @@ import 'package:clean_app/theme/text_styles.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,17 +34,16 @@ class _SearchPageState extends State<SearchPage> {
   bool showSearchResults = false;
   TextEditingController searchController = TextEditingController();
 
-  List<TrendingCoin> coinList = <TrendingCoin>[];
+  List<Coin> coinList = <Coin>[];
   final TrendingCoinBloc trendingCoinBloc = di.sl.get();
+  final CoinBloc coinBloc = di.sl.get();
   final GlobalDataBloc globalDataBloc = di.sl.get();
   final SettingsBloc settingsBloc = di.sl.get();
   Toasts toasts = Toasts();
 
-  StreamSubscription<ConnectivityResult>?
-      connectivityToInternetSubscription; // Subscription to Internet connection variable
-  bool isConnectedToInternet = true; // Internet connection tracking variable
-  int retryConnectToInternetCount =
-      0; // Counter for internet connection retries
+  StreamSubscription<ConnectivityResult>? connectivityToInternetSubscription;
+  bool isConnectedToInternet = true;
+  int retryConnectToInternetCount = 0;
 
   int pageNumber = 1;
   String? fiatCurrency;
@@ -52,7 +52,6 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     super.initState();
 
-    // Subscription to changes in the Internet connection
     connectivityToInternetSubscription = Connectivity()
         .onConnectivityChanged
         .listen((ConnectivityResult result) {
@@ -64,7 +63,6 @@ class _SearchPageState extends State<SearchPage> {
         setState(() {
           isConnectedToInternet = true;
           if (retryConnectToInternetCount > 0) {
-            // Retry downloading data after connection
             loadData();
           }
         });
@@ -82,17 +80,26 @@ class _SearchPageState extends State<SearchPage> {
         }
       },
     );
+
+    trendingCoinBloc.add(const TrendingCoinEvent.getTrendingCoins());
+
+    coinBloc.stream.listen((CoinState coinState) {
+      if (coinState.status == BlocStatus.Loaded) {
+        setState(() {
+          coinList = coinState.coins;
+        });
+      }
+    });
   }
 
   Future<void> loadData() async {
     if (isConnectedToInternet) {
-      while (isConnectedToInternet) {
-        globalDataBloc.add(const GlobalDataEvent.getGlobalData());
-        if (!showSearchResults) {
-          trendingCoinBloc.add(const TrendingCoinEvent.getTrendingCoins());
-          await Future<void>.delayed(const Duration(seconds: 60));
-        }
-      }
+      globalDataBloc.add(const GlobalDataEvent.getGlobalData());
+
+      coinBloc.add(CoinEvent.getMarketCoins(
+          fiatCurrency.toString(), order, pageNumber, perPage100, 'true'));
+
+      await Future<void>.delayed(const Duration(seconds: 60));
     } else {
       retryConnectToInternetCount++;
       toasts.errorConnectionToast();
@@ -196,114 +203,206 @@ class _SearchPageState extends State<SearchPage> {
               ),
             const SizedBox(height: 48),
             Expanded(
-              child: BlocBuilder<TrendingCoinBloc, TrendingCoinState>(
-                bloc: trendingCoinBloc,
-                builder: (BuildContext context, TrendingCoinState state) {
-                  if (state.status == BlocStatus.Loading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (state.status == BlocStatus.Error) {
-                    return Center(
-                      child: Text(
-                        'failed_to_load'.tr(),
-                        style: TextStyles.whiteRegularInter14
-                            .copyWith(color: Theme.of(context).hintColor),
-                      ),
-                    );
-                  } else if (state.status == BlocStatus.Loaded) {
-                    if (state.coins.isEmpty) {
-                      return Center(
-                        child: Text(
-                          'no_trending_coins_found'.tr(),
-                          style: TextStyles.whiteRegularInter14
-                              .copyWith(color: Theme.of(context).hintColor),
-                        ),
-                      );
-                    }
-                    final int itemCount = showSearchResults
-                        ? state.coins.length
-                        : state.coins.length < 7
-                            ? state.coins.length
-                            : 7;
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: BlocBuilder<TrendingCoinBloc, TrendingCoinState>(
+                      bloc: trendingCoinBloc,
+                      builder: (BuildContext context,
+                          TrendingCoinState trendingState) {
+                        if (trendingState.status == BlocStatus.Loading) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        } else if (trendingState.status == BlocStatus.Error) {
+                          return Center(
+                            child: Text(
+                              'failed_to_load'.tr(),
+                              style: TextStyles.whiteRegularInter14
+                                  .copyWith(color: Theme.of(context).hintColor),
+                            ),
+                          );
+                        } else if (trendingState.status == BlocStatus.Loaded) {
+                          if (trendingState.coins.isEmpty) {
+                            return Center(
+                              child: Text(
+                                'no_trending_coins_found'.tr(),
+                                style: TextStyles.whiteRegularInter14.copyWith(
+                                    color: Theme.of(context).hintColor),
+                              ),
+                            );
+                          }
 
-                    return ListView.builder(
-                      padding: EdgeInsets.zero,
-                      itemCount: itemCount,
-                      itemBuilder: (BuildContext context, int index) {
-                        final TrendingCoin coin = state.coins[index];
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 30),
-                          child: Row(
-                            children: <Widget>[
-                              GestureDetector(
-                                onTap: () => context.router.push(
-                                    DetailInfoRoute(
-                                        coinName: coin.name!,
-                                        currentPrice: 0,
-                                        priceChangePercentage: 0,
-                                        marketCap: coin.marketCap!,
-                                        imageUrl: coin.image!,
-                                        coinIndex: 0,
-                                        symbol: 'symbol',
-                                        sparkline: const <double>[],
-                                        flSpotList: const <FlSpot>[],
-                                        fiatCurrency: '')),
-                                child: Image.network(
-                                  coin.image!,
-                                  width: 34,
-                                  height: 34,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (BuildContext context,
-                                      Object exception,
-                                      StackTrace? stackTrace) {
-                                    return Container(
-                                      width: 34,
-                                      height: 34,
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Palette.overlay3,
+                          return BlocBuilder<CoinBloc, CoinState>(
+                            bloc: coinBloc,
+                            builder:
+                                (BuildContext context, CoinState coinState) {
+                              if (coinState.status == BlocStatus.Loading) {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              } else if (coinState.status == BlocStatus.Error) {
+                                return Center(
+                                  child: Text(
+                                    'failed_to_load'.tr(),
+                                    style: TextStyles.whiteRegularInter14
+                                        .copyWith(
+                                            color: Theme.of(context).hintColor),
+                                  ),
+                                );
+                              } else if (coinState.status ==
+                                  BlocStatus.Loaded) {
+                                final List<Coin> coinList = coinState.coins;
+
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  itemCount: trendingState.coins.length > 7
+                                      ? 7
+                                      : trendingState.coins.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    final TrendingCoin coin =
+                                        trendingState.coins[index];
+                                    print(
+                                        'coinList length: ${coinList.length}');
+
+                                    return Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 30),
+                                      child: Row(
+                                        children: <Widget>[
+                                          GestureDetector(
+                                            onTap: () async {
+                                              final Coin? foundCoin =
+                                                  coinList.firstWhere(
+                                                (Coin c) => c.id == coin.id,
+                                                orElse: () => Coin(
+                                                  null,
+                                                  null,
+                                                  null,
+                                                  null,
+                                                  null,
+                                                  null,
+                                                  null,
+                                                  <dynamic>[],
+                                                ),
+                                              );
+                                              print(
+                                                  'found coin: ${foundCoin!.name}');
+                                              final List<double> sparkline =
+                                                  foundCoin.sparkline
+                                                      .map((dynamic e) =>
+                                                          (e is num)
+                                                              ? e.toDouble()
+                                                              : 0.0)
+                                                      .toList();
+                                              final List<FlSpot> flSpotList =
+                                                  <FlSpot>[];
+                                              final List<double> newSparkline =
+                                                  <double>[];
+                                              double i = 0;
+
+                                              for (final dynamic element
+                                                  in foundCoin.sparkline) {
+                                                i++;
+                                                newSparkline
+                                                    .add(element as double);
+                                                flSpotList
+                                                    .add(FlSpot(i, element));
+                                              }
+                                              if (foundCoin.id != null) {
+                                                context.router.push(
+                                                  DetailInfoRoute(
+                                                    coinName: foundCoin.name!,
+                                                    currentPrice:
+                                                        foundCoin.currentPrice!,
+                                                    priceChangePercentage: foundCoin
+                                                        .priceChangePercentage!,
+                                                    marketCap:
+                                                        foundCoin.marketCap!,
+                                                    imageUrl: foundCoin.image!,
+                                                    coinIndex: foundCoin
+                                                        .marketCap!
+                                                        .toInt(),
+                                                    symbol: foundCoin.symbol!,
+                                                    sparkline: sparkline,
+                                                    flSpotList: flSpotList,
+                                                    fiatCurrency:
+                                                        fiatCurrency ?? 'usd',
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                            child: Image.network(
+                                              coin.image!,
+                                              width: 34,
+                                              height: 34,
+                                              fit: BoxFit.cover,
+                                              errorBuilder:
+                                                  (BuildContext context,
+                                                      Object exception,
+                                                      StackTrace? stackTrace) {
+                                                return Container(
+                                                  width: 34,
+                                                  height: 34,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Palette.overlay3,
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                          const SizedBox(width: 21),
+                                          Text(
+                                            coin.name!,
+                                            style: TextStyles.whiteBoldInter18
+                                                .copyWith(
+                                                    color: Theme.of(context)
+                                                        .hintColor),
+                                          ),
+                                          const Spacer(),
+                                          Container(
+                                            height: 25,
+                                            width: 40,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 6),
+                                            decoration: BoxDecoration(
+                                              color: Palette.base4,
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                '${coin.marketCap}',
+                                                style: TextStyles
+                                                    .whiteSemiBoldInter11,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     );
                                   },
+                                );
+                              }
+                              return Center(
+                                child: Text(
+                                  'no_coins_available'.tr(),
+                                  style: TextStyles.whiteRegularInter14
+                                      .copyWith(
+                                          color: Theme.of(context).hintColor),
                                 ),
-                              ),
-                              const SizedBox(width: 21),
-                              Text(
-                                coin.name!,
-                                style: TextStyles.whiteBoldInter18.copyWith(
-                                    color: Theme.of(context).hintColor),
-                              ),
-                              const Spacer(),
-                              Container(
-                                height: 25,
-                                width: 40,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 6),
-                                decoration: BoxDecoration(
-                                  color: Palette.base4,
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '${coin.marketCap}',
-                                    style: TextStyles.whiteSemiBoldInter11,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
+                              );
+                            },
+                          );
+                        }
+                        return const SizedBox.shrink();
                       },
-                    );
-                  }
-                  return Center(
-                      child: Text(
-                    'no_coins_available'.tr(),
-                    style: TextStyles.whiteRegularInter14
-                        .copyWith(color: Theme.of(context).hintColor),
-                  ));
-                },
+                    ),
+                  ),
+                ],
               ),
-            ),
+            )
           ],
         ),
       ),

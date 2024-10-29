@@ -39,12 +39,10 @@ class _DetailInfoPageState extends State<DetailInfoPage> {
   @override
   void initState() {
     super.initState();
-    print('DetailInfoPage initialized');
   }
 
   @override
   void dispose() {
-    print('DetailInfoPage disposed');
     super.dispose();
   }
 
