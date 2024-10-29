@@ -26,9 +26,6 @@ class RestGateway {
     int perPage,
     String sparkline,
   ) async {
-    print('Fetching markets coins with params: '
-        'currency=$currency, order=$order, pageNumber=$pageNumber, perPage=$perPage, sparkline=$sparkline');
-
     final http.Response response = await _getRequest(
       baseUrl,
       coinsMarketsUrl,
@@ -37,21 +34,16 @@ class RestGateway {
         'order': order,
         'page': pageNumber.toString(),
         'per_page': perPage.toString(),
-        'sparkline': sparkline,
+        'sparkline': sparkline.toString(),
       },
     );
 
-    print('Response status: ${response.statusCode}, body: ${response.body}');
-
     if (response.statusCode == 200) {
-      final List<dynamic> jsonResponse =
-          json.decode(response.body) as List<dynamic>;
+      final List<dynamic> jsonResponse = json.decode(response.body);
       final List<Map<String, dynamic>> jsonList =
           jsonResponse.map((dynamic d) => d as Map<String, dynamic>).toList();
 
-      return jsonList
-          .map((Map<String, dynamic> json) => _coinDtoFactory.create(json))
-          .toList();
+      return jsonList.map(_coinDtoFactory.create).toList();
     } else {
       print('Failed to fetch markets coins: ${response.statusCode}');
       throw HttpException(
@@ -59,7 +51,10 @@ class RestGateway {
     }
   }
 
+  int requestCounter = 0;
+
   Future<GlobalDataDto> getGlobalData() async {
+    // If we already have cached data, return it
     if (_cachedGlobalData != null) {
       return _cachedGlobalData!;
     }
@@ -71,22 +66,32 @@ class RestGateway {
     final Map<String, dynamic> globalDataJson =
         jsonResponse['data'] as Map<String, dynamic>;
 
+    // Cache the result
     _cachedGlobalData = _globalDataDtoFactory.create(globalDataJson);
     return _cachedGlobalData!;
   }
 
   Future<http.Response> _getRequest(String baseUrl, String path,
       {Map<String, String>? headers, Map<String, String>? queryParams}) async {
+    requestCounter++;
+
+    try {
+      final List<InternetAddress> result =
+          await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        print('connected');
+      }
+    } on SocketException catch (_) {
+      print('not connected');
+    }
+
     int retryCount = 0;
     const int maxRetries = 3;
     const Duration retryDelay = Duration(seconds: 15);
 
     while (retryCount < maxRetries) {
       final http.Response response = await http.get(
-        Uri.parse(
-          Uri.https(baseUrl, path, queryParams ?? <String, String>{})
-              .toString(),
-        ),
+        Uri.https(baseUrl, path, queryParams),
         headers: headers,
       );
 

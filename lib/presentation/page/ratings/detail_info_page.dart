@@ -37,6 +37,18 @@ class DetailInfoPage extends StatefulWidget {
 
 class _DetailInfoPageState extends State<DetailInfoPage> {
   @override
+  void initState() {
+    super.initState();
+    print('DetailInfoPage initialized');
+  }
+
+  @override
+  void dispose() {
+    print('DetailInfoPage disposed');
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,

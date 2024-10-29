@@ -6,7 +6,7 @@ import 'package:clean_app/domain/entity/coin.dart';
 import 'package:clean_app/presentation/bloc/coin/bloc.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
-import 'package:clean_app/presentation/router/app_router.dart';
+import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:clean_app/presentation/widget/coin_info_box.dart';
 import 'package:clean_app/presentation/widget/error_toast_widget.dart';
 import 'package:clean_app/presentation/widget/ratings_tab_row.dart';
@@ -56,7 +56,7 @@ class _RatingsPageState extends State<RatingsPage> {
   void _fetchCoins() {
     if (fiatCurrency != null && !isCoinDataFetched) {
       coinBloc.add(CoinEvent.getMarketCoins(
-          fiatCurrency!, order, pageNumber, perPage100, 'true'));
+          fiatCurrency.toString(), order, pageNumber, perPage100, 'true'));
       isCoinDataFetched = true; // Set flag to true after fetching data
     }
   }
@@ -92,7 +92,8 @@ class _RatingsPageState extends State<RatingsPage> {
                           if (!isGlobalDataFetched) {
                             globalDataBloc
                                 .add(const GlobalDataEvent.getGlobalData());
-                            isGlobalDataFetched = true;
+                            isGlobalDataFetched =
+                                true; // Set flag to true after fetching global data
                           }
                           _fetchCoins();
                         }

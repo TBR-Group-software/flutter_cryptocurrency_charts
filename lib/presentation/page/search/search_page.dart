@@ -7,7 +7,7 @@ import 'package:clean_app/domain/entity/coin.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:clean_app/presentation/bloc/trending_coin/bloc.dart';
-import 'package:clean_app/presentation/router/app_router.dart';
+import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:clean_app/presentation/widget/back_icon.dart';
 import 'package:clean_app/presentation/widget/error_toast_widget.dart';
 import 'package:clean_app/presentation/widget/search_icon.dart';

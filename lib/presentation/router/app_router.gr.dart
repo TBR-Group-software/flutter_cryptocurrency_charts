@@ -7,11 +7,22 @@
 // ignore_for_file: type=lint
 // coverage:ignore-file
 
-part of 'app_router.dart';
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:auto_route/auto_route.dart' as _i7;
+import 'package:clean_app/presentation/page/navigation_page.dart' as _i2;
+import 'package:clean_app/presentation/page/portfolio/portfolio_page.dart'
+    as _i3;
+import 'package:clean_app/presentation/page/profile/profile_page.dart' as _i4;
+import 'package:clean_app/presentation/page/ratings/detail_info_page.dart'
+    as _i1;
+import 'package:clean_app/presentation/page/ratings/ratings_page.dart' as _i5;
+import 'package:clean_app/presentation/page/search/search_page.dart' as _i6;
+import 'package:fl_chart/fl_chart.dart' as _i8;
+import 'package:flutter/material.dart' as _i9;
 
 /// generated route for
-/// [DetailInfoPage]
-class DetailInfoRoute extends PageRouteInfo<DetailInfoRouteArgs> {
+/// [_i1.DetailInfoPage]
+class DetailInfoRoute extends _i7.PageRouteInfo<DetailInfoRouteArgs> {
   DetailInfoRoute({
     required String coinName,
     required num currentPrice,
@@ -21,10 +32,10 @@ class DetailInfoRoute extends PageRouteInfo<DetailInfoRouteArgs> {
     required int coinIndex,
     required String symbol,
     required List<double>? sparkline,
-    required List<FlSpot>? flSpotList,
+    required List<_i8.FlSpot>? flSpotList,
     required String fiatCurrency,
-    Key? key,
-    List<PageRouteInfo>? children,
+    _i9.Key? key,
+    List<_i7.PageRouteInfo>? children,
   }) : super(
           DetailInfoRoute.name,
           args: DetailInfoRouteArgs(
@@ -45,11 +56,11 @@ class DetailInfoRoute extends PageRouteInfo<DetailInfoRouteArgs> {
 
   static const String name = 'DetailInfoRoute';
 
-  static PageInfo page = PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<DetailInfoRouteArgs>();
-      return DetailInfoPage(
+      return _i1.DetailInfoPage(
         coinName: args.coinName,
         currentPrice: args.currentPrice,
         priceChangePercentage: args.priceChangePercentage,
@@ -97,11 +108,11 @@ class DetailInfoRouteArgs {
 
   final List<double>? sparkline;
 
-  final List<FlSpot>? flSpotList;
+  final List<_i8.FlSpot>? flSpotList;
 
   final String fiatCurrency;
 
-  final Key? key;
+  final _i9.Key? key;
 
   @override
   String toString() {
@@ -110,9 +121,9 @@ class DetailInfoRouteArgs {
 }
 
 /// generated route for
-/// [NavigationPage]
-class NavigationRoute extends PageRouteInfo<void> {
-  const NavigationRoute({List<PageRouteInfo>? children})
+/// [_i2.NavigationPage]
+class NavigationRoute extends _i7.PageRouteInfo<void> {
+  const NavigationRoute({List<_i7.PageRouteInfo>? children})
       : super(
           NavigationRoute.name,
           initialChildren: children,
@@ -120,18 +131,18 @@ class NavigationRoute extends PageRouteInfo<void> {
 
   static const String name = 'NavigationRoute';
 
-  static PageInfo page = PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
-      return const NavigationPage();
+      return const _i2.NavigationPage();
     },
   );
 }
 
 /// generated route for
-/// [PortfolioPage]
-class PortfolioRoute extends PageRouteInfo<void> {
-  const PortfolioRoute({List<PageRouteInfo>? children})
+/// [_i3.PortfolioPage]
+class PortfolioRoute extends _i7.PageRouteInfo<void> {
+  const PortfolioRoute({List<_i7.PageRouteInfo>? children})
       : super(
           PortfolioRoute.name,
           initialChildren: children,
@@ -139,18 +150,18 @@ class PortfolioRoute extends PageRouteInfo<void> {
 
   static const String name = 'PortfolioRoute';
 
-  static PageInfo page = PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
-      return const PortfolioPage();
+      return const _i3.PortfolioPage();
     },
   );
 }
 
 /// generated route for
-/// [ProfilePage]
-class ProfileRoute extends PageRouteInfo<void> {
-  const ProfileRoute({List<PageRouteInfo>? children})
+/// [_i4.ProfilePage]
+class ProfileRoute extends _i7.PageRouteInfo<void> {
+  const ProfileRoute({List<_i7.PageRouteInfo>? children})
       : super(
           ProfileRoute.name,
           initialChildren: children,
@@ -158,18 +169,18 @@ class ProfileRoute extends PageRouteInfo<void> {
 
   static const String name = 'ProfileRoute';
 
-  static PageInfo page = PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
-      return const ProfilePage();
+      return const _i4.ProfilePage();
     },
   );
 }
 
 /// generated route for
-/// [RatingsPage]
-class RatingsRoute extends PageRouteInfo<void> {
-  const RatingsRoute({List<PageRouteInfo>? children})
+/// [_i5.RatingsPage]
+class RatingsRoute extends _i7.PageRouteInfo<void> {
+  const RatingsRoute({List<_i7.PageRouteInfo>? children})
       : super(
           RatingsRoute.name,
           initialChildren: children,
@@ -177,18 +188,18 @@ class RatingsRoute extends PageRouteInfo<void> {
 
   static const String name = 'RatingsRoute';
 
-  static PageInfo page = PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
-      return RatingsPage();
+      return _i5.RatingsPage();
     },
   );
 }
 
 /// generated route for
-/// [SearchPage]
-class SearchRoute extends PageRouteInfo<void> {
-  const SearchRoute({List<PageRouteInfo>? children})
+/// [_i6.SearchPage]
+class SearchRoute extends _i7.PageRouteInfo<void> {
+  const SearchRoute({List<_i7.PageRouteInfo>? children})
       : super(
           SearchRoute.name,
           initialChildren: children,
@@ -196,10 +207,10 @@ class SearchRoute extends PageRouteInfo<void> {
 
   static const String name = 'SearchRoute';
 
-  static PageInfo page = PageInfo(
+  static _i7.PageInfo page = _i7.PageInfo(
     name,
     builder: (data) {
-      return const SearchPage();
+      return const _i6.SearchPage();
     },
   );
 }

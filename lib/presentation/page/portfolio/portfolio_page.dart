@@ -7,7 +7,7 @@ import 'package:clean_app/domain/entity/market_cap_percentage.dart';
 import 'package:clean_app/presentation/bloc/coin/bloc.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
-import 'package:clean_app/presentation/router/app_router.dart';
+import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:clean_app/presentation/widget/coin_info_box.dart';
 import 'package:clean_app/presentation/widget/error_toast_widget.dart';
 import 'package:clean_app/presentation/widget/global_data_column.dart';

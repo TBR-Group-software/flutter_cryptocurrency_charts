@@ -14,12 +14,13 @@ class GlobalDataBloc extends Bloc<GlobalDataEvent, GlobalDataState> {
       : super(const GlobalDataState(BlocStatus.Loading, null)) {
     on<GetGlobalDataEvent>(
         (GetGlobalDataEvent event, Emitter<GlobalDataState> emit) async {
-      await _getGlobalData(emit, event);
+      await _getGlobalData(emit);
     });
   }
 
   Future<void> _getGlobalData(
-      Emitter<GlobalDataState> emit, GetGlobalDataEvent event) async {
+    Emitter<GlobalDataState> emit,
+  ) async {
     emit(_loadingState());
     emit(await _getGlobalDataUseCase()
         .then(

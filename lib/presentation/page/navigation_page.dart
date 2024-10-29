@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
-import 'package:clean_app/presentation/router/app_router.dart';
+import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
