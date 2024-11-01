@@ -3,9 +3,7 @@ import 'package:clean_app/backbone/bloc_status.dart';
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
 import 'package:clean_app/data/gateway/constants.dart';
 import 'package:clean_app/domain/entity/coin.dart';
-import 'package:clean_app/presentation/bloc/coin/bloc.dart';
-import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
-import 'package:clean_app/presentation/bloc/settings/bloc.dart';
+import 'package:clean_app/presentation/bloc/initial_data/initial_data_bloc.dart';
 import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:clean_app/presentation/widget/coin_info_box.dart';
 import 'package:clean_app/presentation/widget/error_toast_widget.dart';
@@ -26,32 +24,13 @@ class RatingsPage extends StatefulWidget {
 
 class _RatingsPageState extends State<RatingsPage> {
   List<Coin> coinList = <Coin>[];
-  final CoinBloc coinBloc = di.sl.get();
-  final GlobalDataBloc globalDataBloc = di.sl.get();
-  final SettingsBloc settingsBloc = di.sl.get();
+  final InitialDataBloc initialDataBloc = di.sl.get();
+
   int amountOfPages = 1;
   int pageNumber = 1;
   String? fiatCurrency;
 
   Toasts toasts = Toasts();
-
-  @override
-  void initState() {
-    super.initState();
-    settingsBloc.add(const SettingsEvent.getFiatCurrency());
-    settingsBloc.stream.listen(
-      (SettingsState state) {
-        if (state.status == BlocStatus.Loaded) {
-          setState(() {
-            fiatCurrency = state.fiatCurrency ?? 'usd';
-          });
-          globalDataBloc.add(const GlobalDataEvent.getGlobalData());
-          coinBloc.add(CoinEvent.getMarketCoins(
-              fiatCurrency.toString(), order, pageNumber, perPage100, 'true'));
-        }
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,28 +49,17 @@ class _RatingsPageState extends State<RatingsPage> {
                 color: Palette.primary,
                 strokeWidth: 2,
                 onRefresh: () {
-                  settingsBloc.add(const SettingsEvent.getFiatCurrency());
-                  settingsBloc.stream.listen(
-                    (SettingsState state) {
-                      if (state.status == BlocStatus.Loaded) {
-                        coinBloc.add(CoinEvent.getMarketCoins(
-                          state.fiatCurrency!,
-                          order,
-                          pageNumber,
-                          perPage100,
-                          sparkLineIsTrue,
-                        ));
-                      }
-                    },
-                  );
+                  initialDataBloc.add(InitialDataEvent.getMarketCoins(
+                      order, pageNumber, perPage100, 'true'));
                   return Future<void>.delayed(
                     const Duration(seconds: 1),
                   );
                 },
-                child: BlocBuilder<CoinBloc, CoinState>(
-                  bloc: coinBloc,
-                  builder: (_, CoinState state) {
+                child: BlocBuilder<InitialDataBloc, InitialDataState>(
+                  bloc: initialDataBloc,
+                  builder: (_, InitialDataState state) {
                     coinList = state.coins;
+                    fiatCurrency = state.fiatCurrency;
                     if (state.status == BlocStatus.Loading) {
                       return Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.w),

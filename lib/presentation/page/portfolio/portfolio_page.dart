@@ -4,9 +4,7 @@ import 'package:clean_app/backbone/dependency_injection.dart' as di;
 import 'package:clean_app/data/gateway/constants.dart';
 import 'package:clean_app/domain/entity/coin.dart';
 import 'package:clean_app/domain/entity/market_cap_percentage.dart';
-import 'package:clean_app/presentation/bloc/coin/bloc.dart';
-import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
-import 'package:clean_app/presentation/bloc/settings/bloc.dart';
+import 'package:clean_app/presentation/bloc/initial_data/initial_data_bloc.dart';
 import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:clean_app/presentation/widget/coin_info_box.dart';
 import 'package:clean_app/presentation/widget/error_toast_widget.dart';
@@ -29,60 +27,59 @@ class PortfolioPage extends StatefulWidget {
 
 class _PortfolioPageState extends State<PortfolioPage> {
   List<Coin> coinList = <Coin>[];
-  final CoinBloc coinBloc = di.sl.get();
-  final GlobalDataBloc globalDataBloc = di.sl.get();
-  final SettingsBloc settingsBloc = di.sl.get();
+  final InitialDataBloc initialDataBloc = di.sl.get();
+
   bool internetIsConnected = true;
 
   int pageNumber = 1;
   Toasts toasts = Toasts();
   String? fiatCurrency;
 
-  @override
-  void initState() {
-    super.initState();
-    settingsBloc.add(const SettingsEvent.getFiatCurrency());
-    settingsBloc.stream.listen(
-      (SettingsState state) {
-        if (state.status == BlocStatus.Loaded) {
-          setState(() {
-            fiatCurrency = state.fiatCurrency!;
-          });
-          globalDataBloc.add(const GlobalDataEvent.getGlobalData());
-          coinBloc.add(CoinEvent.getMarketCoins(
-            state.fiatCurrency!,
-            order,
-            pageNumber,
-            perPage100,
-            sparkLineIsTrue,
-          ));
-        }
-      },
-    );
-    globalDataBloc.stream.listen((GlobalDataState state) {
-      setState(() {
-        if (state.status == BlocStatus.Error) {
-          internetIsConnected = false;
-        } else {
-          internetIsConnected = true;
-        }
-      });
-    });
-    coinBloc.stream.listen((CoinState state) {
-      setState(() {
-        if (state.status == BlocStatus.Error) {
-          internetIsConnected = false;
-        } else {
-          internetIsConnected = true;
-        }
-      });
-    });
-    if (internetIsConnected == false) {
-      setState(() {
-        toasts.errorConnectionToast();
-      });
-    }
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   settingsBloc.add(const SettingsEvent.getFiatCurrency());
+  //   settingsBloc.stream.listen(
+  //     (SettingsState state) {
+  //       if (state.status == BlocStatus.Loaded) {
+  //         setState(() {
+  //           fiatCurrency = state.fiatCurrency!;
+  //         });
+  //         globalDataBloc.add(const GlobalDataEvent.getGlobalData());
+  //         coinBloc.add(CoinEvent.getMarketCoins(
+  //           state.fiatCurrency!,
+  //           order,
+  //           pageNumber,
+  //           perPage100,
+  //           sparkLineIsTrue,
+  //         ));
+  //       }
+  //     },
+  //   );
+  //   globalDataBloc.stream.listen((GlobalDataState state) {
+  //     setState(() {
+  //       if (state.status == BlocStatus.Error) {
+  //         internetIsConnected = false;
+  //       } else {
+  //         internetIsConnected = true;
+  //       }
+  //     });
+  //   });
+  //   coinBloc.stream.listen((CoinState state) {
+  //     setState(() {
+  //       if (state.status == BlocStatus.Error) {
+  //         internetIsConnected = false;
+  //       } else {
+  //         internetIsConnected = true;
+  //       }
+  //     });
+  //   });
+  //   if (internetIsConnected == false) {
+  //     setState(() {
+  //       toasts.errorConnectionToast();
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -92,42 +89,54 @@ class _PortfolioPageState extends State<PortfolioPage> {
         child: SingleChildScrollView(
           child: Stack(
             children: <Widget>[
-              if (internetIsConnected == true)
-                Column(
-                  children: <Widget>[
-                    BlocBuilder<GlobalDataBloc, GlobalDataState>(
-                      bloc: globalDataBloc,
-                      builder: (_, GlobalDataState state) {
-                        if (state.status == BlocStatus.Loading) {
-                          return const ShimmerMarketData();
-                        }
-                        if (state.status == BlocStatus.Error) {
-                          return const SizedBox();
-                        } else {
-                          final List<MarketCapPercentage> marketCapList = state
-                              .globalData!.marketCapPercentage
-                              .getRange(0, 5)
-                              .toList();
-                          return GlobalDataColumn(
+              BlocBuilder<InitialDataBloc, InitialDataState>(
+                  bloc: initialDataBloc,
+                  builder: (_, InitialDataState state) {
+                    if (state.status == BlocStatus.Loading) {
+                      return Column(
+                        children: <Widget>[
+                          const ShimmerMarketData(),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16.w),
+                            child: const ShimmerCoinListView(itemCount: 5),
+                          )
+                        ],
+                      );
+                    } else if (state.status == BlocStatus.Error) {
+                      toasts.errorConnectionToast();
+                      return Center(
+                        child: Container(
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          height: 812.h,
+                          width: 375.w,
+                          child: RefreshButton(
+                            onPressed: () {
+                              initialDataBloc.add(
+                                  InitialDataEvent.getMarketCoins(
+                                      order, pageNumber, perPage100, 'true'));
+                              initialDataBloc
+                                  .add(const InitialDataEvent.getGlobalData());
+                            },
+                          ),
+                        ),
+                      );
+                    } else {
+                      final List<MarketCapPercentage> marketCapList = state
+                          .globalData!.marketCapPercentage
+                          .getRange(0, 5)
+                          .toList();
+
+                      coinList = state.coins;
+                      fiatCurrency = state.fiatCurrency;
+                      return Column(
+                        children: <Widget>[
+                          GlobalDataColumn(
                             marketCapList: marketCapList,
                             activeCryptocurrencies:
                                 state.globalData!.activeCryptocurrencies!,
                             markets: state.globalData!.markets!,
-                          );
-                        }
-                      },
-                    ),
-                    BlocBuilder<CoinBloc, CoinState>(
-                      bloc: coinBloc,
-                      builder: (_, CoinState state) {
-                        if (state.status == BlocStatus.Loading) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.w),
-                            child: const ShimmerCoinListView(itemCount: 5),
-                          );
-                        } else if (state.status == BlocStatus.Loaded) {
-                          coinList = state.coins;
-                          return Padding(
+                          ),
+                          Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16.w),
                             child: ListView.builder(
                               padding: EdgeInsets.zero,
@@ -181,23 +190,11 @@ class _PortfolioPageState extends State<PortfolioPage> {
                                 );
                               },
                             ),
-                          );
-                        } else {
-                          return const SizedBox();
-                        }
-                      },
-                    ),
-                  ],
-                )
-              else
-                Center(
-                  child: Container(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    height: 812.h,
-                    width: 375.w,
-                    child: const RefreshButton(),
-                  ),
-                ),
+                          ),
+                        ],
+                      );
+                    }
+                  }),
             ],
           ),
         ),
