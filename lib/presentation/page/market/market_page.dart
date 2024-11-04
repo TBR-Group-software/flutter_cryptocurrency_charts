@@ -35,52 +35,6 @@ class _MarketPageState extends State<MarketPage> {
   Toasts toasts = Toasts();
   String? fiatCurrency;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   settingsBloc.add(const SettingsEvent.getFiatCurrency());
-  //   settingsBloc.stream.listen(
-  //     (SettingsState state) {
-  //       if (state.status == BlocStatus.Loaded) {
-  //         setState(() {
-  //           fiatCurrency = state.fiatCurrency!;
-  //         });
-  //         globalDataBloc.add(const GlobalDataEvent.getGlobalData());
-  //         coinBloc.add(CoinEvent.getMarketCoins(
-  //           state.fiatCurrency!,
-  //           order,
-  //           pageNumber,
-  //           perPage100,
-  //           sparkLineIsTrue,
-  //         ));
-  //       }
-  //     },
-  //   );
-  //   globalDataBloc.stream.listen((GlobalDataState state) {
-  //     setState(() {
-  //       if (state.status == BlocStatus.Error) {
-  //         internetIsConnected = false;
-  //       } else {
-  //         internetIsConnected = true;
-  //       }
-  //     });
-  //   });
-  //   coinBloc.stream.listen((CoinState state) {
-  //     setState(() {
-  //       if (state.status == BlocStatus.Error) {
-  //         internetIsConnected = false;
-  //       } else {
-  //         internetIsConnected = true;
-  //       }
-  //     });
-  //   });
-  //   if (internetIsConnected == false) {
-  //     setState(() {
-  //       toasts.errorConnectionToast();
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
