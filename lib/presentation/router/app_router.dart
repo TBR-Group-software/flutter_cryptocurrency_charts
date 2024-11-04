@@ -16,13 +16,13 @@ class AppRouter extends RootStackRouter {
             AutoRoute(
               page: RatingsRoute.page,
             ),
-            // Define Portfolio route
+            // Define Market route
             AutoRoute(
-              page: PortfolioRoute.page,
+              page: MarketRoute.page,
             ),
-            // Define Profile route
+            // Define Settings route
             AutoRoute(
-              page: ProfileRoute.page,
+              page: SettingsRoute.page,
             ),
           ],
         ),

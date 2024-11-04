@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clean_app/backbone/bloc_status.dart';
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
+import 'package:clean_app/data/gateway/constants.dart';
+import 'package:clean_app/presentation/bloc/initial_data/initial_data_bloc.dart';
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:clean_app/presentation/widget/chevron_icon.dart';
@@ -14,15 +16,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @RoutePage()
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _SettingsPageState createState() => _SettingsPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _SettingsPageState extends State<SettingsPage> {
   final SettingsBloc settingsBloc = di.sl.get();
+  final InitialDataBloc initialDataBloc = di.sl.get();
 
   @override
   void initState() {
@@ -76,6 +79,11 @@ class _ProfilePageState extends State<ProfilePage> {
                           if (selectedCurrency != null) {
                             settingsBloc.add(SettingsEvent.selectFiatCurrency(
                                 selectedCurrency));
+                            initialDataBloc.add(
+                                const InitialDataEvent.getMarketCoins(
+                                    order, 1, perPage100, 'true'));
+                            initialDataBloc
+                                .add(const InitialDataEvent.getGlobalData());
                           }
                         },
                         child: Row(
@@ -144,14 +152,16 @@ class _ProfilePageState extends State<ProfilePage> {
                               context.setLocale(const Locale('en'));
                               context.router.push(const NavigationRoute());
                             }
+                            if (language == 'ukranian'.tr()) {
+                              context.setLocale(const Locale('uk'));
+                              context.router.push(const NavigationRoute());
+                            }
                           });
                         },
                         child: Row(
                           children: <Widget>[
                             Text(
-                              context.locale.toString() == 'en'
-                                  ? 'english'.tr()
-                                  : 'russian'.tr(),
+                              _getLocaleTitle(context.locale.toString()),
                               style: TextStyles.overlay3Bold14,
                             ),
                             SizedBox(width: 4.w),
@@ -168,5 +178,20 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
+  }
+}
+
+String _getLocaleTitle(
+  String locale,
+) {
+  switch (locale) {
+    case 'en':
+      return 'English';
+    case 'ru':
+      return 'Русский';
+    case 'uk':
+      return 'Українська';
+    default:
+      return 'English';
   }
 }

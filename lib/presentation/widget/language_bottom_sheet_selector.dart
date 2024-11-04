@@ -47,6 +47,10 @@ Future<String?> showBottomSheetLanguageSelector({
                     LanguageSelectedWidgeet(
                       language: 'russian'.tr(),
                     ),
+                    SizedBox(height: 24.h),
+                    LanguageSelectedWidgeet(
+                      language: 'ukranian'.tr(),
+                    ),
                   ],
                 ),
               ),

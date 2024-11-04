@@ -43,6 +43,8 @@
 		<array>
 			<string>en</string>
 			<string>ru</string>
+			<string>ua</string>
+
 		</array>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>

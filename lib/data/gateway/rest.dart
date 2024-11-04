@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:http/http.dart' as http;
+
 import 'package:clean_app/assembly/factory.dart';
 import 'package:clean_app/backbone/rest_api_urls.dart';
 import 'package:clean_app/data/model/coin.dart';
 import 'package:clean_app/data/model/global_data.dart';
+import 'package:http/http.dart' as http;
 
 class RestGateway {
   final Factory<CoinDto, Map<String, dynamic>> _coinDtoFactory;

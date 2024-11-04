@@ -18,6 +18,7 @@ Future<void> main() async {
     supportedLocales: const <Locale>[
       Locale('en'),
       Locale('ru'),
+      Locale('uk'),
     ],
     fallbackLocale: const Locale('en'),
     path: 'assets/translations',
