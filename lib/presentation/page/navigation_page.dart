@@ -4,6 +4,7 @@ import 'package:clean_app/backbone/dependency_injection.dart' as di;
 import 'package:clean_app/data/gateway/constants.dart';
 import 'package:clean_app/presentation/bloc/initial_data/initial_data_bloc.dart';
 import 'package:clean_app/presentation/router/app_router.gr.dart';
+import 'package:clean_app/presentation/widget/shimmers/shimmer_coin_list_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,7 +42,10 @@ class _NavigationPageState extends State<NavigationPage> {
             bloc: initialDataBloc,
             builder: (BuildContext context, InitialDataState state) {
               if (state.status == BlocStatus.Loading) {
-                return const CircularProgressIndicator();
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: const ShimmerCoinListView(itemCount: 15),
+                );
               }
               return AutoTabsScaffold(
                 backgroundColor: Theme.of(context).primaryColor,

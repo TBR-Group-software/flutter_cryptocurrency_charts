@@ -152,14 +152,16 @@ class _SettingsPageState extends State<SettingsPage> {
                               context.setLocale(const Locale('en'));
                               context.router.push(const NavigationRoute());
                             }
+                            if (language == 'ukranian'.tr()) {
+                              context.setLocale(const Locale('uk'));
+                              context.router.push(const NavigationRoute());
+                            }
                           });
                         },
                         child: Row(
                           children: <Widget>[
                             Text(
-                              context.locale.toString() == 'en'
-                                  ? 'english'.tr()
-                                  : 'russian'.tr(),
+                              _getLocaleTitle(context.locale.toString()),
                               style: TextStyles.overlay3Bold14,
                             ),
                             SizedBox(width: 4.w),
@@ -176,5 +178,20 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ),
     );
+  }
+}
+
+String _getLocaleTitle(
+  String locale,
+) {
+  switch (locale) {
+    case 'en':
+      return 'English';
+    case 'ru':
+      return 'Русский';
+    case 'uk':
+      return 'Українська';
+    default:
+      return 'English';
   }
 }
