@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:clean_app/backbone/bloc_status.dart';
 import 'package:clean_app/backbone/dependency_injection.dart' as di;
+import 'package:clean_app/data/gateway/constants.dart';
+import 'package:clean_app/presentation/bloc/initial_data/initial_data_bloc.dart';
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:clean_app/presentation/router/app_router.gr.dart';
 import 'package:clean_app/presentation/widget/chevron_icon.dart';
@@ -23,6 +25,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   final SettingsBloc settingsBloc = di.sl.get();
+  final InitialDataBloc initialDataBloc = di.sl.get();
 
   @override
   void initState() {
@@ -76,6 +79,11 @@ class _SettingsPageState extends State<SettingsPage> {
                           if (selectedCurrency != null) {
                             settingsBloc.add(SettingsEvent.selectFiatCurrency(
                                 selectedCurrency));
+                            initialDataBloc.add(
+                                const InitialDataEvent.getMarketCoins(
+                                    order, 1, perPage100, 'true'));
+                            initialDataBloc
+                                .add(const InitialDataEvent.getGlobalData());
                           }
                         },
                         child: Row(
