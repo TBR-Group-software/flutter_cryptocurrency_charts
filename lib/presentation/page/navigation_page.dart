@@ -47,8 +47,8 @@ class _NavigationPageState extends State<NavigationPage> {
                 backgroundColor: Theme.of(context).primaryColor,
                 routes: const <PageRouteInfo<dynamic>>[
                   RatingsRoute(),
-                  PortfolioRoute(),
-                  ProfileRoute(),
+                  MarketRoute(),
+                  SettingsRoute(),
                 ],
                 bottomNavigationBuilder: (_, TabsRouter tabsRouter) {
                   return Padding(

@@ -18,14 +18,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @RoutePage()
-class PortfolioPage extends StatefulWidget {
-  const PortfolioPage({Key? key}) : super(key: key);
+class MarketPage extends StatefulWidget {
+  const MarketPage({Key? key}) : super(key: key);
 
   @override
-  _PortfolioPageState createState() => _PortfolioPageState();
+  _MarketPageState createState() => _MarketPageState();
 }
 
-class _PortfolioPageState extends State<PortfolioPage> {
+class _MarketPageState extends State<MarketPage> {
   List<Coin> coinList = <Coin>[];
   final InitialDataBloc initialDataBloc = di.sl.get();
 
