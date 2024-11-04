@@ -43,25 +43,7 @@ class InitialDataBloc extends Bloc<InitialDataEvent, InitialDataState> {
         await _getGlobalData(emit);
       },
     );
-
-    // on<GetFiatCurrencyEvent>(
-    //   (GetFiatCurrencyEvent event, Emitter<InitialDataState> emit) async {
-    //     await _getFiatCurrency(emit, event);
-    //   },
-    // );
   }
-  // Future<void> _getFiatCurrency(
-  //   Emitter<InitialDataState> emit,
-  //   GetFiatCurrencyEvent event,
-  // ) async {
-  //   emit(_loadingState());
-  //   emit(await _getFiatCurrencyUseCase().then(
-  //     (String fiatCurrency) => state.copyWith(
-  //       status: BlocStatus.Loaded,
-  //       fiatCurrency: fiatCurrency,
-  //     ),
-  //   ));
-  // }
 
   Future<void> _getMarketCoins(
     Emitter<InitialDataState> emit,
