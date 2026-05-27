@@ -1,10 +1,10 @@
-import 'package:clean_app/data/gateway/hive_settings_gateway.dart';
+import 'package:clean_app/data/gateway/drift_settings_gateway.dart';
 import 'package:clean_app/domain/service/settings.dart';
 
-class HiveSettingsService implements SettingsService {
-  final HiveSettingsGateway _gateway;
+class DriftSettingsService implements SettingsService {
+  final DriftSettingsGateway _gateway;
 
-  HiveSettingsService(this._gateway);
+  DriftSettingsService(this._gateway);
 
   @override
   Future<String> getFiatCurrency() => _gateway.getFiatCurrency();

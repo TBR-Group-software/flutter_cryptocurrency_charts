@@ -37,22 +37,22 @@ class DetailInfoRoute extends _i6.PageRouteInfo<DetailInfoRouteArgs> {
     _i8.Key? key,
     List<_i6.PageRouteInfo>? children,
   }) : super(
-          DetailInfoRoute.name,
-          args: DetailInfoRouteArgs(
-            coinName: coinName,
-            currentPrice: currentPrice,
-            priceChangePercentage: priceChangePercentage,
-            marketCap: marketCap,
-            imageUrl: imageUrl,
-            coinIndex: coinIndex,
-            symbol: symbol,
-            sparkline: sparkline,
-            flSpotList: flSpotList,
-            fiatCurrency: fiatCurrency,
-            key: key,
-          ),
-          initialChildren: children,
-        );
+         DetailInfoRoute.name,
+         args: DetailInfoRouteArgs(
+           coinName: coinName,
+           currentPrice: currentPrice,
+           priceChangePercentage: priceChangePercentage,
+           marketCap: marketCap,
+           imageUrl: imageUrl,
+           coinIndex: coinIndex,
+           symbol: symbol,
+           sparkline: sparkline,
+           flSpotList: flSpotList,
+           fiatCurrency: fiatCurrency,
+           key: key,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'DetailInfoRoute';
 
@@ -158,7 +158,7 @@ class DetailInfoRouteArgs {
 /// [_i2.MarketPage]
 class MarketRoute extends _i6.PageRouteInfo<void> {
   const MarketRoute({List<_i6.PageRouteInfo>? children})
-      : super(MarketRoute.name, initialChildren: children);
+    : super(MarketRoute.name, initialChildren: children);
 
   static const String name = 'MarketRoute';
 
