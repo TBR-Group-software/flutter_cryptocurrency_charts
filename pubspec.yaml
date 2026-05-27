@@ -1,48 +1,50 @@
 name: clean_app
 description: A new Flutter project.
 
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  auto_route: ^9.2.2
+  auto_route: ^11.1.0
   convex_bottom_bar: ^3.2.0
-  cupertino_icons: ^1.0.2
-  easy_localization: ^3.0.7
-  fl_chart: ^0.69.0
-  flutter_bloc: ^8.1.6
-  flutter_native_splash: ^2.4.2
+  cupertino_icons: ^1.0.8
+  easy_localization: ^3.0.8
+  fl_chart: ^1.2.0
+  flutter_bloc: ^9.1.1
+  flutter_native_splash: ^2.4.7
   flutter_screenutil: ^5.9.3
-  fluttertoast: ^8.2.8
-  get_it: ^8.0.0
+  fluttertoast: ^9.1.0
+  get_it: ^9.2.1
   hive_flutter: ^1.1.0
-  http: ^1.2.2
+  http: ^1.6.0
   salomon_bottom_bar: ^3.3.2
   shimmer: ^3.0.0
+  drift_flutter: ^0.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  auto_route_generator: ^9.0.0
-  build_runner: ^2.4.13
-  flutter_launcher_icons: ^0.14.1
-  flutter_lints: ^5.0.0
-  freezed: ^2.5.7
-  hive_generator: ^2.0.1
+  build_runner: ^2.15.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_lints: ^6.0.0
+  freezed: ^3.2.5
+  drift_dev: ^2.33.0
+  auto_route_generator: ^10.5.0
 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
     - assets/translations/
+
 flutter_native_splash:
   color: "#0C0B09"
   image: "assets/images/crypto_splash_screen.png"

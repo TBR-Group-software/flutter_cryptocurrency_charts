@@ -1,8 +1,7 @@
 part of 'bloc.dart';
 
-@immutable
 @freezed
-abstract class CoinEvent with _$CoinEvent {
+sealed class CoinEvent with _$CoinEvent {
   const CoinEvent._();
 
   const factory CoinEvent.getMarketCoins(String currency, String order,

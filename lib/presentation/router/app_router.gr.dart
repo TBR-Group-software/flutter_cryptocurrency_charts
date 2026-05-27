@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -15,6 +16,7 @@ import 'package:clean_app/presentation/page/ratings/detail_info_page.dart'
     as _i1;
 import 'package:clean_app/presentation/page/ratings/ratings_page.dart' as _i4;
 import 'package:clean_app/presentation/page/settings/settings_page.dart' as _i5;
+import 'package:collection/collection.dart' as _i9;
 import 'package:fl_chart/fl_chart.dart' as _i7;
 import 'package:flutter/material.dart' as _i8;
 
@@ -116,16 +118,47 @@ class DetailInfoRouteArgs {
   String toString() {
     return 'DetailInfoRouteArgs{coinName: $coinName, currentPrice: $currentPrice, priceChangePercentage: $priceChangePercentage, marketCap: $marketCap, imageUrl: $imageUrl, coinIndex: $coinIndex, symbol: $symbol, sparkline: $sparkline, flSpotList: $flSpotList, fiatCurrency: $fiatCurrency, key: $key}';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! DetailInfoRouteArgs) return false;
+    return coinName == other.coinName &&
+        currentPrice == other.currentPrice &&
+        priceChangePercentage == other.priceChangePercentage &&
+        marketCap == other.marketCap &&
+        imageUrl == other.imageUrl &&
+        coinIndex == other.coinIndex &&
+        symbol == other.symbol &&
+        const _i9.ListEquality<double>().equals(sparkline, other.sparkline) &&
+        const _i9.ListEquality<_i7.FlSpot>().equals(
+          flSpotList,
+          other.flSpotList,
+        ) &&
+        fiatCurrency == other.fiatCurrency &&
+        key == other.key;
+  }
+
+  @override
+  int get hashCode =>
+      coinName.hashCode ^
+      currentPrice.hashCode ^
+      priceChangePercentage.hashCode ^
+      marketCap.hashCode ^
+      imageUrl.hashCode ^
+      coinIndex.hashCode ^
+      symbol.hashCode ^
+      const _i9.ListEquality<double>().hash(sparkline) ^
+      const _i9.ListEquality<_i7.FlSpot>().hash(flSpotList) ^
+      fiatCurrency.hashCode ^
+      key.hashCode;
 }
 
 /// generated route for
 /// [_i2.MarketPage]
 class MarketRoute extends _i6.PageRouteInfo<void> {
   const MarketRoute({List<_i6.PageRouteInfo>? children})
-      : super(
-          MarketRoute.name,
-          initialChildren: children,
-        );
+      : super(MarketRoute.name, initialChildren: children);
 
   static const String name = 'MarketRoute';
 
@@ -141,10 +174,7 @@ class MarketRoute extends _i6.PageRouteInfo<void> {
 /// [_i3.NavigationPage]
 class NavigationRoute extends _i6.PageRouteInfo<void> {
   const NavigationRoute({List<_i6.PageRouteInfo>? children})
-      : super(
-          NavigationRoute.name,
-          initialChildren: children,
-        );
+      : super(NavigationRoute.name, initialChildren: children);
 
   static const String name = 'NavigationRoute';
 
@@ -160,10 +190,7 @@ class NavigationRoute extends _i6.PageRouteInfo<void> {
 /// [_i4.RatingsPage]
 class RatingsRoute extends _i6.PageRouteInfo<void> {
   const RatingsRoute({List<_i6.PageRouteInfo>? children})
-      : super(
-          RatingsRoute.name,
-          initialChildren: children,
-        );
+      : super(RatingsRoute.name, initialChildren: children);
 
   static const String name = 'RatingsRoute';
 
@@ -179,10 +206,7 @@ class RatingsRoute extends _i6.PageRouteInfo<void> {
 /// [_i5.SettingsPage]
 class SettingsRoute extends _i6.PageRouteInfo<void> {
   const SettingsRoute({List<_i6.PageRouteInfo>? children})
-      : super(
-          SettingsRoute.name,
-          initialChildren: children,
-        );
+      : super(SettingsRoute.name, initialChildren: children);
 
   static const String name = 'SettingsRoute';
 

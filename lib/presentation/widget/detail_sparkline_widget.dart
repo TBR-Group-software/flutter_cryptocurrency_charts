@@ -127,7 +127,7 @@ class _SparklineWidgetState extends State<DetailSparklineWidget> {
             show: widget.showBarArea,
             gradient: LinearGradient(
               colors: gradientColors
-                  .map((Color color) => color.withOpacity(0.3))
+                  .map((Color color) => color.withValues(alpha: 0.3))
                   .toList(),
             ),
           ),
@@ -136,27 +136,3 @@ class _SparklineWidgetState extends State<DetailSparklineWidget> {
     );
   }
 }
-
-
-            // getTitlesWidget: (double value) {
-            //   switch (value.toInt()) {
-            //     case 0:
-            //       return SideTitleWidget(
-            //         axisSide: AxisSide.bottom,
-            //         child: Text('1${'day'.tr()}'),
-            //       );
-            //     case 24:
-            //       return '2${'day'.tr()}';
-            //     case 48:
-            //       return '3${'day'.tr()}';
-            //     case 72:
-            //       return '4${'day'.tr()}';
-            //     case 96:
-            //       return '5${'day'.tr()}';
-            //     case 120:
-            //       return '6${'day'.tr()}';
-            //     case 144:
-            //       return '7${'day'.tr()}';
-            //   }
-            //   return '';
-            // },

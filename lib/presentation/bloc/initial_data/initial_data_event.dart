@@ -1,8 +1,7 @@
 part of 'initial_data_bloc.dart';
 
-@immutable
 @freezed
-abstract class InitialDataEvent with _$InitialDataEvent {
+sealed class InitialDataEvent with _$InitialDataEvent {
   const InitialDataEvent._();
 
   const factory InitialDataEvent.getMarketCoins(
