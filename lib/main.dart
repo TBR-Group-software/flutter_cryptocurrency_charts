@@ -10,8 +10,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 const Size screenSize = Size(375, 812);
 
 Future<void> main() async {
-  di.init();
   WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   await EasyLocalization.ensureInitialized();
 
   runApp(EasyLocalization(

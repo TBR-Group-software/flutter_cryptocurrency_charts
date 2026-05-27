@@ -1,28 +1,48 @@
 PODS:
   - Flutter (1.0.0)
-  - flutter_native_splash (0.0.1):
+  - flutter_native_splash (2.4.3):
     - Flutter
   - fluttertoast (0.0.2):
     - Flutter
-    - Toast
-  - path_provider_foundation (0.0.1):
-    - Flutter
-    - FlutterMacOS
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - Toast (4.0.0)
+  - sqlite3 (3.52.0):
+    - sqlite3/common (= 3.52.0)
+  - sqlite3/common (3.52.0)
+  - sqlite3/dbstatvtab (3.52.0):
+    - sqlite3/common
+  - sqlite3/fts5 (3.52.0):
+    - sqlite3/common
+  - sqlite3/math (3.52.0):
+    - sqlite3/common
+  - sqlite3/perf-threadsafe (3.52.0):
+    - sqlite3/common
+  - sqlite3/rtree (3.52.0):
+    - sqlite3/common
+  - sqlite3/session (3.52.0):
+    - sqlite3/common
+  - sqlite3_flutter_libs (0.0.1):
+    - Flutter
+    - FlutterMacOS
+    - sqlite3 (~> 3.52.0)
+    - sqlite3/dbstatvtab
+    - sqlite3/fts5
+    - sqlite3/math
+    - sqlite3/perf-threadsafe
+    - sqlite3/rtree
+    - sqlite3/session
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - sqlite3_flutter_libs (from `.symlinks/plugins/sqlite3_flutter_libs/darwin`)
 
 SPEC REPOS:
   trunk:
-    - Toast
+    - sqlite3
 
 EXTERNAL SOURCES:
   Flutter:
@@ -31,19 +51,19 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
-  path_provider_foundation:
-    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  sqlite3_flutter_libs:
+    :path: ".symlinks/plugins/sqlite3_flutter_libs/darwin"
 
 SPEC CHECKSUMS:
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_native_splash: edf599c81f74d093a4daf8e17bd7a018854bc778
-  fluttertoast: e9a18c7be5413da53898f660530c56f35edfba9c
-  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
-  shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
-  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_native_splash: c32d145d68aeda5502d5f543ee38c192065986cf
+  fluttertoast: 2c67e14dce98bbdb200df9e1acf610d7a6264ea1
+  shared_preferences_foundation: 7036424c3d8ec98dfe75ff1667cb0cd531ec82bb
+  sqlite3: a51c07cf16e023d6c48abd5e5791a61a47354921
+  sqlite3_flutter_libs: b3e120efe9a82017e5552a620f696589ed4f62ab
 
-PODFILE CHECKSUM: 4e8f8b2be68aeea4c0d5beb6ff1e79fface1d048
+PODFILE CHECKSUM: cc1f88378b4bfcf93a6ce00d2c587857c6008d3b
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

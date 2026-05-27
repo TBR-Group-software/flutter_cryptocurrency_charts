@@ -5,12 +5,11 @@ import 'package:clean_app/assembly/factory.dart';
 import 'package:clean_app/assembly/model/coin_dto_from_json.dart';
 import 'package:clean_app/assembly/model/global_data_dto_from_json.dart';
 import 'package:clean_app/assembly/model/market_cap_percentage.dart';
+import 'package:clean_app/data/gateway/hive_settings_gateway.dart';
 import 'package:clean_app/data/gateway/rest.dart';
-import 'package:clean_app/data/gateway/settings.dart';
 import 'package:clean_app/data/model/coin.dart';
 import 'package:clean_app/data/model/global_data.dart';
 import 'package:clean_app/data/model/market_cap_percentage.dart';
-import 'package:clean_app/data/service/hive_settings.dart';
 import 'package:clean_app/data/service/rest_coins.dart';
 import 'package:clean_app/data/service/rest_global_data.dart';
 import 'package:clean_app/domain/entity/coin.dart';
@@ -31,9 +30,14 @@ import 'package:clean_app/presentation/bloc/initial_data/initial_data_bloc.dart'
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:get_it/get_it.dart';
 
+import '../data/database/app_database.dart';
+import '../data/gateway/drift_settings_gateway.dart';
+import '../data/migration/settings_migration.dart';
+import '../data/service/drift_settings.dart';
+
 final GetIt sl = GetIt.instance;
 
-void init() {
+Future<void> init() async {
   //From Dto Factory
   sl.registerLazySingleton<Factory<Coin, CoinDto>>(() => CoinFromDtoFactory());
   sl.registerLazySingleton<Factory<GlobalData, GlobalDataDto>>(
@@ -57,7 +61,12 @@ void init() {
         sl.get(),
         sl.get(),
       ));
-  sl.registerLazySingleton<SettingsGateway>(() => SettingsGateway());
+  sl.registerLazySingleton<AppDatabase>(() => AppDatabase());
+  sl.registerLazySingleton<HiveSettingsGateway>(() => HiveSettingsGateway());
+  sl.registerLazySingleton<DriftSettingsGateway>(
+      () => DriftSettingsGateway(sl.get()));
+  sl.registerLazySingleton<SettingsMigration>(
+      () => SettingsMigration(sl.get(), sl.get()));
 
   //Service
   sl.registerLazySingleton<CoinService>(
@@ -66,7 +75,7 @@ void init() {
       () => RestGlobalDataService(sl.get(), sl.get()));
 
   sl.registerLazySingleton<SettingsService>(
-      () => HiveSettingsSerivce(sl.get()));
+      () => DriftSettingsService(sl.get()));
   //UseCase
   sl.registerLazySingleton<GetMarketCoinsUseCase>(
       () => RestGetMarketCoinsUseCase(sl.get()));
@@ -90,4 +99,6 @@ void init() {
         sl.get(),
         sl.get(),
       ));
+  //Migration from hive to drift
+  await sl.get<SettingsMigration>().migrateIfNeeded();
 }

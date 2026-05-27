@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -35,22 +36,22 @@ class DetailInfoRoute extends _i6.PageRouteInfo<DetailInfoRouteArgs> {
     _i8.Key? key,
     List<_i6.PageRouteInfo>? children,
   }) : super(
-          DetailInfoRoute.name,
-          args: DetailInfoRouteArgs(
-            coinName: coinName,
-            currentPrice: currentPrice,
-            priceChangePercentage: priceChangePercentage,
-            marketCap: marketCap,
-            imageUrl: imageUrl,
-            coinIndex: coinIndex,
-            symbol: symbol,
-            sparkline: sparkline,
-            flSpotList: flSpotList,
-            fiatCurrency: fiatCurrency,
-            key: key,
-          ),
-          initialChildren: children,
-        );
+         DetailInfoRoute.name,
+         args: DetailInfoRouteArgs(
+           coinName: coinName,
+           currentPrice: currentPrice,
+           priceChangePercentage: priceChangePercentage,
+           marketCap: marketCap,
+           imageUrl: imageUrl,
+           coinIndex: coinIndex,
+           symbol: symbol,
+           sparkline: sparkline,
+           flSpotList: flSpotList,
+           fiatCurrency: fiatCurrency,
+           key: key,
+         ),
+         initialChildren: children,
+       );
 
   static const String name = 'DetailInfoRoute';
 
@@ -122,10 +123,7 @@ class DetailInfoRouteArgs {
 /// [_i2.MarketPage]
 class MarketRoute extends _i6.PageRouteInfo<void> {
   const MarketRoute({List<_i6.PageRouteInfo>? children})
-      : super(
-          MarketRoute.name,
-          initialChildren: children,
-        );
+    : super(MarketRoute.name, initialChildren: children);
 
   static const String name = 'MarketRoute';
 
@@ -141,10 +139,7 @@ class MarketRoute extends _i6.PageRouteInfo<void> {
 /// [_i3.NavigationPage]
 class NavigationRoute extends _i6.PageRouteInfo<void> {
   const NavigationRoute({List<_i6.PageRouteInfo>? children})
-      : super(
-          NavigationRoute.name,
-          initialChildren: children,
-        );
+    : super(NavigationRoute.name, initialChildren: children);
 
   static const String name = 'NavigationRoute';
 
@@ -160,10 +155,7 @@ class NavigationRoute extends _i6.PageRouteInfo<void> {
 /// [_i4.RatingsPage]
 class RatingsRoute extends _i6.PageRouteInfo<void> {
   const RatingsRoute({List<_i6.PageRouteInfo>? children})
-      : super(
-          RatingsRoute.name,
-          initialChildren: children,
-        );
+    : super(RatingsRoute.name, initialChildren: children);
 
   static const String name = 'RatingsRoute';
 
@@ -179,10 +171,7 @@ class RatingsRoute extends _i6.PageRouteInfo<void> {
 /// [_i5.SettingsPage]
 class SettingsRoute extends _i6.PageRouteInfo<void> {
   const SettingsRoute({List<_i6.PageRouteInfo>? children})
-      : super(
-          SettingsRoute.name,
-          initialChildren: children,
-        );
+    : super(SettingsRoute.name, initialChildren: children);
 
   static const String name = 'SettingsRoute';
 
