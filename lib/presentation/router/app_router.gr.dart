@@ -26,7 +26,7 @@ class DetailInfoRoute extends _i6.PageRouteInfo<DetailInfoRouteArgs> {
   DetailInfoRoute({
     required String coinName,
     required num currentPrice,
-    required num priceChangePercentage,
+    required num? priceChangePercentage,
     required num marketCap,
     required String imageUrl,
     required int coinIndex,
@@ -96,7 +96,7 @@ class DetailInfoRouteArgs {
 
   final num currentPrice;
 
-  final num priceChangePercentage;
+  final num? priceChangePercentage;
 
   final num marketCap;
 

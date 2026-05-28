@@ -96,8 +96,6 @@ extension InitialDataEventPatterns on InitialDataEvent {
         return getGlobalData(_that);
       case GetFiatCurrencyEvent():
         return getFiatCurrency(_that);
-      case _:
-        throw StateError('Unexpected subclass');
     }
   }
 
@@ -197,8 +195,6 @@ extension InitialDataEventPatterns on InitialDataEvent {
         return getGlobalData();
       case GetFiatCurrencyEvent():
         return getFiatCurrency();
-      case _:
-        throw StateError('Unexpected subclass');
     }
   }
 
@@ -650,7 +646,7 @@ class _InitialDataState implements InitialDataState {
   @override
   List<Coin> get coins {
     if (_coins is EqualUnmodifiableListView) return _coins;
-// ignore: implicit_dynamic_type
+    // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_coins);
   }
 

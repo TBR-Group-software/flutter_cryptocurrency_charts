@@ -9,7 +9,7 @@ class DetailSparklineWidget extends StatefulWidget {
   final List<double>? sparkline;
   final List<FlSpot>? flSpotList;
   final bool showBarArea;
-  final num pricePercentage;
+  final num? pricePercentage;
 
   const DetailSparklineWidget({
     required this.sparkline,
@@ -33,27 +33,34 @@ class _SparklineWidgetState extends State<DetailSparklineWidget> {
   }
 
   LineChartData mainData() {
-    final List<Color> gradientColors = <Color>[
-      if (widget.pricePercentage >= 0) Palette.accentBlue else Palette.errorRed,
-      if (widget.pricePercentage >= 0) Palette.primary else Palette.lightRed,
-    ];
+    final num? pricePercentage = widget.pricePercentage;
+    final bool hasPercentage = pricePercentage != null;
+    final bool isPositive = pricePercentage != null && pricePercentage >= 0;
+    final List<Color> gradientColors = hasPercentage
+        ? <Color>[
+            if (isPositive) Palette.accentBlue else Palette.errorRed,
+            if (isPositive) Palette.primary else Palette.lightRed,
+          ]
+        : <Color>[Palette.overlay3, Palette.overlay4];
+    final Color lineColor = hasPercentage
+        ? (isPositive ? Palette.darkBlue : Palette.darkRed)
+        : Palette.overlay4;
+    final Color verticalLineColor = hasPercentage
+        ? (isPositive ? const Color(0xff37434d) : const Color(0xff4D3737))
+        : Palette.overlay4;
     return LineChartData(
       gridData: FlGridData(
         show: true,
         drawVerticalLine: true,
         getDrawingHorizontalLine: (double value) {
           return FlLine(
-            color: widget.pricePercentage >= 0
-                ? Palette.darkBlue
-                : Palette.darkRed,
+            color: lineColor,
             strokeWidth: 1,
           );
         },
         getDrawingVerticalLine: (double value) {
           return FlLine(
-            color: widget.pricePercentage >= 0
-                ? const Color(0xff37434d)
-                : const Color(0xff4D3737),
+            color: verticalLineColor,
             strokeWidth: 1,
           );
         },
@@ -97,16 +104,8 @@ class _SparklineWidgetState extends State<DetailSparklineWidget> {
       borderData: FlBorderData(
         show: true,
         border: Border(
-          bottom: BorderSide(
-              color: widget.pricePercentage >= 0
-                  ? Palette.darkBlue
-                  : Palette.darkRed,
-              width: 2),
-          left: BorderSide(
-              color: widget.pricePercentage >= 0
-                  ? Palette.darkBlue
-                  : Palette.darkRed,
-              width: 2),
+          bottom: BorderSide(color: lineColor, width: 2),
+          left: BorderSide(color: lineColor, width: 2),
         ),
       ),
       minX: 0,

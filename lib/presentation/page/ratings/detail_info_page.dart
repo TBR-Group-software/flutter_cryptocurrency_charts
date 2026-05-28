@@ -10,13 +10,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 @RoutePage()
 class DetailInfoPage extends StatefulWidget {
   final String coinName;
-  final num currentPrice, priceChangePercentage, marketCap;
+  final num currentPrice, marketCap;
+  final num? priceChangePercentage;
   final String imageUrl;
   final int coinIndex;
   final String symbol;
   final List<double>? sparkline;
   final List<FlSpot>? flSpotList;
   final String fiatCurrency;
+
   const DetailInfoPage({
     required this.coinName,
     required this.currentPrice,

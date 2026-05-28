@@ -15,13 +15,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CoinEvent {
   String get currency;
-
   String get order;
-
   int get pageNumber;
-
   int get perPage;
-
   String get sparkline;
 
   /// Create a copy of CoinEvent
@@ -60,7 +56,6 @@ mixin _$CoinEvent {
 abstract mixin class $CoinEventCopyWith<$Res> {
   factory $CoinEventCopyWith(CoinEvent value, $Res Function(CoinEvent) _then) =
       _$CoinEventCopyWithImpl;
-
   @useResult
   $Res call(
       {String currency,
@@ -162,8 +157,6 @@ extension CoinEventPatterns on CoinEvent {
     switch (_that) {
       case GetMarketCoinsEvent():
         return getMarketCoins(_that);
-      case _:
-        throw StateError('Unexpected subclass');
     }
   }
 
@@ -245,8 +238,6 @@ extension CoinEventPatterns on CoinEvent {
       case GetMarketCoinsEvent():
         return getMarketCoins(_that.currency, _that.order, _that.pageNumber,
             _that.perPage, _that.sparkline);
-      case _:
-        throw StateError('Unexpected subclass');
     }
   }
 
@@ -637,7 +628,7 @@ class _CoinState implements CoinState {
   @override
   List<Coin> get coins {
     if (_coins is EqualUnmodifiableListView) return _coins;
-// ignore: implicit_dynamic_type
+    // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_coins);
   }
 

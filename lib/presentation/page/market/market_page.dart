@@ -117,7 +117,7 @@ class _MarketPageState extends State<MarketPage> {
                                     imageUrl: coinList[index].image!,
                                     symbol: coinList[index].symbol!,
                                     priceChangePercentage:
-                                        coinList[index].priceChangePercentage!,
+                                        coinList[index].priceChangePercentage,
                                     marketCap: coinList[index].marketCap!,
                                     sparkline: newSparkline,
                                     flSpotList: flSpotList,
@@ -133,7 +133,7 @@ class _MarketPageState extends State<MarketPage> {
                                         imageUrl: coinList[index].image!,
                                         symbol: coinList[index].symbol!,
                                         priceChangePercentage: coinList[index]
-                                            .priceChangePercentage!,
+                                            .priceChangePercentage,
                                         marketCap: coinList[index].marketCap!,
                                         sparkline: newSparkline,
                                         flSpotList: flSpotList,

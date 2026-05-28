@@ -84,8 +84,6 @@ extension GlobalDataEventPatterns on GlobalDataEvent {
     switch (_that) {
       case GetGlobalDataEvent():
         return getGlobalData(_that);
-      case _:
-        throw StateError('Unexpected subclass');
     }
   }
 
@@ -161,8 +159,6 @@ extension GlobalDataEventPatterns on GlobalDataEvent {
     switch (_that) {
       case GetGlobalDataEvent():
         return getGlobalData();
-      case _:
-        throw StateError('Unexpected subclass');
     }
   }
 
