@@ -9,13 +9,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CoinInfoBox extends StatelessWidget {
   final String coinName;
-  final num currentPrice, priceChangePercentage, marketCap;
+  final num currentPrice, marketCap;
+  final num? priceChangePercentage;
   final String imageUrl;
   final int coinIndex;
   final String symbol;
   final List<double>? sparkline;
   final List<FlSpot>? flSpotList;
   final String fiatCurrency;
+
   const CoinInfoBox({
     required this.coinName,
     required this.currentPrice,
@@ -84,7 +86,11 @@ class CoinInfoBox extends StatelessWidget {
                           ),
                           SizedBox(width: 4.w),
                           Text(
-                            symbol.toUpperCase(),
+                            symbol.toUpperCase().length > 5
+                                ? symbol
+                                    .toUpperCase()
+                                    .replaceRange(5, symbol.length, '...')
+                                : symbol.toUpperCase(),
                             style: TextStyles.overlay3Bold11,
                           ),
                           ChangePriceTriangle(

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'bloc.dart';
+part of 'initial_data_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,103 +13,30 @@ part of 'bloc.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$CoinEvent {
-  String get currency;
-  String get order;
-  int get pageNumber;
-  int get perPage;
-  String get sparkline;
-
-  /// Create a copy of CoinEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $CoinEventCopyWith<CoinEvent> get copyWith =>
-      _$CoinEventCopyWithImpl<CoinEvent>(this as CoinEvent, _$identity);
-
+mixin _$InitialDataEvent {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is CoinEvent &&
-            (identical(other.currency, currency) ||
-                other.currency == currency) &&
-            (identical(other.order, order) || other.order == order) &&
-            (identical(other.pageNumber, pageNumber) ||
-                other.pageNumber == pageNumber) &&
-            (identical(other.perPage, perPage) || other.perPage == perPage) &&
-            (identical(other.sparkline, sparkline) ||
-                other.sparkline == sparkline));
+        (other.runtimeType == runtimeType && other is InitialDataEvent);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, currency, order, pageNumber, perPage, sparkline);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
-    return 'CoinEvent(currency: $currency, order: $order, pageNumber: $pageNumber, perPage: $perPage, sparkline: $sparkline)';
+    return 'InitialDataEvent()';
   }
 }
 
 /// @nodoc
-abstract mixin class $CoinEventCopyWith<$Res> {
-  factory $CoinEventCopyWith(CoinEvent value, $Res Function(CoinEvent) _then) =
-      _$CoinEventCopyWithImpl;
-  @useResult
-  $Res call(
-      {String currency,
-      String order,
-      int pageNumber,
-      int perPage,
-      String sparkline});
+class $InitialDataEventCopyWith<$Res> {
+  $InitialDataEventCopyWith(
+      InitialDataEvent _, $Res Function(InitialDataEvent) __);
 }
 
-/// @nodoc
-class _$CoinEventCopyWithImpl<$Res> implements $CoinEventCopyWith<$Res> {
-  _$CoinEventCopyWithImpl(this._self, this._then);
-
-  final CoinEvent _self;
-  final $Res Function(CoinEvent) _then;
-
-  /// Create a copy of CoinEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? currency = null,
-    Object? order = null,
-    Object? pageNumber = null,
-    Object? perPage = null,
-    Object? sparkline = null,
-  }) {
-    return _then(_self.copyWith(
-      currency: null == currency
-          ? _self.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-      order: null == order
-          ? _self.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as String,
-      pageNumber: null == pageNumber
-          ? _self.pageNumber
-          : pageNumber // ignore: cast_nullable_to_non_nullable
-              as int,
-      perPage: null == perPage
-          ? _self.perPage
-          : perPage // ignore: cast_nullable_to_non_nullable
-              as int,
-      sparkline: null == sparkline
-          ? _self.sparkline
-          : sparkline // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// Adds pattern-matching-related methods to [CoinEvent].
-extension CoinEventPatterns on CoinEvent {
+/// Adds pattern-matching-related methods to [InitialDataEvent].
+extension InitialDataEventPatterns on InitialDataEvent {
   /// A variant of `map` that fallback to returning `orElse`.
   ///
   /// It is equivalent to doing:
@@ -125,12 +52,18 @@ extension CoinEventPatterns on CoinEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetMarketCoinsEvent value)? getMarketCoins,
+    TResult Function(GetGlobalDataEvent value)? getGlobalData,
+    TResult Function(GetFiatCurrencyEvent value)? getFiatCurrency,
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case GetMarketCoinsEvent() when getMarketCoins != null:
         return getMarketCoins(_that);
+      case GetGlobalDataEvent() when getGlobalData != null:
+        return getGlobalData(_that);
+      case GetFiatCurrencyEvent() when getFiatCurrency != null:
+        return getFiatCurrency(_that);
       case _:
         return orElse();
     }
@@ -152,11 +85,17 @@ extension CoinEventPatterns on CoinEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetMarketCoinsEvent value) getMarketCoins,
+    required TResult Function(GetGlobalDataEvent value) getGlobalData,
+    required TResult Function(GetFiatCurrencyEvent value) getFiatCurrency,
   }) {
     final _that = this;
     switch (_that) {
       case GetMarketCoinsEvent():
         return getMarketCoins(_that);
+      case GetGlobalDataEvent():
+        return getGlobalData(_that);
+      case GetFiatCurrencyEvent():
+        return getFiatCurrency(_that);
     }
   }
 
@@ -175,11 +114,17 @@ extension CoinEventPatterns on CoinEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetMarketCoinsEvent value)? getMarketCoins,
+    TResult? Function(GetGlobalDataEvent value)? getGlobalData,
+    TResult? Function(GetFiatCurrencyEvent value)? getFiatCurrency,
   }) {
     final _that = this;
     switch (_that) {
       case GetMarketCoinsEvent() when getMarketCoins != null:
         return getMarketCoins(_that);
+      case GetGlobalDataEvent() when getGlobalData != null:
+        return getGlobalData(_that);
+      case GetFiatCurrencyEvent() when getFiatCurrency != null:
+        return getFiatCurrency(_that);
       case _:
         return null;
     }
@@ -199,16 +144,22 @@ extension CoinEventPatterns on CoinEvent {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String currency, String order, int pageNumber, int perPage,
-            String sparkline)?
+    TResult Function(
+            String order, int pageNumber, int perPage, String sparkline)?
         getMarketCoins,
+    TResult Function()? getGlobalData,
+    TResult Function()? getFiatCurrency,
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case GetMarketCoinsEvent() when getMarketCoins != null:
-        return getMarketCoins(_that.currency, _that.order, _that.pageNumber,
-            _that.perPage, _that.sparkline);
+        return getMarketCoins(
+            _that.order, _that.pageNumber, _that.perPage, _that.sparkline);
+      case GetGlobalDataEvent() when getGlobalData != null:
+        return getGlobalData();
+      case GetFiatCurrencyEvent() when getFiatCurrency != null:
+        return getFiatCurrency();
       case _:
         return orElse();
     }
@@ -229,15 +180,21 @@ extension CoinEventPatterns on CoinEvent {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String currency, String order, int pageNumber,
-            int perPage, String sparkline)
+    required TResult Function(
+            String order, int pageNumber, int perPage, String sparkline)
         getMarketCoins,
+    required TResult Function() getGlobalData,
+    required TResult Function() getFiatCurrency,
   }) {
     final _that = this;
     switch (_that) {
       case GetMarketCoinsEvent():
-        return getMarketCoins(_that.currency, _that.order, _that.pageNumber,
-            _that.perPage, _that.sparkline);
+        return getMarketCoins(
+            _that.order, _that.pageNumber, _that.perPage, _that.sparkline);
+      case GetGlobalDataEvent():
+        return getGlobalData();
+      case GetFiatCurrencyEvent():
+        return getFiatCurrency();
     }
   }
 
@@ -255,15 +212,21 @@ extension CoinEventPatterns on CoinEvent {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String currency, String order, int pageNumber,
-            int perPage, String sparkline)?
+    TResult? Function(
+            String order, int pageNumber, int perPage, String sparkline)?
         getMarketCoins,
+    TResult? Function()? getGlobalData,
+    TResult? Function()? getFiatCurrency,
   }) {
     final _that = this;
     switch (_that) {
       case GetMarketCoinsEvent() when getMarketCoins != null:
-        return getMarketCoins(_that.currency, _that.order, _that.pageNumber,
-            _that.perPage, _that.sparkline);
+        return getMarketCoins(
+            _that.order, _that.pageNumber, _that.perPage, _that.sparkline);
+      case GetGlobalDataEvent() when getGlobalData != null:
+        return getGlobalData();
+      case GetFiatCurrencyEvent() when getFiatCurrency != null:
+        return getFiatCurrency();
       case _:
         return null;
     }
@@ -272,25 +235,18 @@ extension CoinEventPatterns on CoinEvent {
 
 /// @nodoc
 
-class GetMarketCoinsEvent extends CoinEvent {
+class GetMarketCoinsEvent extends InitialDataEvent {
   const GetMarketCoinsEvent(
-      this.currency, this.order, this.pageNumber, this.perPage, this.sparkline)
+      this.order, this.pageNumber, this.perPage, this.sparkline)
       : super._();
 
-  @override
-  final String currency;
-  @override
   final String order;
-  @override
   final int pageNumber;
-  @override
   final int perPage;
-  @override
   final String sparkline;
 
-  /// Create a copy of CoinEvent
+  /// Create a copy of InitialDataEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
   $GetMarketCoinsEventCopyWith<GetMarketCoinsEvent> get copyWith =>
@@ -301,8 +257,6 @@ class GetMarketCoinsEvent extends CoinEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is GetMarketCoinsEvent &&
-            (identical(other.currency, currency) ||
-                other.currency == currency) &&
             (identical(other.order, order) || other.order == order) &&
             (identical(other.pageNumber, pageNumber) ||
                 other.pageNumber == pageNumber) &&
@@ -313,28 +267,22 @@ class GetMarketCoinsEvent extends CoinEvent {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, currency, order, pageNumber, perPage, sparkline);
+      Object.hash(runtimeType, order, pageNumber, perPage, sparkline);
 
   @override
   String toString() {
-    return 'CoinEvent.getMarketCoins(currency: $currency, order: $order, pageNumber: $pageNumber, perPage: $perPage, sparkline: $sparkline)';
+    return 'InitialDataEvent.getMarketCoins(order: $order, pageNumber: $pageNumber, perPage: $perPage, sparkline: $sparkline)';
   }
 }
 
 /// @nodoc
 abstract mixin class $GetMarketCoinsEventCopyWith<$Res>
-    implements $CoinEventCopyWith<$Res> {
+    implements $InitialDataEventCopyWith<$Res> {
   factory $GetMarketCoinsEventCopyWith(
           GetMarketCoinsEvent value, $Res Function(GetMarketCoinsEvent) _then) =
       _$GetMarketCoinsEventCopyWithImpl;
-  @override
   @useResult
-  $Res call(
-      {String currency,
-      String order,
-      int pageNumber,
-      int perPage,
-      String sparkline});
+  $Res call({String order, int pageNumber, int perPage, String sparkline});
 }
 
 /// @nodoc
@@ -345,22 +293,16 @@ class _$GetMarketCoinsEventCopyWithImpl<$Res>
   final GetMarketCoinsEvent _self;
   final $Res Function(GetMarketCoinsEvent) _then;
 
-  /// Create a copy of CoinEvent
+  /// Create a copy of InitialDataEvent
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? currency = null,
     Object? order = null,
     Object? pageNumber = null,
     Object? perPage = null,
     Object? sparkline = null,
   }) {
     return _then(GetMarketCoinsEvent(
-      null == currency
-          ? _self.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
       null == order
           ? _self.order
           : order // ignore: cast_nullable_to_non_nullable
@@ -382,25 +324,72 @@ class _$GetMarketCoinsEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-mixin _$CoinState {
+
+class GetGlobalDataEvent extends InitialDataEvent {
+  const GetGlobalDataEvent() : super._();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is GetGlobalDataEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'InitialDataEvent.getGlobalData()';
+  }
+}
+
+/// @nodoc
+
+class GetFiatCurrencyEvent extends InitialDataEvent {
+  const GetFiatCurrencyEvent() : super._();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is GetFiatCurrencyEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'InitialDataEvent.getFiatCurrency()';
+  }
+}
+
+/// @nodoc
+mixin _$InitialDataState {
   BlocStatus get status;
   List<Coin> get coins;
+  GlobalData? get globalData;
+  String? get fiatCurrency;
   Object? get error;
 
-  /// Create a copy of CoinState
+  /// Create a copy of InitialDataState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $CoinStateCopyWith<CoinState> get copyWith =>
-      _$CoinStateCopyWithImpl<CoinState>(this as CoinState, _$identity);
+  $InitialDataStateCopyWith<InitialDataState> get copyWith =>
+      _$InitialDataStateCopyWithImpl<InitialDataState>(
+          this as InitialDataState, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is CoinState &&
+            other is InitialDataState &&
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other.coins, coins) &&
+            (identical(other.globalData, globalData) ||
+                other.globalData == globalData) &&
+            (identical(other.fiatCurrency, fiatCurrency) ||
+                other.fiatCurrency == fiatCurrency) &&
             const DeepCollectionEquality().equals(other.error, error));
   }
 
@@ -409,36 +398,47 @@ mixin _$CoinState {
       runtimeType,
       status,
       const DeepCollectionEquality().hash(coins),
+      globalData,
+      fiatCurrency,
       const DeepCollectionEquality().hash(error));
 
   @override
   String toString() {
-    return 'CoinState(status: $status, coins: $coins, error: $error)';
+    return 'InitialDataState(status: $status, coins: $coins, globalData: $globalData, fiatCurrency: $fiatCurrency, error: $error)';
   }
 }
 
 /// @nodoc
-abstract mixin class $CoinStateCopyWith<$Res> {
-  factory $CoinStateCopyWith(CoinState value, $Res Function(CoinState) _then) =
-      _$CoinStateCopyWithImpl;
+abstract mixin class $InitialDataStateCopyWith<$Res> {
+  factory $InitialDataStateCopyWith(
+          InitialDataState value, $Res Function(InitialDataState) _then) =
+      _$InitialDataStateCopyWithImpl;
   @useResult
-  $Res call({BlocStatus status, List<Coin> coins, Object? error});
+  $Res call(
+      {BlocStatus status,
+      List<Coin> coins,
+      GlobalData? globalData,
+      String? fiatCurrency,
+      Object? error});
 }
 
 /// @nodoc
-class _$CoinStateCopyWithImpl<$Res> implements $CoinStateCopyWith<$Res> {
-  _$CoinStateCopyWithImpl(this._self, this._then);
+class _$InitialDataStateCopyWithImpl<$Res>
+    implements $InitialDataStateCopyWith<$Res> {
+  _$InitialDataStateCopyWithImpl(this._self, this._then);
 
-  final CoinState _self;
-  final $Res Function(CoinState) _then;
+  final InitialDataState _self;
+  final $Res Function(InitialDataState) _then;
 
-  /// Create a copy of CoinState
+  /// Create a copy of InitialDataState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? status = null,
     Object? coins = null,
+    Object? globalData = freezed,
+    Object? fiatCurrency = freezed,
     Object? error = freezed,
   }) {
     return _then(_self.copyWith(
@@ -450,13 +450,21 @@ class _$CoinStateCopyWithImpl<$Res> implements $CoinStateCopyWith<$Res> {
           ? _self.coins
           : coins // ignore: cast_nullable_to_non_nullable
               as List<Coin>,
+      globalData: freezed == globalData
+          ? _self.globalData
+          : globalData // ignore: cast_nullable_to_non_nullable
+              as GlobalData?,
+      fiatCurrency: freezed == fiatCurrency
+          ? _self.fiatCurrency
+          : fiatCurrency // ignore: cast_nullable_to_non_nullable
+              as String?,
       error: freezed == error ? _self.error : error,
     ));
   }
 }
 
-/// Adds pattern-matching-related methods to [CoinState].
-extension CoinStatePatterns on CoinState {
+/// Adds pattern-matching-related methods to [InitialDataState].
+extension InitialDataStatePatterns on InitialDataState {
   /// A variant of `map` that fallback to returning `orElse`.
   ///
   /// It is equivalent to doing:
@@ -471,12 +479,12 @@ extension CoinStatePatterns on CoinState {
 
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_CoinState value)? $default, {
+    TResult Function(_InitialDataState value)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _CoinState() when $default != null:
+      case _InitialDataState() when $default != null:
         return $default(_that);
       case _:
         return orElse();
@@ -498,11 +506,11 @@ extension CoinStatePatterns on CoinState {
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_CoinState value) $default,
+    TResult Function(_InitialDataState value) $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _CoinState():
+      case _InitialDataState():
         return $default(_that);
       case _:
         throw StateError('Unexpected subclass');
@@ -523,11 +531,11 @@ extension CoinStatePatterns on CoinState {
 
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_CoinState value)? $default,
+    TResult? Function(_InitialDataState value)? $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _CoinState() when $default != null:
+      case _InitialDataState() when $default != null:
         return $default(_that);
       case _:
         return null;
@@ -548,14 +556,16 @@ extension CoinStatePatterns on CoinState {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(BlocStatus status, List<Coin> coins, Object? error)?
+    TResult Function(BlocStatus status, List<Coin> coins,
+            GlobalData? globalData, String? fiatCurrency, Object? error)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _CoinState() when $default != null:
-        return $default(_that.status, _that.coins, _that.error);
+      case _InitialDataState() when $default != null:
+        return $default(_that.status, _that.coins, _that.globalData,
+            _that.fiatCurrency, _that.error);
       case _:
         return orElse();
     }
@@ -576,13 +586,15 @@ extension CoinStatePatterns on CoinState {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(BlocStatus status, List<Coin> coins, Object? error)
+    TResult Function(BlocStatus status, List<Coin> coins,
+            GlobalData? globalData, String? fiatCurrency, Object? error)
         $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _CoinState():
-        return $default(_that.status, _that.coins, _that.error);
+      case _InitialDataState():
+        return $default(_that.status, _that.coins, _that.globalData,
+            _that.fiatCurrency, _that.error);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -602,13 +614,15 @@ extension CoinStatePatterns on CoinState {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(BlocStatus status, List<Coin> coins, Object? error)?
+    TResult? Function(BlocStatus status, List<Coin> coins,
+            GlobalData? globalData, String? fiatCurrency, Object? error)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _CoinState() when $default != null:
-        return $default(_that.status, _that.coins, _that.error);
+      case _InitialDataState() when $default != null:
+        return $default(_that.status, _that.coins, _that.globalData,
+            _that.fiatCurrency, _that.error);
       case _:
         return null;
     }
@@ -617,9 +631,13 @@ extension CoinStatePatterns on CoinState {
 
 /// @nodoc
 
-class _CoinState implements CoinState {
-  const _CoinState(
-      {required this.status, required final List<Coin> coins, this.error})
+class _InitialDataState implements InitialDataState {
+  const _InitialDataState(
+      {required this.status,
+      required final List<Coin> coins,
+      this.globalData,
+      this.fiatCurrency,
+      this.error})
       : _coins = coins;
 
   @override
@@ -633,23 +651,31 @@ class _CoinState implements CoinState {
   }
 
   @override
+  final GlobalData? globalData;
+  @override
+  final String? fiatCurrency;
+  @override
   final Object? error;
 
-  /// Create a copy of CoinState
+  /// Create a copy of InitialDataState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$CoinStateCopyWith<_CoinState> get copyWith =>
-      __$CoinStateCopyWithImpl<_CoinState>(this, _$identity);
+  _$InitialDataStateCopyWith<_InitialDataState> get copyWith =>
+      __$InitialDataStateCopyWithImpl<_InitialDataState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _CoinState &&
+            other is _InitialDataState &&
             (identical(other.status, status) || other.status == status) &&
             const DeepCollectionEquality().equals(other._coins, _coins) &&
+            (identical(other.globalData, globalData) ||
+                other.globalData == globalData) &&
+            (identical(other.fiatCurrency, fiatCurrency) ||
+                other.fiatCurrency == fiatCurrency) &&
             const DeepCollectionEquality().equals(other.error, error));
   }
 
@@ -658,42 +684,52 @@ class _CoinState implements CoinState {
       runtimeType,
       status,
       const DeepCollectionEquality().hash(_coins),
+      globalData,
+      fiatCurrency,
       const DeepCollectionEquality().hash(error));
 
   @override
   String toString() {
-    return 'CoinState(status: $status, coins: $coins, error: $error)';
+    return 'InitialDataState(status: $status, coins: $coins, globalData: $globalData, fiatCurrency: $fiatCurrency, error: $error)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$CoinStateCopyWith<$Res>
-    implements $CoinStateCopyWith<$Res> {
-  factory _$CoinStateCopyWith(
-          _CoinState value, $Res Function(_CoinState) _then) =
-      __$CoinStateCopyWithImpl;
+abstract mixin class _$InitialDataStateCopyWith<$Res>
+    implements $InitialDataStateCopyWith<$Res> {
+  factory _$InitialDataStateCopyWith(
+          _InitialDataState value, $Res Function(_InitialDataState) _then) =
+      __$InitialDataStateCopyWithImpl;
   @override
   @useResult
-  $Res call({BlocStatus status, List<Coin> coins, Object? error});
+  $Res call(
+      {BlocStatus status,
+      List<Coin> coins,
+      GlobalData? globalData,
+      String? fiatCurrency,
+      Object? error});
 }
 
 /// @nodoc
-class __$CoinStateCopyWithImpl<$Res> implements _$CoinStateCopyWith<$Res> {
-  __$CoinStateCopyWithImpl(this._self, this._then);
+class __$InitialDataStateCopyWithImpl<$Res>
+    implements _$InitialDataStateCopyWith<$Res> {
+  __$InitialDataStateCopyWithImpl(this._self, this._then);
 
-  final _CoinState _self;
-  final $Res Function(_CoinState) _then;
+  final _InitialDataState _self;
+  final $Res Function(_InitialDataState) _then;
 
-  /// Create a copy of CoinState
+  /// Create a copy of InitialDataState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $Res call({
     Object? status = null,
     Object? coins = null,
+    Object? globalData = freezed,
+    Object? fiatCurrency = freezed,
     Object? error = freezed,
   }) {
-    return _then(_CoinState(
+    return _then(_InitialDataState(
       status: null == status
           ? _self.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -702,6 +738,14 @@ class __$CoinStateCopyWithImpl<$Res> implements _$CoinStateCopyWith<$Res> {
           ? _self._coins
           : coins // ignore: cast_nullable_to_non_nullable
               as List<Coin>,
+      globalData: freezed == globalData
+          ? _self.globalData
+          : globalData // ignore: cast_nullable_to_non_nullable
+              as GlobalData?,
+      fiatCurrency: freezed == fiatCurrency
+          ? _self.fiatCurrency
+          : fiatCurrency // ignore: cast_nullable_to_non_nullable
+              as String?,
       error: freezed == error ? _self.error : error,
     ));
   }

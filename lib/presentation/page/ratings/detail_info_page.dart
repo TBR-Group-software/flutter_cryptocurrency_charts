@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:clean_app/presentation/widget/change_price_triangle.dart';
 import 'package:clean_app/presentation/widget/detail_sparkline_widget.dart';
 import 'package:clean_app/theme/text_styles.dart';
@@ -6,15 +7,18 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+@RoutePage()
 class DetailInfoPage extends StatefulWidget {
   final String coinName;
-  final num currentPrice, priceChangePercentage, marketCap;
+  final num currentPrice, marketCap;
+  final num? priceChangePercentage;
   final String imageUrl;
   final int coinIndex;
   final String symbol;
   final List<double>? sparkline;
   final List<FlSpot>? flSpotList;
   final String fiatCurrency;
+
   const DetailInfoPage({
     required this.coinName,
     required this.currentPrice,

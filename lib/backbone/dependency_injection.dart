@@ -27,6 +27,7 @@ import 'package:clean_app/domain/usecase/select_fiat_currency.dart';
 import 'package:clean_app/domain/usecase/select_theme.dart';
 import 'package:clean_app/presentation/bloc/coin/bloc.dart';
 import 'package:clean_app/presentation/bloc/global_data/bloc.dart';
+import 'package:clean_app/presentation/bloc/initial_data/initial_data_bloc.dart';
 import 'package:clean_app/presentation/bloc/settings/bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -84,4 +85,9 @@ void init() {
   sl.registerLazySingleton<GlobalDataBloc>(() => GlobalDataBloc(sl.get()));
   sl.registerLazySingleton<SettingsBloc>(
       () => SettingsBloc(sl.get(), sl.get(), sl.get(), sl.get()));
+  sl.registerLazySingleton<InitialDataBloc>(() => InitialDataBloc(
+        sl.get(),
+        sl.get(),
+        sl.get(),
+      ));
 }

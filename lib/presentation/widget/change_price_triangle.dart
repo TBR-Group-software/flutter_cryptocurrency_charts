@@ -1,10 +1,12 @@
 import 'dart:math' as math;
+
 import 'package:clean_app/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChangePriceTriangle extends StatelessWidget {
-  final num priceChangePercentage, fontSize;
+  final num? priceChangePercentage;
+  final num fontSize;
   final TextStyle textStyle;
 
   const ChangePriceTriangle({
@@ -12,9 +14,32 @@ class ChangePriceTriangle extends StatelessWidget {
     required this.fontSize,
     required this.textStyle,
   });
+
   @override
   Widget build(BuildContext context) {
-    if (priceChangePercentage > 0) {
+    if (priceChangePercentage == null) {
+      final TextStyle neutralStyle = textStyle.copyWith(
+        color: Palette.overlay3,
+      );
+      return Row(
+        children: <Widget>[
+          Container(
+            transform: Matrix4.translationValues(0, -1, 0),
+            child: Icon(
+              Icons.play_arrow,
+              color: Palette.overlay3,
+              size: fontSize.sp,
+            ),
+          ),
+          Text(
+            '-%',
+            style: neutralStyle,
+          ),
+        ],
+      );
+    }
+    final num value = priceChangePercentage ?? 0;
+    if (value > 0) {
       return Row(
         children: <Widget>[
           Container(
@@ -29,13 +54,13 @@ class ChangePriceTriangle extends StatelessWidget {
             ),
           ),
           Text(
-            '${priceChangePercentage.toStringAsFixed(2)}%',
+            '${value.toStringAsFixed(2)}%',
             style: textStyle,
           ),
         ],
       );
     } else {
-      if (priceChangePercentage < 0) {
+      if (value < 0) {
         return Row(
           children: <Widget>[
             Container(
@@ -50,7 +75,7 @@ class ChangePriceTriangle extends StatelessWidget {
               ),
             ),
             Text(
-              '${priceChangePercentage.abs().toStringAsFixed(2)}%',
+              '${value.abs().toStringAsFixed(2)}%',
               style: textStyle,
             ),
           ],
@@ -70,7 +95,7 @@ class ChangePriceTriangle extends StatelessWidget {
               ),
             ),
             Text(
-              '${priceChangePercentage.abs().toStringAsFixed(2)}%',
+              '${value.abs().toStringAsFixed(2)}%',
               style: textStyle,
             ),
           ],
