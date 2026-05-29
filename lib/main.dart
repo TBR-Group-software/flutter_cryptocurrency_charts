@@ -72,8 +72,6 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             title: 'Crypto Aggregator',
             routerConfig: _appRouter.config(),
-            // routerDelegate: _appRouter.delegate(),
-            // routeInformationParser: _appRouter.defaultRouteParser(),
           );
         },
       ),
