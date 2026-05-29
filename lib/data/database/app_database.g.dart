@@ -8,7 +8,9 @@ class $AppSettingsTable extends AppSettings
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
+
   $AppSettingsTable(this.attachedDatabase, [this._alias]);
+
   static const VerificationMeta _keyMeta = const VerificationMeta('key');
   @override
   late final GeneratedColumn<String> key = GeneratedColumn<String>(
@@ -19,13 +21,17 @@ class $AppSettingsTable extends AppSettings
   late final GeneratedColumn<String> value = GeneratedColumn<String>(
       'value', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+
   @override
   List<GeneratedColumn> get $columns => [key, value];
+
   @override
   String get aliasedName => _alias ?? actualTableName;
+
   @override
   String get actualTableName => $name;
   static const String $name = 'app_settings';
+
   @override
   VerificationContext validateIntegrity(Insertable<AppSetting> instance,
       {bool isInserting = false}) {
@@ -48,6 +54,7 @@ class $AppSettingsTable extends AppSettings
 
   @override
   Set<GeneratedColumn> get $primaryKey => {key};
+
   @override
   AppSetting map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -68,7 +75,9 @@ class $AppSettingsTable extends AppSettings
 class AppSetting extends DataClass implements Insertable<AppSetting> {
   final String key;
   final String value;
+
   const AppSetting({required this.key, required this.value});
+
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -92,6 +101,7 @@ class AppSetting extends DataClass implements Insertable<AppSetting> {
       value: serializer.fromJson<String>(json['value']),
     );
   }
+
   @override
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
@@ -105,6 +115,7 @@ class AppSetting extends DataClass implements Insertable<AppSetting> {
         key: key ?? this.key,
         value: value ?? this.value,
       );
+
   AppSetting copyWithCompanion(AppSettingsCompanion data) {
     return AppSetting(
       key: data.key.present ? data.key.value : this.key,
@@ -123,6 +134,7 @@ class AppSetting extends DataClass implements Insertable<AppSetting> {
 
   @override
   int get hashCode => Object.hash(key, value);
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -135,17 +147,20 @@ class AppSettingsCompanion extends UpdateCompanion<AppSetting> {
   final Value<String> key;
   final Value<String> value;
   final Value<int> rowid;
+
   const AppSettingsCompanion({
     this.key = const Value.absent(),
     this.value = const Value.absent(),
     this.rowid = const Value.absent(),
   });
+
   AppSettingsCompanion.insert({
     required String key,
     required String value,
     this.rowid = const Value.absent(),
   })  : key = Value(key),
         value = Value(value);
+
   static Insertable<AppSetting> custom({
     Expression<String>? key,
     Expression<String>? value,
@@ -195,11 +210,16 @@ class AppSettingsCompanion extends UpdateCompanion<AppSetting> {
 
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
+
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $AppSettingsTable appSettings = $AppSettingsTable(this);
+  late final AppSettingsDao appSettingsDao =
+      AppSettingsDao(this as AppDatabase);
+
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
+
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [appSettings];
 }
@@ -226,6 +246,7 @@ class $$AppSettingsTableFilterComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
+
   ColumnFilters<String> get key => $composableBuilder(
       column: $table.key, builder: (column) => ColumnFilters(column));
 
@@ -242,6 +263,7 @@ class $$AppSettingsTableOrderingComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
+
   ColumnOrderings<String> get key => $composableBuilder(
       column: $table.key, builder: (column) => ColumnOrderings(column));
 
@@ -258,6 +280,7 @@ class $$AppSettingsTableAnnotationComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
+
   GeneratedColumn<String> get key =>
       $composableBuilder(column: $table.key, builder: (column) => column);
 
@@ -329,7 +352,9 @@ typedef $$AppSettingsTableProcessedTableManager = ProcessedTableManager<
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
+
   $AppDatabaseManager(this._db);
+
   $$AppSettingsTableTableManager get appSettings =>
       $$AppSettingsTableTableManager(_db, _db.appSettings);
 }
