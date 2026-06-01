@@ -29,7 +29,7 @@ This project has been built using the Flutter framework, which allows to build a
 - [Get It](https://pub.dev/packages/get_it) - Dependency Injection.
 - [Auto Route](https://pub.dev/packages/auto_route) - Navigation.
 - [Fl Chart](https://pub.dev/packages/fl_chart) - Line and Pie Charts.
-- [Drift]([https://pub.dev/packages/hive](https://pub.dev/packages/drift)) - Cashing settings of application.
+- [Drift](https://pub.dev/packages/drift) - Cashing settings of application.
 - [Easy Localization](https://pub.dev/packages/easy_localization) - Localization.
 - [Flutter Screenutil](https://pub.dev/packages/flutter_screenutil) - Adapting UI display for different screens.
 - [Shimmer](https://pub.dev/packages/shimmer) - Shimmer effects in the application.
